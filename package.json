@@ -7,7 +7,11 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "biome lint && stylelint \"**/*.{css,scss}\" --fix",
+    "lint:check": "biome lint && stylelint \"**/*.{css,scss}\"",
+    "format": "biome format . && stylelint \"**/*.{css,scss}\" --fix",
+    "check": "biome check . && stylelint \"**/*.{css,scss}\""
   },
   "dependencies": {
     "@astrojs/check": "^0.9.3",
@@ -16,7 +20,11 @@
     "typescript": "^5.5.4"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.8.3",
-    "lefthook": "^1.7.14"
+    "@biomejs/biome": "^1.8.3",
+    "lefthook": "^1.7.14",
+    "stylelint": "^16.8.2",
+    "stylelint-config-recess-order": "^5.0.1",
+    "stylelint-config-recommended-scss": "^14.1.0",
+    "stylelint-config-standard": "^36.0.1"
   }
 }
