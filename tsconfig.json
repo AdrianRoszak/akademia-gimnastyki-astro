@@ -1,6 +1,5 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "**/*.(ts|tsx|astro)": ["tsc --noEmit -p tsconfig.json"],
   "compilerOptions": {
     "target": "ES2018",
     "allowJs": true,

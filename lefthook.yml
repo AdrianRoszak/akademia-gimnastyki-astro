@@ -3,10 +3,19 @@ pre-commit:
     check:
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,astro}"
       run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
-      stage_fixed: 
+      stage_fixed: true
+    lint: 
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,astro}"
+      run: pnpm lint
+      stage_fixed: true
     typescript:
       glob: "*.{ts,tsx,astro}"
       run: npx tsc --noEmit --project ./tsconfig.json
+      stage_fixed: true
+    stylelint:
+      glob: "*.{css,scss,sass,less}"
+      run: npx stylelint {staged_files}
+      stage_fixed: true
 commit-msg:
   commands:
     lint-commit-message:
