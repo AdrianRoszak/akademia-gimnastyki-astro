@@ -16,6 +16,9 @@ pre-commit:
       glob: "*.{css,scss,sass,less}"
       run: npx stylelint {staged_files}
       stage_fixed: true
+    format:
+      glob: "*.{ts,tsx,astro,js,cjs,mjs,d.cts,d.mts,jsx,json,jsonc}"
+      run: pnpm format
 commit-msg:
   commands:
     lint-commit-message:
