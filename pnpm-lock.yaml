@@ -8,6 +8,9 @@ dependencies:
   '@astrojs/check':
     specifier: ^0.9.3
     version: 0.9.3(typescript@5.5.4)
+  '@astrojs/ts-plugin':
+    specifier: ^1.10.1
+    version: 1.10.1
   '@astrojs/vercel':
     specifier: ^7.7.2
     version: 7.7.2(astro@4.14.2)
@@ -159,6 +162,18 @@ packages:
       which-pm-runs: 1.1.0
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /@astrojs/ts-plugin@1.10.1:
+    resolution: {integrity: sha512-T7Z8fob6bkgLlcYiJSsn84wF5XelS0VJSEC4BRPnEHZj3eeOrmmMl8uZqBTJ+zArGMOfyhhA7X+SUGRIAZApHQ==}
+    dependencies:
+      '@astrojs/compiler': 2.10.3
+      '@astrojs/yaml2ts': 0.2.1
+      '@jridgewell/sourcemap-codec': 1.5.0
+      '@volar/language-core': 2.4.0
+      '@volar/typescript': 2.4.0
+      semver: 7.6.3
+      vscode-languageserver-textdocument: 1.0.12
     dev: false
 
   /@astrojs/vercel@7.7.2(astro@4.14.2):
