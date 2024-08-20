@@ -1,15 +1,15 @@
 pre-commit:
   commands:
-    check:
-      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,astro}"
-      run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
-      stage_fixed: true
     format:
       glob: "*.{ts,tsx,astro,js,cjs,mjs,d.cts,d.mts,jsx,json,jsonc}"
       run: pnpm format
     lint: 
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,astro}"
       run: pnpm lint
+      stage_fixed: true
+    check:
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,astro}"
+      run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
       stage_fixed: true
     typescript:
       glob: "*.{ts,tsx,astro}"

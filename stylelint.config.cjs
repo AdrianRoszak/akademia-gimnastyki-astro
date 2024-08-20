@@ -7,4 +7,4 @@ module.exports = {
     'scss/no-global-function-names': null,
   },
   ignoreFiles: ['node_modules/**/*', 'dist/**/*'],
-};
+}
