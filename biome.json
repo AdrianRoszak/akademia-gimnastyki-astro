@@ -47,6 +47,9 @@
       "jsxQuoteStyle": "double",
       "quoteProperties": "asNeeded",
       "semicolons": "asNeeded"
+    },
+    "linter": {
+      "enabled": true
     }
   }
 }
