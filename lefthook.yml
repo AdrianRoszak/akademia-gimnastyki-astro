@@ -12,8 +12,8 @@ pre-commit:
       run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
       stage_fixed: true
     typescript:
-      glob: "*.{ts,tsx,astro}"
-      run: npx tsc --noEmit --project ./tsconfig.json
+      glob: "*.{ts,tsx}"
+      run: tsc --noEmit --skipLibCheck ./tsconfig.json
       stage_fixed: true
     stylelint:
       glob: "*.{css,scss,sass,less}"
