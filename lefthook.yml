@@ -4,6 +4,9 @@ pre-commit:
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,astro}"
       run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
       stage_fixed: true
+    format:
+      glob: "*.{ts,tsx,astro,js,cjs,mjs,d.cts,d.mts,jsx,json,jsonc}"
+      run: pnpm format
     lint: 
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,astro}"
       run: pnpm lint
@@ -16,9 +19,6 @@ pre-commit:
       glob: "*.{css,scss,sass,less}"
       run: npx stylelint {staged_files}
       stage_fixed: true
-    format:
-      glob: "*.{ts,tsx,astro,js,cjs,mjs,d.cts,d.mts,jsx,json,jsonc}"
-      run: pnpm format
 commit-msg:
   commands:
     lint-commit-message:
