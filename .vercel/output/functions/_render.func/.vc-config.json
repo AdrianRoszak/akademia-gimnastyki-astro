@@ -1,6 +1,0 @@
-{
-  "runtime": "nodejs20.x",
-  "handler": "Desktop/Adrian/Projects/MYPROJECTS/WEIRDO/AkademiaGimnastyki/akademia-gimnastyki-astro/.vercel/output/_functions/entry.mjs",
-  "launcherType": "Nodejs",
-  "supportsResponseStreaming": true
-}
