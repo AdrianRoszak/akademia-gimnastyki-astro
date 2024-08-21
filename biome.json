@@ -5,7 +5,8 @@
     "clientKind": "git"
   },
   "files": {
-    "ignore": ["node_modules/**", ".vercel/**"]
+    "ignore": ["node_modules/**", ".vercel/**"],
+    "include": ["**/*.astro"]
   },
   "css": {
     "formatter": {
