@@ -1,9 +1,9 @@
 ---
-import Card from '../components/Card.astro'
+import { getHomePageData } from '../data'
+
 import Layout from '../layouts/Layout.astro'
 
-const test = 'Akademia Gimnastyki'
-const newVar = 'AG'
+const data = await getHomePageData()
 ---
 
 <Layout title="Welcome to Astro">
@@ -12,5 +12,6 @@ const newVar = 'AG'
 		<p class="instructions">
 			Tweak the "Welcome to Akademia Gimnastyki" message above.
 		</p>
+		{data[0].home_values_block}
 	</main>
 </Layout>

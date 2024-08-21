@@ -20,7 +20,11 @@
     "@sanity/astro": "^3.1.4",
     "@sanity/client": "^6.21.3",
     "@sanity/image-url": "^1.0.2",
+    "@sanity/visual-editing": "^2.1.9",
     "astro": "^4.14.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sanity": "^3.55.0",
     "sass": "^1.77.8",
     "typescript": "^5.5.4"
   },
@@ -32,7 +36,8 @@
     "stylelint": "^16.8.2",
     "stylelint-config-recess-order": "^5.0.1",
     "stylelint-config-recommended-scss": "^14.1.0",
-    "stylelint-config-standard": "^36.0.1"
+    "stylelint-config-standard": "^36.0.1",
+    "vite": "^5.4.2"
   },
   "volta": {
     "node": "22.6.0"

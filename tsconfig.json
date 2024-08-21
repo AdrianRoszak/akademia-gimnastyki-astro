@@ -1,5 +1,5 @@
 {
-  "**/*.(ts|tsx|astro)": ["tsc --noEmit --skipLibCheck -p tsconfig.json"],
+  "**/*.(ts|tsx)": ["tsc --noEmit --skipLibCheck -p tsconfig.json"],
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "target": "ES2018",
