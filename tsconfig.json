@@ -24,6 +24,7 @@
       "@/styles/*": ["./src/styles/*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.astro"],
+  "files": ["*.astro"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules"]
 }
