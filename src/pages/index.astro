@@ -12,6 +12,9 @@ const data = await getHomePageData()
 		<p class="instructions">
 			Tweak the "Welcome to Akademia Gimnastyki" message above.
 		</p>
-		{data[0].home_values_block.values_block_title}
+
+		{data[0].home_values_block.values_block_title && (
+			<p>{data[0].home_values_block.values_block_title}</p>
+		)}
 	</main>
 </Layout>
