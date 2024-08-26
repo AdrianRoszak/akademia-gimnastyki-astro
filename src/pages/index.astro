@@ -1,9 +1,10 @@
 ---
-import { getHomePageData } from '../data'
+import type { HomePage } from '../data/digests/digest-home-page-data'
+import { getHomePageData } from '../data/get-home-page-data'
 
 import Layout from '../layouts/Layout.astro'
 
-const data = await getHomePageData()
+const { values } = (await getHomePageData()) as HomePage
 ---
 
 <Layout title="Welcome to Astro">
@@ -12,9 +13,8 @@ const data = await getHomePageData()
 		<p class="instructions">
 			Tweak the "Welcome to Akademia Gimnastyki" message above.
 		</p>
-
-		{data[0].home_values_block.values_block_title && (
-			<p>{data[0].home_values_block.values_block_title}</p>
+		{values && (
+			<h1>{values.title}</h1>
 		)}
 	</main>
 </Layout>
