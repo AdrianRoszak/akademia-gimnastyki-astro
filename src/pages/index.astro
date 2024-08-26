@@ -6,7 +6,7 @@ import { urlForImage } from '../utils'
 
 import Layout from '../layouts/Layout.astro'
 
-const { values, banners } = (await getHomePageData()) as HomePage
+const { values, banners, about } = (await getHomePageData()) as HomePage
 ---
 
 <Layout title="Welcome to Astro">
@@ -15,9 +15,9 @@ const { values, banners } = (await getHomePageData()) as HomePage
 			<h1>{banners[0].title}</h1>
 			<p>{banners[0].lead}</p>
 			<Image
-                  src={urlForImage(banners[0].images.mainImage.source)
-                    .width(1920)
-                    .format("webp")
+        src={urlForImage(banners[0].images.mainImage.source)
+        	.width(1920)
+          .format("webp")
                     .quality(80)
                     .url()}
                   alt={banners[0].images.mainImage.alt}
@@ -25,8 +25,21 @@ const { values, banners } = (await getHomePageData()) as HomePage
                   height={950}
                 />
 		)}
+		{about && (
+			<h1>{about.title}</h1>
+			<p>{about.lead}</p>
+		)}
 		{values && (
 			<h1>{values.title}</h1>
+			<p>{values.lead}</p>
+			<ul>
+				{values.values.map((value) => (
+					<li>
+						<h2>{value.title}</h2>
+						<p>{value.description}</p>
+					</li>
+				))}
+			</ul>
 		)}
 	</main>
 </Layout>

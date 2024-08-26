@@ -17,10 +17,21 @@ export type BannerType = {
   }
 }
 
+export type ValueType = {
+  title: string
+  description: string
+}
+
 export interface HomePage {
   banners: BannerType[]
+  about: {
+    title: string
+    lead: string
+  }
   values: {
     title: string
+    lead: string
+    values: ValueType[]
   }
 }
 
@@ -32,6 +43,10 @@ export function digestHomePageData(source): HomePage | null {
 
   return {
     banners: digestBanners(source[0].home_banner_selector),
+    about: {
+      title: source[0].home_about_us_block.about_us_block_heading,
+      lead: source[0].home_about_us_block.about_us_block_lead,
+    },
     values: digestValues(source[0].home_values_block),
   }
 }
@@ -52,6 +67,13 @@ function digestBanners(source): HomePage['banners'] {
 function digestValues(source) {
   return {
     title: source.values_block_title,
+    lead: source.values_block_lead,
+    values: source.values_block_values_selector.value_selector_list.map((value) => {
+      return {
+        title: value.value_item_title,
+        description: value.value_item_description,
+      }
+    }),
   }
 }
 
