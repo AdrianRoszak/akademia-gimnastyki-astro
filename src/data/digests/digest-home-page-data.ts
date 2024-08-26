@@ -10,7 +10,11 @@ export type ImageType = {
 export type BannerType = {
   title: string
   lead: string
-  image: ImageType
+  images: {
+    mainImage: ImageType
+    tabletImage: ImageType | false
+    mobileImage: ImageType | false
+  }
 }
 
 export interface HomePage {

@@ -1,18 +1,30 @@
 ---
+import { Image } from 'astro:assets'
 import type { HomePage } from '../data/digests/digest-home-page-data'
 import { getHomePageData } from '../data/get-home-page-data'
+import { urlForImage } from '../utils'
 
 import Layout from '../layouts/Layout.astro'
 
-const { values } = (await getHomePageData()) as HomePage
+const { values, banners } = (await getHomePageData()) as HomePage
 ---
 
 <Layout title="Welcome to Astro">
 	<main>
-		<h1>Welcome to <span class="text-gradient">AG</span></h1>
-		<p class="instructions">
-			Tweak the "Welcome to Akademia Gimnastyki" message above.
-		</p>
+		{banners && (
+			<h1>{banners[0].title}</h1>
+			<p>{banners[0].lead}</p>
+			<Image
+                  src={urlForImage(banners[0].images.mainImage.source)
+                    .width(1920)
+                    .format("webp")
+                    .quality(80)
+                    .url()}
+                  alt={banners[0].images.mainImage.alt}
+                  width={1920}
+                  height={950}
+                />
+		)}
 		{values && (
 			<h1>{values.title}</h1>
 		)}
