@@ -1,5 +1,6 @@
 // import { secureImage } from "./utils/secure-image"
 
+import ts from 'typescript'
 import { secureImage } from './utils'
 
 export type ImageType = {
@@ -68,6 +69,7 @@ function digestValues(source) {
   return {
     title: source.values_block_title,
     lead: source.values_block_lead,
+    //@ts-ignore
     values: source.values_block_values_selector.value_selector_list.map((value) => {
       return {
         title: value.value_item_title,
