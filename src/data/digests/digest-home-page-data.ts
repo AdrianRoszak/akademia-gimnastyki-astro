@@ -40,8 +40,6 @@ export interface HomePage {
 export function digestHomePageData(source): HomePage | null {
   if (!source) return null
 
-  console.log(source)
-
   return {
     banners: digestBanners(source[0].home_banner_selector),
     about: {

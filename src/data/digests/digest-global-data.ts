@@ -1,8 +1,8 @@
 //@ts-ignore
 export function digestGlobalData(source) {
   return {
-    companyName: source.company_data_name,
-    companyPhone: source.company_data_phone,
-    companyEmail: source.company_data_email,
+    companyName: source[0].company_data_name,
+    companyPhone: source[0].company_data_phone,
+    companyEmail: source[0].company_data_email,
   }
 }

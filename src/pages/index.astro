@@ -1,12 +1,14 @@
 ---
 import { Image } from 'astro:assets'
 import type { HomePage } from '../data/digests/digest-home-page-data'
+import { getGlobalData } from '../data/get-global-data'
 import { getHomePageData } from '../data/get-home-page-data'
 import { urlForImage } from '../utils'
 
 import Layout from '../layouts/Layout.astro'
 
 const { values, banners, about } = (await getHomePageData()) as HomePage
+const { companyName, companyEmail, companyPhone } = await getGlobalData()
 ---
 
 <Layout title="Welcome to Astro">
@@ -40,6 +42,11 @@ const { values, banners, about } = (await getHomePageData()) as HomePage
 					</li>
 				))}
 			</ul>
+		)}
+		{companyName && (
+			<h1>{companyName}</h1>
+			<p>{companyEmail}</p>
+			<p>{companyPhone}</p>
 		)}
 	</main>
 </Layout>
