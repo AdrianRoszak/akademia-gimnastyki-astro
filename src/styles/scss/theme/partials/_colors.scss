@@ -1,0 +1,60 @@
+@use "../../utils" as utils;
+
+//default color parameters
+$black-h: 0;
+$black-s: 0%;
+$black-l: 1%;
+
+$grey-h: 0;
+$grey-s: 0%;
+$grey-l: 80%;
+
+$light-grey-h: 0;
+$light-grey-s: 0%;
+$light-grey-l: 94%;
+
+$white-h: 0;
+$white-s: 0%;
+$white-l: 100%;
+
+// default theme color parameters
+$josera-gold-h: 48;
+$josera-gold-s: 100%;
+$josera-gold-l: 50%;
+
+$josera-ruby-h: 0;
+$josera-ruby-s: 100%;
+$josera-ruby-l: 50%;
+
+// default theme colors
+$josera-black: hsla($black-h, $black-s, $black-l, 1);
+$josera-grey: hsla($grey-h, $grey-s, $grey-l, 1);
+$josera-light-grey: hsla($light-grey-h, $light-grey-s, $light-grey-l, 1);
+$josera-white: hsla($white-h, $white-s, $white-l, 1);
+
+$josera-gold: hsla($josera-gold-h, $josera-gold-s, $josera-gold-l, 1);
+$josera-ruby: hsla($josera-ruby-h, $josera-ruby-s, $josera-ruby-l, 1);
+
+$color-black: $josera-black;
+$color-grey: $josera-grey;
+$color-light-grey: $josera-light-grey;
+$color-white: $josera-white;
+
+$color-primary: $josera-gold;
+$color-secondary: $josera-ruby;
+
+$colors: (
+  "color-black": $color-black,
+  "color-grey": $color-grey,
+  "color-light-grey": $color-light-grey,
+  "color-white": $color-white,
+  "color-primary": $color-primary,
+  "color-secondary": $color-secondary,
+);
+
+// generate color variables
+@each $name, $color in $colors {
+  :root {
+    #{utils.buildVarName($name)}: #{$color};
+  }
+}

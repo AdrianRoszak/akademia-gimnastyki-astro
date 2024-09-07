@@ -1,0 +1,67 @@
+@use "sass:math";
+
+@use "../../utils/" as utils;
+@use "../../defaults/" as defaults;
+
+$container-min-width: 360px;
+$container-prefered-width: 100%;
+$container-padding-x: 1rem;
+$container-padding-y: 0;
+
+@mixin container-root-vars {
+  :root {
+    #{utils.buildVarName("container-min-width")}: $container-min-width;
+    #{utils.buildVarName("container-prefered-width")}: $container-prefered-width;
+    #{utils.buildVarName("container-padding-y")}: $container-padding-y;
+    #{utils.buildVarName("container-padding-x")}: $container-padding-x;
+  }
+}
+
+@mixin container-styles {
+  .#{utils.buildClassName("container")} {
+    position: relative;
+    width: clamp(
+      var(--weirdo-container-min-width),
+      var(--weirdo-container-prefered-width),
+      var(--weirdo-container-max-width)
+    );
+    max-width: var(--weirdo-container-max-width);
+    padding: var(--weirdo-container-padding-y) var(--weirdo-container-padding-x);
+    margin: 0 auto;
+  }
+}
+
+@mixin generate-container-max-widths {
+  $breakpoints: defaults.$breakpoints;
+  $keys: map-keys($breakpoints);
+  $breakpoints-count: length($keys);
+
+  @for $i from 2 through $breakpoints-count {
+    $breakpoint-key: nth($keys, $i);
+    $previous-breakpoint-key: nth($keys, $i - 1);
+
+    $breakpoint-value: map-get($breakpoints, $breakpoint-key);
+    $previous-breakpoint-value: map-get($breakpoints, $previous-breakpoint-key);
+
+    @media (min-width: $breakpoint-value) {
+      :root {
+        #{utils.buildVarName("container-max-width")}: calc(
+          #{$previous-breakpoint-value} * 1.25
+        );
+      }
+    }
+  }
+}
+
+@mixin container-full-screen {
+  .#{utils.buildClassName("container--full-screen")} {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+@include container-root-vars;
+@include generate-container-max-widths;
+@include container-styles;
+@include container-full-screen;

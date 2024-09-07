@@ -1,0 +1,127 @@
+@use "sass:math";
+
+@use "../../defaults" as defaults;
+@use "../../theme" as theme;
+@use "../../utils" as utils;
+
+$button-colors: theme.$colors;
+$button-color-default: map-get($button-colors, "color-light-grey");
+
+@function luminance($color) {
+  $red: math.div(red($color), 255);
+  $green: math.div(green($color), 255);
+  $blue: math.div(blue($color), 255);
+
+  $red: if(
+    $red < 0.03928,
+    math.div($red, 12.92),
+    pow((math.div(($red + 0.055), 1.055)), 2.4)
+  );
+  $green: if(
+    $green < 0.03928,
+    math.div($green, 12.92),
+    pow((math.div(($green + 0.055), 1.055)), 2.4)
+  );
+  $blue: if(
+    $blue < 0.03928,
+    math.div($blue, 12.92),
+    pow((math.div(($blue + 0.055), 1.055)), 2.4)
+  );
+
+  @return 0.2126 * $red + 0.7152 * $green + 0.0722 * $blue;
+}
+
+@function contrast-color($color) {
+  $luminance: luminance($color);
+
+  @if ($luminance > 0.179) {
+    @return #000000;
+  } @else {
+    @return #ffffff;
+  }
+}
+
+@function lightness($color) {
+  $red: red($color);
+  $green: green($color);
+  $blue: blue($color);
+
+  @return (max($red, $green, $blue) + min($red, $green, $blue)) / 2;
+}
+
+@function lighten-or-darken($color) {
+  $lightness: lightness($color);
+
+  @if ($lightness > 128) {
+    @return darken($color, 10%);
+  } @else {
+    @return lighten($color, 20%);
+  }
+}
+
+a {
+  display: inline-block;
+}
+
+button,
+a {
+  &:hover {
+    cursor: pointer;
+  }
+
+  &[disabled]:hover {
+    pointer-events: none;
+    cursor: auto;
+  }
+}
+
+.#{utils.buildClassName("button")} {
+  padding: 0.75rem 1.25rem;
+  color: contrast-color($button-color-default);
+  background-color: $button-color-default;
+
+  border-radius: 0.75rem;
+  transition: all 0.15s ease-in-out;
+
+  &:hover {
+    background-color: darken($button-color-default, 10%);
+  }
+
+  @each $name, $color in $button-colors {
+    &--#{$name} {
+      @extend .#{utils.buildClassName("button")};
+      color: contrast-color($color);
+      background-color: $color;
+
+      &:hover {
+        background-color: lighten-or-darken($color);
+      }
+    }
+  }
+
+  &--disabled {
+    background-color: lightcoral;
+  }
+}
+
+// @each $name, $color in $button-colors {
+//   .#{utils.buildClassName("button--#{$name}")} {
+//     color: contrast-color($color);
+//     background-color: $color;
+
+//     &:hover {
+//       background-color: lighten-or-darken($color);
+//     }
+//   }
+// }
+
+// TODO: expected button selectors :: all classNames should go with weirdo- prefix
+// button :: common styles for all buttons
+// .button-outline :: common styles for all outline buttons
+
+// button[disabled] :: common styles for all disabled buttons
+
+// .button-primary :: primary button styles
+// .button-secondary :: primary button outline styles
+// .button-black :: black button styles
+// .button-white :: white button styles

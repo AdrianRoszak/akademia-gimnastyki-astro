@@ -1,0 +1,13 @@
+@use "../../utils/" as utils;
+
+@mixin create-tile {
+  .#{utils.buildClassName("tile")} {
+    height: 100%;
+    padding: 2rem;
+    background: #{utils.getVar("color-white")};
+    border-radius: #{utils.getVar("border-radius-default")};
+    box-shadow: #{utils.getVar("shadow-default")};
+  }
+}
+
+@include create-tile;

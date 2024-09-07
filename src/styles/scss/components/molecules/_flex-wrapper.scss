@@ -1,0 +1,48 @@
+@use "../../utils/" as utils;
+
+@mixin flex-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center
+}
+
+.#{utils.buildClassName("flex-wrapper")} {
+  @include flex-wrapper;
+
+  &--space-between {
+    @include flex-wrapper;
+    justify-content: space-between;
+  }
+
+  &--center {
+    @include flex-wrapper;
+    justify-content: center;
+  }
+
+  &--end {
+    @include flex-wrapper;
+    justify-content: flex-end;
+  }
+
+  &--start {
+    @include flex-wrapper;
+    justify-content: flex-start;
+  }
+
+  &--gap-small {
+    @include flex-wrapper;
+    gap: 0.5rem;
+  }
+
+  &--gap-medium {
+    @include flex-wrapper;
+    gap: 1rem;
+  }
+
+  &--gap-large {
+    @include flex-wrapper;
+
+    gap: 1.5rem;
+  }
+}

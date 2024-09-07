@@ -1,0 +1,11 @@
+body {
+  display: flex;
+  flex-direction: column;
+  overflow-x: clip;
+  font-size: var(--base-font-size);
+}
+
+main {
+  flex-grow: 1;
+  padding: 10rem 0;
+}

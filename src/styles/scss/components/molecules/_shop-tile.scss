@@ -1,0 +1,71 @@
+@use "../../utils" as utils;
+@use "../../defaults" as defaults;
+
+.#{utils.buildClassName("shop-tile")} {
+  $shop-tile-spacing: 1rem;
+  $shop-tile-address-border: 1px solid utils.getVar("color-grey");
+  $shop-tile-address-spacing: $shop-tile-spacing;
+
+  &__id {
+    display: block;
+    margin-bottom: $shop-tile-spacing;
+    color: utils.getVar("color-grey");
+    text-align: right;
+  }
+
+  &__address {
+    display: flex;
+    padding-top: $shop-tile-address-spacing;
+    margin-top: $shop-tile-address-spacing;
+    border-top: $shop-tile-address-border;
+
+    &-details {
+      padding-left: $shop-tile-address-spacing;
+      margin-left: $shop-tile-address-spacing;
+      border-left: $shop-tile-address-border;
+    }
+  }
+
+  &__opening-hours {
+    display: flex;
+
+    &-wrapper {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: $shop-tile-spacing;
+      width: 100%;
+      padding-top: $shop-tile-address-spacing;
+      margin-top: $shop-tile-address-spacing;
+      border-top: $shop-tile-address-border;
+
+      @media (min-width: map-get(defaults.$breakpoints, "sm")) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @media (min-width: map-get(defaults.$breakpoints, "lg")) {
+        grid-template-columns: repeat(5, 1fr);
+      }
+
+      @media (min-width: map-get(defaults.$breakpoints, "xl")) {
+        grid-template-columns: repeat(7, 1fr);
+      }
+    }
+
+    &-details {
+      padding-left: $shop-tile-address-spacing;
+      margin-left: $shop-tile-address-spacing;
+      border-left: $shop-tile-address-border;
+    }
+  }
+
+  &__partner-icon {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__brands {
+    display: flex;
+    gap: calc($shop-tile-spacing / 2);
+    margin-top: $shop-tile-spacing;
+  }
+}

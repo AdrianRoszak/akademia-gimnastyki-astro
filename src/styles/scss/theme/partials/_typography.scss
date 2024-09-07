@@ -1,0 +1,108 @@
+@use "sass:map";
+@use "sass:math";
+
+@use "../../utils" as utils;
+@use "../../defaults/breakpoints" as breakpoints;
+
+$font-family: "Archivo Narrow", sans-serif;
+
+// TODO: these initial values are needed to create baseline typography
+$base-font-size: 16px;
+$base-line-height: 1.5;
+$base-line: $base-font-size * $base-line-height;
+
+:root {
+  --base-font-size: #{$base-font-size};
+  --base-line-height: #{$base-line-height};
+  --base-line: #{$base-line};
+}
+
+// Define type scales
+$type-scales: (
+  minor-second: 1.067,
+  major-second: 1.125,
+  minor-third: 1.2,
+  major-third: 1.25,
+  perfect-fourth: 1.333,
+  augmented-fourth: 1.414,
+  perfect-fifth: 1.5,
+  golden-ratio: 1.618,
+);
+
+// Mixin to generate font sizes
+@mixin generate-font-sizes($base-size, $scale) {
+  $size-md: $base-size;
+  $size-sm: round($size-md / $scale);
+  $size-xs: round($size-sm / $scale);
+  $size-2xs: round($size-xs / $scale);
+  $size-lg: round($size-md * $scale);
+  $size-xl: round($size-lg * $scale);
+  $size-2xl: round($size-xl * $scale);
+  $size-3xl: round($size-2xl * $scale);
+  $size-4xl: round($size-3xl * $scale);
+  $size-5xl: round($size-4xl * $scale);
+  $size-6xl: round($size-5xl * $scale);
+  $size-7xl: round($size-6xl * $scale);
+  $size-8xl: round($size-7xl * $scale);
+  $size-9xl: round($size-8xl * $scale);
+
+  $text-sizes: (
+    "text-2xs": $size-2xs,
+    "text-xs": $size-xs,
+    "text-sm": $size-sm,
+    "text-md": $size-md,
+    "text-lg": $size-lg,
+    "text-xl": $size-xl,
+    "text-2xl": $size-2xl,
+    "text-3xl": $size-3xl,
+    "text-4xl": $size-4xl,
+    "text-5xl": $size-5xl,
+    "text-6xl": $size-6xl,
+    "text-7xl": $size-7xl,
+    "text-8xl": $size-8xl,
+    "text-9xl": $size-9xl,
+  );
+
+  @each $name, $size in $text-sizes {
+    .#{utils.buildClassName($name)} {
+      font-size: var(utils.buildVarName($name));
+    }
+  }
+
+  @each $name, $size in $text-sizes {
+    :root {
+      #{utils.buildVarName($name)}: #{$size};
+    }
+  }
+}
+
+// Mixin to apply font sizes based on breakpoints
+@mixin apply-font-sizes($base-size, $breakpoints, $scales) {
+  @each $breakpoint, $value in breakpoints.$breakpoints {
+    @media (min-width: $value) {
+      $chosen-scale: map-get($scales, $breakpoint);
+      @include generate-font-sizes($base-size, $chosen-scale);
+    }
+  }
+}
+
+// Map of type scales to use for each breakpoint
+// TODO: this should be corelated with the breakpoints defined in defaults
+$type-scales-by-breakpoint: (
+  "default": map-get($type-scales, minor-third),
+  "xs": map-get($type-scales, major-third),
+  "sm": map-get($type-scales, major-third),
+  "md": map-get($type-scales, perfect-fourth),
+  "lg": map-get($type-scales, perfect-fourth),
+  "xl": map-get($type-scales, augmented-fourth),
+  "2xl": map-get($type-scales, golden-ratio),
+  "3xl": map-get($type-scales, golden-ratio),
+  "4xl": map-get($type-scales, golden-ratio),
+);
+
+// Apply font sizes based on the breakpoints and type scales
+@include apply-font-sizes(
+  $base-font-size,
+  breakpoints.$breakpoints,
+  $type-scales-by-breakpoint
+);

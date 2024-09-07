@@ -5,6 +5,7 @@ module.exports = {
     'value-keyword-case': 'lower',
     'no-duplicate-selectors': true,
     'scss/no-global-function-names': null,
+    'scss/at-extend-no-missing-placeholder': null,
   },
   ignoreFiles: ['node_modules/**/*', 'dist/**/*'],
 }

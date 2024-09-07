@@ -1,0 +1,7 @@
+@use "../../utils/" as utils;
+
+.#{utils.buildClassName("link")} {
+  &:hover {
+    text-decoration: underline;
+  }
+}

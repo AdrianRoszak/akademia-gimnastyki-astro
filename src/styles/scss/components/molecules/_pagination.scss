@@ -1,0 +1,47 @@
+@use "../../utils" as utils;
+
+$pagination-link-border-radius: utils.getVar("border-radius-default");
+$pagination-link-active-background-color: utils.getVar("color-grey");
+$pagination-link-hover-background-color: utils.getVar("color-light-grey");
+
+@mixin pagination-link-common-styles {
+  padding: 0.25rem 0.75rem;
+  border-radius: $pagination-link-border-radius;
+}
+
+.#{utils.buildClassName("pagination")} {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  font-size: #{utils.getVar("text-md")};
+
+  .#{utils.buildClassName("pagination-link")} {
+    @include pagination-link-common-styles;
+
+    &:hover {
+      background-color: $pagination-link-hover-background-color;
+    }
+
+    &--active {
+      background-color: $pagination-link-active-background-color;
+    }
+
+    &--prev,
+    &--next {
+      @include pagination-link-common-styles;
+
+      &:hover {
+        background-color: $pagination-link-hover-background-color;
+      }
+    }
+
+    &--disabled {
+      color: utils.getVar("color-grey");
+      pointer-events: none;
+      cursor: auto;
+      background-color: utils.getVar("color-light-grey");
+    }
+  }
+}

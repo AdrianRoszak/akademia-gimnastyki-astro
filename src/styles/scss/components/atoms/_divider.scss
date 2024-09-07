@@ -1,0 +1,15 @@
+@use '../../utils/' as utils;
+
+@mixin divider-common-styles {
+  margin: 2rem 0;
+}
+
+.#{utils.buildClassName('divider')} {
+  @include divider-common-styles;
+  
+  &--line {
+    @include divider-common-styles;
+    border-top: 1px solid utils.getVar('color-grey');
+
+  }
+}

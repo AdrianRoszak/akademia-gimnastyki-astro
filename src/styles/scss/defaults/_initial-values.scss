@@ -1,0 +1,20 @@
+@use "../utils" as utils;
+
+//* shadow
+$shadow-color: #000000;
+$shadow-opacity: 0.2;
+$shadow-x: 0;
+$shadow-y: 10px;
+$shadow-blur: 15px;
+$shadow-spread: -3px;
+
+$shadow-default: $shadow-x $shadow-y $shadow-blur $shadow-spread
+  rgba($shadow-color, $shadow-opacity);
+
+//* border-radius
+$border-radius-default: 0.75rem;
+
+:root {
+  #{utils.buildVarName("shadow-default")}: #{$shadow-default};
+  #{utils.buildVarName("border-radius-default")}: #{$border-radius-default};
+}

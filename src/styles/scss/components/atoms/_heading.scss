@@ -1,0 +1,12 @@
+@use "../../utils/" as utils;
+@use "../../defaults/" as defaults;
+
+.#{utils.buildClassName("heading")} {
+  font-weight: 400;
+
+  @each $size in defaults.$sizes {
+    &--#{$size} {
+      font-size: utils.getVar("text-#{$size}");
+    }
+  }
+}

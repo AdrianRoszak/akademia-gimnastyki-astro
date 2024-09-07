@@ -1,0 +1,5 @@
+@use '../../utils/' as utils;
+
+.#{utils.buildClassName('logo')} {
+  margin: 0.25rem 0;
+}

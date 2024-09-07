@@ -1,0 +1,7 @@
+@use '../../utils/' as utils;
+
+.#{utils.buildClassName('checkbox-with-icon')} {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}

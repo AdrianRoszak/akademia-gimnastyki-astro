@@ -1,0 +1,52 @@
+:root {
+  --burger-button-color: var(--weirdo-black);
+}
+
+.burger {
+  width: auto;
+  padding: 20px 15px;
+
+  &-line {
+    position: relative;
+    display: block;
+    width: 36px;
+    height: 3px;
+    background-color: var(--burger-button-color);
+    transition: all 0.3s;
+
+    &::after,
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      content: "";
+      background-color: var(--burger-button-color);
+      transition: inherit;
+    }
+
+    &::after {
+      transform: translateY(10px);
+    }
+
+    &::before {
+      transform: translateY(-10px);
+    }
+  }
+
+  &--isOpen {
+    .burger-line {
+      background-color: transparent;
+
+      &::after {
+        transform: rotate(45deg);
+      }
+
+      &::before {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}

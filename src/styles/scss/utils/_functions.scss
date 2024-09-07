@@ -1,0 +1,31 @@
+@use "../defaults/prefixes" as prefixes;
+
+@function buildVarName($name, $prefix: prefixes.$prefix) {
+  @return --#{$prefix}-#{$name};
+}
+
+@function buildClassName($name) {
+  @return prefixes.$prefix + "-" + $name;
+}
+
+@function getVar($name) {
+  $varName: buildVarName($name);
+  @return var($varName);
+}
+
+//! Concept of variable existance validation
+//! It didn't work as expected probably because of the order of execution 
+// @function getVar($name) {
+//   $varName: buildVarName($name);
+
+//   // Check if the CSS variable is defined
+//   @if not variable-exists($varName) {
+//     @error "The CSS variable `#{$varName}` does not exist.";
+//   }
+
+//   @return var(#{$varName});
+// }
+
+// @function variable-exists($varName) {
+//   @return map-has-key((), $varName);
+// }

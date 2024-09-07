@@ -1,0 +1,53 @@
+@use "../../utils" as utils;
+
+$checkbox-width: 2.5rem;
+$checkbox-height: calc($checkbox-width / 1.9);
+$checkbox-label-size: calc($checkbox-height * 0.9);
+$checkbox-label-spacing: calc($checkbox-height * 0.05);
+
+.#{utils.buildClassName("checkbox")} {
+  display: none;
+  width: 0;
+  height: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  visibility: hidden;
+
+  &:checked + label {
+    background-color: utils.getVar("color-secondary");
+  }
+
+  &:checked + label:after {
+    left: calc(100% - $checkbox-label-spacing);
+    transform: translateX(-100%);
+  }
+}
+
+label {
+  position: relative;
+  display: block;
+  width: $checkbox-width;
+  height: $checkbox-height;
+  text-indent: -9999px;
+  cursor: pointer;
+  background: utils.getVar("color-grey");
+  border-radius: 100px;
+  transition: background-color 0.3s ease-out;
+
+  &::after {
+    position: absolute;
+    top: $checkbox-label-spacing;
+    left: $checkbox-label-spacing;
+    width: $checkbox-label-size;
+    height: $checkbox-label-size;
+    content: "";
+    background: utils.getVar("color-white");
+    border-radius: 100%;
+    transition: 0.3s;
+  }
+}
+
+// label:active:after {
+//   width: 130px;
+// }
