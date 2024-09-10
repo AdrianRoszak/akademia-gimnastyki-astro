@@ -76,12 +76,15 @@ a {
 }
 
 .#{utils.buildClassName("button")} {
-  padding: 0.75rem 1.25rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 1em;
+  font-size: var(--weirdo-text-md);
   color: contrast-color($button-color-default);
   background-color: $button-color-default;
 
-  border-radius: 0.75rem;
-  transition: all 0.15s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
     background-color: darken($button-color-default, 10%);
@@ -91,10 +94,43 @@ a {
     &--#{$name} {
       @extend .#{utils.buildClassName("button")};
       color: contrast-color($color);
-      background-color: $color;
+      background: transparent;
+
+      &:after {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        z-index: -1;
+        display: block;
+        width: 100%;
+        height: 2.5em;
+        content: "";
+        background-color: $color;
+        transition: all 0.3s ease-in-out;
+        transform: translateY(-50%);
+      }
+
+      svg {
+        transition: all 0.3s ease-in-out;
+      }
 
       &:hover {
-        background-color: lighten-or-darken($color);
+        background-color: transparent;
+
+        svg {
+          transform: translateX(25%);
+        }
+
+        &::after {
+          width: 100%;
+          background-color: lighten($color, 10%);
+        }
+      }
+
+      @media (min-width: map-get(defaults.$breakpoints, "lg")) {
+        &:after {
+          width: 2.5em;
+        }
       }
     }
   }

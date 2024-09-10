@@ -1,0 +1,73 @@
+---
+
+---
+
+<div class="wrapper">
+  <fieldset class=d1><legend>Akademia gimnastyki</legend></fieldset>
+<fieldset class=d1><legend>Szarfy</legend></fieldset>
+<fieldset class=d1><legend>Akademia gimnastyki</legend></fieldset>
+<fieldset class=d1><legend>Air track</legend></fieldset>
+<!-- <fieldset class=d2><legend>Wash Your Hands</legend></fieldset>
+<fieldset class=d2><legend>Stay Apart</legend></fieldset>
+<fieldset class=d2><legend>Wear A Mask</legend></fieldset>
+<fieldset class=d2><legend>Stay Home</legend></fieldset> -->
+</div>
+
+<style>
+  
+/* body{
+  display: grid; 
+  margin: auto; 
+  margin-top: calc(50vh - 170px); 
+  width: 420px; 
+  height: 200px; 
+} */
+
+.wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
+  display: grid;
+  padding: 0.5rem;
+
+}
+
+fieldset{
+  border: 6px solid transparent; 
+  border-top-color: black; 
+  box-sizing: border-box; 
+  grid-area: 1 / 1; 
+  padding: 20px;  
+}
+
+/* .d2{ grid-area: 1 / 2; } */
+
+fieldset:nth-of-type(2){ 
+  transform: rotate(90deg); 
+  width: 100dvh, 
+  height: 100vw; 
+}
+
+fieldset:nth-of-type(3) { 
+  transform: rotate(180deg); 
+}
+fieldset:nth-of-type(4) { 
+  transform: rotate(-90deg); 
+  width: 100dvh;
+ }
+
+legend{
+  padding: 0 4px; 
+}
+
+.d1 legend{ margin-left: auto; }
+.d2 legend{ margin-right: auto; }
+fieldset:nth-of-type(3)>legend{ transform: rotate(180deg); } 
+
+body {
+  user-select: none;
+  -webkit-user-select: none;
+}
+</style>

@@ -1,10 +1,9 @@
 ---
-import { Image } from 'astro:assets'
 import type { HomePage } from '../data/digests/digest-home-page-data'
 import { getGlobalData } from '../data/get-global-data'
 import { getHomePageData } from '../data/get-home-page-data'
-import { urlForImage } from '../utils'
 
+import Banner from '../components/organisms/Banner.astro'
 import Layout from '../layouts/Layout.astro'
 
 const { values, banners, about } = (await getHomePageData()) as HomePage
@@ -13,20 +12,9 @@ const { companyName, companyEmail, companyPhone } = await getGlobalData()
 
 <Layout title="Welcome to Astro">
 	<main>
-		{banners && (
-			<h1>{banners[0].title}</h1>
-			<p>{banners[0].lead}</p>
-			<Image
-        src={urlForImage(banners[0].images.mainImage.source)
-        	.width(1920)
-          .format("webp")
-                    .quality(80)
-                    .url()}
-                  alt={banners[0].images.mainImage.alt}
-                  width={1920}
-                  height={950}
-                />
-		)}
+		{banners && banners.map((banner) => (
+			<Banner data={banner} />
+		))}
 		{about && (
 			<h1>{about.title}</h1>
 			<p>{about.lead}</p>

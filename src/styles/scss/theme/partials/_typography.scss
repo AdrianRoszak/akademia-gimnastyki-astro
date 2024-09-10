@@ -7,7 +7,7 @@
 $font-family: "Archivo Narrow", sans-serif;
 
 // TODO: these initial values are needed to create baseline typography
-$base-font-size: 16px;
+$base-font-size: 20px;
 $base-line-height: 1.5;
 $base-line: $base-font-size * $base-line-height;
 
@@ -94,7 +94,7 @@ $type-scales-by-breakpoint: (
   "sm": map-get($type-scales, major-third),
   "md": map-get($type-scales, perfect-fourth),
   "lg": map-get($type-scales, perfect-fourth),
-  "xl": map-get($type-scales, augmented-fourth),
+  "xl": map-get($type-scales, perfect-fourth),
   "2xl": map-get($type-scales, golden-ratio),
   "3xl": map-get($type-scales, golden-ratio),
   "4xl": map-get($type-scales, golden-ratio),

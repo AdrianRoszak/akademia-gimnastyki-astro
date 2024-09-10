@@ -1,0 +1,52 @@
+---
+import type { HTMLTag, Polymorphic } from 'astro/types'
+
+export type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+export type HeadingSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
+
+export interface HeadingType {
+  as: HeadingTag
+  text: string
+  size: HeadingSize
+  emphasize: 'first' | 'last'
+}
+
+type HeadingTextProps<Tag extends HTMLTag> = Polymorphic<{
+  as: Tag
+  text: string
+  size?: HeadingSize
+  uppercase?: boolean
+}>
+
+type Props = HeadingTextProps<HeadingTag>
+
+const { as: Tag = 'h6', text, size }: Props = Astro.props
+const classes = ['weirdo-heading', serveSizeClass(size)]
+
+function serveSizeClass(size: HeadingSize | undefined) {
+  if (!size) return 'text-md'
+  switch (size) {
+    case 'sm':
+      return 'weirdo-text-sm'
+    case 'md':
+      return 'weirdo-text-md'
+    case 'lg':
+      return 'weirdo-text-lg'
+    case 'xl':
+      return 'weirdo-text-xl'
+    case '2xl':
+      return 'weirdo-text-2xl'
+    case '3xl':
+      return 'weirdo-text-3xl'
+    case '4xl':
+      return 'weirdo-text-4xl'
+    default:
+      return 'weirdo-text-md'
+  }
+}
+---
+
+<Tag
+  class:list={[...classes]}
+  set:html={text}
+/>

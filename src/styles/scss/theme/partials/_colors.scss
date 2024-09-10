@@ -18,38 +18,45 @@ $white-s: 0%;
 $white-l: 100%;
 
 // default theme color parameters
-$josera-gold-h: 48;
-$josera-gold-s: 100%;
-$josera-gold-l: 50%;
+$accent-1-h: 332;
+$accent-1-s: 100%;
+$accent-1-l: 60%;
 
-$josera-ruby-h: 0;
-$josera-ruby-s: 100%;
-$josera-ruby-l: 50%;
+$accent-2-h: 182;
+$accent-2-s: 81%;
+$accent-2-l: 44%;
+
+$accent-3-h: 31;
+$accent-3-s: 86%;
+$accent-3-l: 56%;
 
 // default theme colors
-$josera-black: hsla($black-h, $black-s, $black-l, 1);
-$josera-grey: hsla($grey-h, $grey-s, $grey-l, 1);
-$josera-light-grey: hsla($light-grey-h, $light-grey-s, $light-grey-l, 1);
-$josera-white: hsla($white-h, $white-s, $white-l, 1);
+$brand-black: hsla($black-h, $black-s, $black-l, 1);
+$brand-grey: hsla($grey-h, $grey-s, $grey-l, 1);
+$brand-light-grey: hsla($light-grey-h, $light-grey-s, $light-grey-l, 1);
+$brand-white: hsla($white-h, $white-s, $white-l, 1);
 
-$josera-gold: hsla($josera-gold-h, $josera-gold-s, $josera-gold-l, 1);
-$josera-ruby: hsla($josera-ruby-h, $josera-ruby-s, $josera-ruby-l, 1);
+$accent-1: hsla($accent-1-h, $accent-1-s, $accent-1-l, 1);
+$accent-2: hsla($accent-2-h, $accent-2-s, $accent-2-l, 1);
+$accent-3: hsla($accent-3-h, $accent-3-s, $accent-3-l, 1);
 
-$color-black: $josera-black;
-$color-grey: $josera-grey;
-$color-light-grey: $josera-light-grey;
-$color-white: $josera-white;
+$color-black: $brand-black;
+$color-grey: $brand-grey;
+$color-light-grey: $brand-light-grey;
+$color-white: $brand-white;
 
-$color-primary: $josera-gold;
-$color-secondary: $josera-ruby;
+$color-accent-1: $accent-1;
+$color-accent-2: $accent-2;
+$color-accent-3: $accent-3;
 
 $colors: (
   "color-black": $color-black,
   "color-grey": $color-grey,
   "color-light-grey": $color-light-grey,
   "color-white": $color-white,
-  "color-primary": $color-primary,
-  "color-secondary": $color-secondary,
+  "color-accent-1": $color-accent-1,
+  "color-accent-2": $color-accent-2,
+  "color-accent-3": $color-accent-3
 );
 
 // generate color variables

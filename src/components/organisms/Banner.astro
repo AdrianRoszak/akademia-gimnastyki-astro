@@ -1,0 +1,93 @@
+---
+import { urlForImage } from '../../utils'
+
+import { Image } from 'astro:assets'
+
+import Container from '../atoms/Container.astro'
+import ArrowRight from '../atoms/icons/ArrowRight.astro'
+import BodyText from '../molecules/BodyText.astro'
+import Heading from '../molecules/Heading.astro'
+import TextFrame from '../molecules/TextFrame.astro'
+
+const { data } = Astro.props
+---
+
+<div class="weirdo-banner">
+  <TextFrame />
+  <Container>
+    <div class="grid-wrapper">
+      <div>
+        <Heading as="h1" size="2xl" text={data.title} />
+        <BodyText text={data.lead} />
+        <a href="https://forms.office.com/r/zPghF4cykx" class="weirdo-button--color-accent-2" target="_blank">
+          Zapisz swoje dziecko
+          <ArrowRight width={30}/>
+        </a>
+      </div>
+      <div class="image-wrapper">
+        <Image
+          src={urlForImage(data.images.mainImage.source)
+          .width(900)
+          .format("webp")
+          .quality(80)
+          .url()}
+            alt={data.images.mainImage.alt}
+            width={900}
+            height={600}
+        />
+      </div>
+    </div>
+  </Container>
+</div>
+
+<style>
+  .weirdo-banner {
+    position: relative;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+  }
+
+  .grid-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .image-wrapper {
+    position: relative;
+    
+    img {
+      object-fit: contain;
+      -webkit-filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
+      filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
+    }
+
+    &::after,
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      z-index: -1;
+    }
+
+    &::after {
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 50%;
+      background-color: var(--weirdo-color-accent-2);
+    }
+
+    &:before {
+      bottom: 0;
+      right: 0;
+      width: 50%;
+      height: 50%;
+      background-color: var(--weirdo-color-accent-1);
+    }
+  }
+</style>

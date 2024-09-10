@@ -2,7 +2,8 @@
 @use "../../defaults/" as defaults;
 
 .#{utils.buildClassName("heading")} {
-  font-weight: 400;
+  font-family: var(--font-heading);
+  font-weight: 700;
 
   @each $size in defaults.$sizes {
     &--#{$size} {
