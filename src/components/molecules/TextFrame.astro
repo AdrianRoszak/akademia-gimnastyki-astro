@@ -21,52 +21,44 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  /* display: grid; */
+  display: grid;
   padding: 0.5rem 1rem;
   z-index: -1;
+  font-size: var(--weirdo-text-sm)
 
 }
 
 fieldset{
-  border: 4px solid transparent; 
-  border-top-color: black; 
+  border: 3px solid transparent; 
+  border-top-color: #efefef; 
   box-sizing: border-box; 
-  /* grid-area: 1 / 1;  */
-  padding: 40px; 
-  margin:0; 
-  height: fit-content;
-  position: absolute;
-  width: 100%;
+  grid-area: 1 / 1; 
+  padding: 40px;
 }
 
 /* .d2{ grid-area: 1 / 2; } */
 
 fieldset:nth-of-type(2){ 
-  transform: rotate(90deg) translateY(0); 
-  width: calc(100vh - calc(2em + 2px));
-  position: absolute;
-  /* right: 0%;
-  bottom: 0; */
-  /* transform-origin: bottom right; */
+  transform: rotate(90deg); 
+  width: calc(100vh - 2em));
+
 }
 
 fieldset:nth-of-type(3) { 
   transform: rotate(180deg); 
-  bottom: 0;
 }
 
 fieldset:nth-of-type(4) { 
-  transform: rotate(-90deg) translateY(-50%); 
+  transform: rotate(-90deg); 
   width: calc(100vh - 2em);
-  bottom: 50%;
  }
 
 legend{
   padding: 0 4px; 
+  color: #cfcfcf;
 }
 
 .d1 legend{ margin-left: auto; }
-.d2 legend{ margin-right: auto; }
 
 fieldset:nth-of-type(3)>legend{ transform: rotate(180deg); } 
 
