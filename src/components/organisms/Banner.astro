@@ -7,24 +7,25 @@ import Container from '../atoms/Container.astro'
 import ArrowRight from '../atoms/icons/ArrowRight.astro'
 import BodyText from '../molecules/BodyText.astro'
 import Heading from '../molecules/Heading.astro'
-import TextFrame from '../molecules/TextFrame.astro'
 
 const { data } = Astro.props
 ---
 
 <div class="weirdo-banner">
-  <TextFrame />
   <Container>
     <div class="grid-wrapper">
-      <div>
-        <Heading as="h1" size="2xl" text={data.title} />
-        <BodyText text={data.lead} />
+      <div class="flex-wrapper">
+        <div class="heading-lead-wrapper">
+          <Heading as="h1" size="2xl" text={data.title} />
+          <BodyText text={data.lead} />
+        </div>
         <a href="https://forms.office.com/r/zPghF4cykx" class="weirdo-button--color-accent-2" target="_blank">
           Zapisz swoje dziecko
           <ArrowRight width={30}/>
         </a>
       </div>
       <div class="image-wrapper">
+        <div class="transparent-image-background" />
         <Image
           src={urlForImage(data.images.mainImage.source)
           .width(900)
@@ -43,9 +44,28 @@ const { data } = Astro.props
 <style>
   .weirdo-banner {
     position: relative;
-    height: 100dvh;
     display: flex;
     align-items: center;
+    flex-direction: column;
+
+    &::before {
+      content: "";
+      display: block;
+      width: 100%;
+      background-color: var(--weirdo-color-accent-1);
+      height: 5rem;
+    }
+
+    @media(min-width: 1024px) {
+      height: 100dvh;
+      flex-direction: row;
+      padding-top: 5rem;
+
+      &::before {
+        display: none;
+        visibility: hidden;
+      }
+    }
   }
 
   .grid-wrapper {
@@ -54,40 +74,100 @@ const { data } = Astro.props
 
     @media (min-width: 768px) {
       grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+  }
+
+  .flex-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem 0;
+
+    @media (min-width: 768px) {
+      padding: 0;
+    }
+  }
+
+  .heading-lead-wrapper {
+    margin: 1rem 0 2rem;
+
+    @media (min-width: 768px) {
+      margin: 1rem 0 0;
     }
   }
 
   .image-wrapper {
+    grid-row: 1 / 1;
     position: relative;
+    width: calc(100% + calc(var(--weirdo-container-padding-x) * 2));
+    margin-left: calc(var(--weirdo-container-padding-x) * -1);
+
+    &::after {
+      content: "";
+      display: block;
+      padding-bottom: 75%;
+    }
+
+    @media (min-width: 768px) {
+      grid-row: auto;
+    }
     
     img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
       -webkit-filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
       filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
     }
 
-    &::after,
-    &:before {
-      content: "";
-      display: block;
+    .transparent-image-background {
       position: absolute;
-      z-index: -1;
-    }
-
-    &::after {
       top: 0;
       left: 0;
-      width: 50%;
-      height: 50%;
-      background-color: var(--weirdo-color-accent-2);
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      
+      &::after,
+      &:before {
+        content: "";
+        display: block;
+        position: absolute;
+      }
+  
+      &::after {
+        display: none;
+        visibility: hidden;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 50%;
+        background-color: var(--weirdo-color-accent-2);
+      }
+  
+      &:before {
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--weirdo-color-accent-1);
+      }
+
+      @media (min-width: 768px) {
+        &::after {
+          display: block;
+          visibility: visible;
+        }
+
+        &::before {
+          width: 50%;
+          height: 50%;
+      }
     }
 
-    &:before {
-      bottom: 0;
-      right: 0;
-      width: 50%;
-      height: 50%;
-      background-color: var(--weirdo-color-accent-1);
-    }
   }
 </style>

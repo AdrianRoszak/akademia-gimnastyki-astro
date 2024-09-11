@@ -1,0 +1,30 @@
+---
+import Container from '../atoms/Container.astro'
+---
+
+<header class="weirdo-header">
+  <Container>
+    <div class="wrapper">
+      header
+    </div>
+  </Container>
+</header>
+
+<style>
+  .wrapper {
+    margin: 0 auto;
+    box-shadow: var(--weirdo-shadow-default);
+    background: var(--weirdo-color-white);
+    padding: 0.5rem;
+    background: #fafafa;
+
+    @media (min-width: 768px) {
+      width: 90%;
+    }
+
+    @media (min-width:1200px) {
+      width: 80%;
+      padding: 1rem;
+    }
+  }
+</style>

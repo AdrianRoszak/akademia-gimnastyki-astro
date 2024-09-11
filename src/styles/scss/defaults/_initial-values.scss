@@ -2,9 +2,9 @@
 
 //* shadow
 $shadow-color: #000000;
-$shadow-opacity: 0.2;
+$shadow-opacity: 0.1;
 $shadow-x: 0;
-$shadow-y: 10px;
+$shadow-y: 5px;
 $shadow-blur: 15px;
 $shadow-spread: -3px;
 
@@ -14,7 +14,12 @@ $shadow-default: $shadow-x $shadow-y $shadow-blur $shadow-spread
 //* border-radius
 $border-radius-default: 0.75rem;
 
+//* animation
+$animation-duration: 0.3s;
+
+
 :root {
   #{utils.buildVarName("shadow-default")}: #{$shadow-default};
   #{utils.buildVarName("border-radius-default")}: #{$border-radius-default};
+  #{utils.buildVarName("animation-duration")}: #{$animation-duration};
 }

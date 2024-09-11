@@ -77,17 +77,24 @@ a {
 
 .#{utils.buildClassName("button")} {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
   padding: 1em;
   font-size: var(--weirdo-text-md);
   color: contrast-color($button-color-default);
   background-color: $button-color-default;
 
-  transition: all 0.3s ease-in-out;
+  transition: all #{utils.getVar("animation-duration")} ease-in-out;
 
   &:hover {
     background-color: darken($button-color-default, 10%);
+  }
+
+  @media (min-width: map-get(defaults.$breakpoints, "lg")) {
+    justify-content: flex-start;
+    max-width: fit-content;
   }
 
   @each $name, $color in $button-colors {
@@ -106,12 +113,12 @@ a {
         height: 2.5em;
         content: "";
         background-color: $color;
-        transition: all 0.3s ease-in-out;
+        transition: all #{utils.getVar("animation-duration")} ease-in-out;
         transform: translateY(-50%);
       }
 
       svg {
-        transition: all 0.3s ease-in-out;
+        transition: all #{utils.getVar("animation-duration")} ease-in-out;
       }
 
       &:hover {
