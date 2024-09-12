@@ -8,3 +8,16 @@ body {
 main {
   flex-grow: 1;
 }
+
+.portable-text-wrapper {
+  margin-top: 2rem;
+
+  p {
+    margin-bottom: 1.5em;
+    text-wrap: balance;
+
+    @media (min-width: 768px) {
+      margin-bottom: 1.25em;
+    }
+  }
+}

@@ -1,6 +1,4 @@
-// import { secureImage } from "./utils/secure-image"
-
-import ts from 'typescript'
+import type { TypedObject } from 'astro-portabletext/types'
 import { secureImage } from './utils'
 
 export type ImageType = {
@@ -21,6 +19,10 @@ export type BannerType = {
 export type ValueType = {
   title: string
   description: string
+  icon: {
+    alt: string
+    source: string
+  }
 }
 
 export interface HomePage {
@@ -28,6 +30,7 @@ export interface HomePage {
   about: {
     title: string
     lead: string
+    body: TypedObject
   }
   values: {
     title: string
@@ -45,6 +48,7 @@ export function digestHomePageData(source): HomePage | null {
     about: {
       title: source[0].home_about_us_block.about_us_block_heading,
       lead: source[0].home_about_us_block.about_us_block_lead,
+      body: source[0].home_about_us_block.about_us_block_content,
     },
     values: digestValues(source[0].home_values_block),
   }
@@ -72,6 +76,10 @@ function digestValues(source) {
       return {
         title: value.value_item_title,
         description: value.value_item_description,
+        icon: {
+          alt: value.value_item_title,
+          source: value.value_item_icon,
+        },
       }
     }),
   }

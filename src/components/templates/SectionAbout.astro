@@ -1,0 +1,29 @@
+---
+import { PortableText } from 'astro-portabletext'
+import Container from '../atoms/Container.astro'
+import Heading from '../molecules/Heading.astro'
+
+const { data } = Astro.props
+---
+
+<section class="weirdo-about">
+  <Container>
+    <Heading as="h1" size='xl' text={data.title} />
+    <p>{data.lead}</p>
+    <div class="portable-text-wrapper">
+      <PortableText value={data.body}/>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .weirdo-about {
+    text-align: center;
+    padding: 5rem 0;
+    
+    @media (min-width: 768px) {
+      padding: 10rem 15%;
+    }
+  }
+</style>
+

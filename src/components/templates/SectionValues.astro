@@ -1,0 +1,79 @@
+---
+import Container from '../atoms/Container.astro'
+import Heading from '../molecules/Heading.astro'
+
+const { data } = Astro.props
+---
+
+<section>
+  <Container>
+    <h1>{data.values.title}</h1>
+    <p>{data.values.lead}</p>
+      <ul class="icons-wrapper">
+        {data.values.map((value, index) => {
+              const htmlString = value.icon.source
+              
+              return (
+              <li class="icon-wrapper">
+                <small>0{index+1}</small>
+                <Heading as="h2" size="md" text={value.title} />
+                {/* <div class="icon" set:html={htmlString} /> */}
+                <p>{value.description}</p>
+              </li>
+              <li class="icon-wrapper">
+                <small>0{index+1}</small>
+                <Heading as="h2" size="md" text={value.title} />
+                {/* <div class="icon" set:html={htmlString} /> */}
+                <p>{value.description}</p>
+              </li>
+              <li class="icon-wrapper">
+                <small>0{index+1}</small>
+                <Heading as="h2" size="md" text={value.title} />
+                {/* <div class="icon" set:html={htmlString} /> */}
+                <p>{value.description}</p>
+              </li><li class="icon-wrapper">
+                <small>0{index+1}</small>
+                <Heading as="h2" size="md" text={value.title} />
+                {/* <div class="icon" set:html={htmlString} /> */}
+                <p>{value.description}</p>
+              </li>
+              )
+            })}
+          </ul>  
+  </Container>
+</section>
+
+<style>
+  .icons-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .icon-wrapper {
+    font-size: var(--weirdo-text-md);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background: #fafafa;
+    padding: 15%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+    small {
+      font-size: var(--weirdo-text-lg);
+      color: var(--weirdo-color-accent-3);
+    }
+
+  }
+
+  .icon {
+    width: 8rem;
+    height: 8rem;
+
+    svg {
+      stroke-width: 0;
+      stroke-color: var(--weirdo-color-accent-2);
+    }
+  }
+</style>
