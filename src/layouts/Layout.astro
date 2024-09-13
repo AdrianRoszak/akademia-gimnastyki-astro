@@ -3,11 +3,15 @@ import { AstroFont } from 'astro-font'
 
 import '../styles/index.css'
 import '../styles/scss/styles.scss'
+import Footer from '../components/organisms/Footer.astro'
 import Header from '../components/organisms/Header.astro'
+import { getGlobalData } from '../data/get-global-data'
 
 interface Props {
   title: string
 }
+
+const globalData = await getGlobalData()
 
 const { title } = Astro.props
 ---
@@ -50,5 +54,6 @@ const { title } = Astro.props
 	<body>
     <Header />
 		<slot />
+    <Footer data={globalData} />
 	</body>
 </html>

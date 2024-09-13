@@ -9,7 +9,6 @@ import SectionValues from '../components/templates/SectionValues.astro'
 import Layout from '../layouts/Layout.astro'
 
 const { values, banners, about } = (await getHomePageData()) as HomePage
-const { companyName, companyEmail, companyPhone } = await getGlobalData()
 
 console.log('values', values.values[0])
 ---
@@ -22,11 +21,6 @@ console.log('values', values.values[0])
 		{about && <SectionAbout data={about} />}
 		{values && (
 			<SectionValues data={values}	/>
-		)}
-		{companyName && (
-			<h1>{companyName}</h1>
-			<p>{companyEmail}</p>
-			<p>{companyPhone}</p>
 		)}
 	</main>
 </Layout>

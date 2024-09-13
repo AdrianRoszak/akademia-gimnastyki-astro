@@ -2,7 +2,6 @@
 @use "../../defaults/" as defaults;
 
 .#{utils.buildClassName("heading")} {
-  margin-bottom: 0.25em;
   font-family: var(--font-heading);
   font-weight: 700;
 

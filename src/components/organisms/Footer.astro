@@ -1,0 +1,65 @@
+---
+import Container from '../atoms/Container.astro'
+import ArrowRight from '../atoms/icons/ArrowRight.astro'
+import Mail from '../atoms/icons/Mail.astro'
+import Phone from '../atoms/icons/Phone.astro'
+import Heading from '../molecules/Heading.astro'
+
+const { data } = Astro.props
+---
+
+<footer class="weirdo-footer">
+  <Container>
+    <div class="wrapper">
+      
+      {data && (
+        <Heading as="h1" size="md" text={data.companyName} />
+        <a class="link" href={`tel:${data.companyPhone}`}>
+          <Phone size={28} />
+          {data.companyPhone}
+        </a>
+        <a class="weirdo-button--color-black" href={`mailto:${data.companyMail}`}>
+          <Mail size={28}/>
+          {data.companyEmail}
+        </a>
+      )}
+      </div>
+  </Container>
+</footer>
+
+<style>
+  .weirdo-footer {
+    background-color: var(--weirdo-color-accent-3);
+    padding: 2rem;
+    
+    .wrapper {
+      display: flex;
+      align-items: center;
+      gap: 5rem;
+    }
+
+    .link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      &::after {
+
+        content: "";
+        display: block;
+        width: 100%;
+        height: 1px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: var(--weirdo-color-accent-1);
+        margin-top: 0.5rem;
+      }
+
+      &:hover {
+        color: var(--weirdo-color-accent-1);
+      }
+    }
+  }
+</style>
