@@ -1,22 +1,37 @@
 ---
 import Container from '../atoms/Container.astro'
+import Mail from '../atoms/icons/Mail.Astro'
+import Phone from '../atoms/icons/Phone.astro'
 ---
 
 <header class="weirdo-header">
   <Container>
     <div class="wrapper">
       header
+      <div class="icons-wrapper">
+        <a href="" class="icon-link">
+          <Phone size={28} color="var(--weirdo-color-white" />
+        </a>
+        <a href="" class="icon-link">
+        <Mail size={28} color="var(--weirdo-color-white" />
+        </a>
+      </div>
     </div>
   </Container>
 </header>
 
 <style>
+
+
   .wrapper {
     margin: 0 auto;
     box-shadow: var(--weirdo-shadow-default);
     background: var(--weirdo-color-white);
     padding: 0.5rem;
     background: #fafafa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     @media (min-width: 768px) {
       width: 90%;
@@ -25,6 +40,13 @@ import Container from '../atoms/Container.astro'
     @media (min-width:1200px) {
       width: 80%;
       padding: 1rem;
+    }
+
+    .icons-wrapper {
+
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
   }
 </style>
