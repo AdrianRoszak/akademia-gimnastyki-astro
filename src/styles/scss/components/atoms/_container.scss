@@ -36,6 +36,8 @@ $container-padding-y: 0;
   $keys: map-keys($breakpoints);
   $breakpoints-count: length($keys);
 
+  $xl-index: index($keys, xl);
+
   @for $i from 2 through $breakpoints-count {
     $breakpoint-key: nth($keys, $i);
     $previous-breakpoint-key: nth($keys, $i - 1);
@@ -43,10 +45,15 @@ $container-padding-y: 0;
     $breakpoint-value: map-get($breakpoints, $breakpoint-key);
     $previous-breakpoint-value: map-get($breakpoints, $previous-breakpoint-key);
 
+    $value-to-use: $breakpoint-value; // Default for smaller than xl
+    @if $i >= $xl-index {
+      $value-to-use: $previous-breakpoint-value; // Use previous value for xl and larger
+    }
+
     @media (min-width: $breakpoint-value) {
       :root {
         #{utils.buildVarName("container-max-width")}: calc(
-          #{$previous-breakpoint-value} * 1.25
+          #{$value-to-use} * 1.25
         );
       }
     }

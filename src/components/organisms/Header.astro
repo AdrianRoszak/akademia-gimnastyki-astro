@@ -2,6 +2,8 @@
 import Container from '../atoms/Container.astro'
 import MailIcon from '../atoms/icons/MailIcon.astro'
 import Phone from '../atoms/icons/Phone.astro'
+
+const { data } = Astro.props
 ---
 
 <header class="weirdo-header">
@@ -9,11 +11,11 @@ import Phone from '../atoms/icons/Phone.astro'
     <div class="wrapper">
       header
       <div class="icons-wrapper">
-        <a href="" class="icon-link">
+        <a href={`tel:${data.companyPhone}`} class="icon-link">
           <Phone size={28} color="var(--weirdo-color-white" />
         </a>
-        <a href="" class="icon-link">
-        <MailIcon size={28} color="var(--weirdo-color-white" />
+        <a href={`mailto:${data.companyEmail}`} class="icon-link">
+          <MailIcon size={28} color="var(--weirdo-color-white" />
         </a>
       </div>
     </div>

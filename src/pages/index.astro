@@ -9,8 +9,6 @@ import SectionValues from '../components/templates/SectionValues.astro'
 import Layout from '../layouts/Layout.astro'
 
 const { values, banners, about } = (await getHomePageData()) as HomePage
-
-console.log('values', values.values[0])
 ---
 
 <Layout title="Welcome to Astro">
