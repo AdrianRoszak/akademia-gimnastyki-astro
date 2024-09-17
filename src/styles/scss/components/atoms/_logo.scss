@@ -1,5 +1,21 @@
-@use '../../utils/' as utils;
+@use "../../utils/" as utils;
 
-.#{utils.buildClassName('logo')} {
-  margin: 0.25rem 0;
+.#{utils.buildClassName("logo")} {
+  position: relative;
+  width: 100px;
+  mix-blend-mode: multiply;
+
+  &::after {
+    display: block;
+    padding-top: 61%;
+    content: "";
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 }

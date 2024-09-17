@@ -1,7 +1,14 @@
 ---
+import { Image } from 'astro:assets'
+import type { GlobalData } from '../../data/types'
+import { urlForImage } from '../../utils'
 import Container from '../atoms/Container.astro'
 import MailIcon from '../atoms/icons/MailIcon.astro'
 import Phone from '../atoms/icons/Phone.astro'
+
+interface Props {
+  data: GlobalData
+}
 
 const { data } = Astro.props
 ---
@@ -9,7 +16,22 @@ const { data } = Astro.props
 <header class="weirdo-header">
   <Container>
     <div class="wrapper">
-      header
+      {data.companyLogo && (
+        <div class="weirdo-logo">
+          <Image
+            src={urlForImage(data.companyLogo.source)
+              .width(100)
+              .format('webp')
+              .quality(100)
+              .url()
+            }
+            alt={data.companyName}
+            width={100}
+            height={100}
+            class="logo"
+          />
+        </div>
+      )}
       <div class="icons-wrapper">
         <a href={`tel:${data.companyPhone}`} class="icon-link">
           <Phone size={28} color="var(--weirdo-color-white" />

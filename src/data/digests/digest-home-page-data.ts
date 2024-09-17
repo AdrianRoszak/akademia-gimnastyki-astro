@@ -1,10 +1,6 @@
 import type { TypedObject } from 'astro-portabletext/types'
+import type { ImageType } from '../types'
 import { secureImage } from './utils'
-
-export type ImageType = {
-  alt: string
-  source: string
-}
 
 export type BannerType = {
   title: string
