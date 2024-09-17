@@ -15,7 +15,9 @@ const { PUBLIC_SANITY_PROJECT_ID, PUBLIC_SANITY_API_VERSION, PUBLIC_SANITY_DATAS
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
-  adapter: vercel(),
+  adapter: vercel({
+    imageService: true,
+  }),
   prefetch: true,
   integrations: [
     icon(),
