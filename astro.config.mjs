@@ -15,7 +15,7 @@ const isProduction = IS_PRODUCTION === 'true'
 export default defineConfig({
   output: 'server',
   adapter: vercel({
-    imageService: isProduction,
+    imageService: true,
   }),
   prefetch: true,
   integrations: [
