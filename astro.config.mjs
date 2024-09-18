@@ -13,11 +13,9 @@ const isProduction = IS_PRODUCTION === 'true'
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'server',
-  adapter: vercel({
-    imageService: true,
-  }),
   prefetch: true,
+  output: 'hybrid',
+  adapter: vercel(),
   integrations: [
     icon(),
     sanity({
