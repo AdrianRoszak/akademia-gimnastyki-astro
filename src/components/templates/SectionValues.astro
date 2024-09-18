@@ -9,15 +9,13 @@ const { data } = Astro.props
   <Container>
     <h1>{data.values.title}</h1>
     <p>{data.values.lead}</p>
-      <ul class="icons-wrapper">
+      <ul class="tiles-wrapper">
         {data.values.map((value, index) => {
-              const htmlString = value.icon.source
               
               return (
-              <li class="icon-wrapper">
+              <li class="tile-wrapper">
                 <small>0{index+1}</small>
                 <Heading as="h2" size="md" text={value.title} />
-                {/* <div class="icon" set:html={htmlString} /> */}
                 <p>{value.description}</p>
               </li>
               )
@@ -27,7 +25,7 @@ const { data } = Astro.props
 </section>
 
 <style>
-  .icons-wrapper {
+  .tiles-wrapper {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -42,7 +40,7 @@ const { data } = Astro.props
     }
   }
 
-  .icon-wrapper {
+  .tile-wrapper {
     font-size: var(--weirdo-text-md);
     position: relative;
     display: flex;
