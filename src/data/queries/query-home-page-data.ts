@@ -11,6 +11,17 @@ export const queryHomePage = `*[_type == 'home'] {
     about_us_block_lead,
     about_us_block_content,
   },
+  home_activities_block {
+    activities_block_heading,
+    activities_block_lead,
+    activities_block_activities_selector {
+      activity_selector_list[]-> {
+        activity_item_name,
+        activity_item_description,
+        activity_item_image,
+      }
+    }
+  },
   home_values_block {
     values_block_title,
     values_block_lead,

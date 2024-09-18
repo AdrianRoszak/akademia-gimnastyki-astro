@@ -1,0 +1,33 @@
+---
+import { Image } from 'astro:assets'
+import type { HomePage } from '../../data/digests/digest-home-page-data'
+import { urlForImage } from '../../utils'
+
+interface Props {
+  data: HomePage['activities']
+}
+
+const { data } = Astro.props
+---
+
+<section>
+  <h2>{data.title}</h2>
+  <ul>
+    {data.activities.map((activity) => (
+      <li>{activity.name}</li>
+      <div class="image-wrapper">
+        <div class="transparent-image-background" />
+        <Image
+          src={urlForImage(activity.image.source)
+          .width(900)
+          .format("webp")
+          .quality(80)
+          .url()}
+            alt={activity.image.alt}
+            width={900}
+            height={600}
+        />
+      </div>
+    ))}
+  </ul>
+</section>

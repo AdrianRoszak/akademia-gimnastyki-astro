@@ -21,12 +21,23 @@ export type ValueType = {
   }
 }
 
+export type ActivityType = {
+  name: string
+  description: string
+  image: ImageType
+}
+
 export interface HomePage {
   banners: BannerType[]
   about: {
     title: string
     lead: string
     body: TypedObject
+  }
+  activities: {
+    title: string
+    lead: string
+    activities: ActivityType[]
   }
   values: {
     title: string
@@ -46,7 +57,25 @@ export function digestHomePageData(source): HomePage | null {
       lead: source[0].home_about_us_block.about_us_block_lead,
       body: source[0].home_about_us_block.about_us_block_content,
     },
+    activities: digestActivities(source[0].home_activities_block),
     values: digestValues(source[0].home_values_block),
+  }
+}
+//@ts-ignore
+function digestActivities(source): HomePage['activities'] {
+  return {
+    title: source.activities_block_heading,
+    lead: source.activities_block_lead,
+    activities: source.activities_block_activities_selector.activity_selector_list.map(
+      //@ts-ignore
+      (activity) => {
+        return {
+          name: activity.activity_item_name,
+          description: activity.activity_item_description,
+          image: secureImage(activity.activity_item_image),
+        }
+      },
+    ),
   }
 }
 
