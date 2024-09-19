@@ -2,6 +2,9 @@
 import { Image } from 'astro:assets'
 import type { HomePage } from '../../data/digests/digest-home-page-data'
 import { urlForImage } from '../../utils'
+import Container from '../atoms/Container.astro'
+import BodyText from '../molecules/BodyText.astro'
+import Heading from '../molecules/Heading.astro'
 
 interface Props {
   data: HomePage['activities']
@@ -11,23 +14,135 @@ const { data } = Astro.props
 ---
 
 <section>
-  <h2>{data.title}</h2>
-  <ul>
-    {data.activities.map((activity) => (
-      <li>{activity.name}</li>
-      <div class="image-wrapper">
-        <div class="transparent-image-background" />
-        <Image
-          src={urlForImage(activity.image.source)
-          .width(900)
-          .format("webp")
-          .quality(80)
-          .url()}
-            alt={activity.image.alt}
-            width={900}
-            height={600}
-        />
+  <Container>
+    <div class="heading-wrapper">
+      <Heading as='h1' size='xl' text={data.title} />
+    </div>
+    <div class="activities-wrapper">
+      <div data-weirdo='deco-wrapper' data-weirdo-items={data.activities.length} class="deco-wrapper">
       </div>
-    ))}
-  </ul>
+      {data.activities.map((activity) => (
+        <div class="activity-item">
+          <div class="activity-text">
+            <Heading as="h2" size='lg' text={activity.name}/>
+            <div class="portable-text-wrapper">
+            <BodyText text={activity.description} />
+            </div>
+          </div>
+          <div class="image-wrapper">
+            <div class="transparent-image-background" />
+            <Image
+            src={urlForImage(activity.image.source)
+            .width(1000)
+            .format("webp")
+            .quality(80)
+            .url()}
+              alt={activity.image.alt}
+              width={1000}
+              height={1000}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  </Container>
 </section>
+
+<script>
+  const decoWrapper: HTMLDivElement | null = document.querySelector('[data-weirdo="deco-wrapper"]')
+  const numberOfItems = decoWrapper!.getAttribute('data-weirdo-items')
+
+  if (decoWrapper && numberOfItems) {
+    decoWrapper.style = `grid-template-rows: repeat(${numberOfItems}, 1fr); grid-template-columns: repeat(${numberOfItems}, 1fr);`
+  }
+
+</script>
+
+<style>
+  .heading-wrapper {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .activity-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    &:nth-child(even) {
+      .image-wrapper {
+
+        &::before {
+          right: 0;
+          transform: translate(25%, -25%);
+        }
+      }
+    }
+
+    &:nth-child(odd) {
+      .image-wrapper {
+        grid-row: 1 / 1;
+
+        &::before {
+          left: 0;
+        }
+      }
+    }
+  }
+
+  .activities-wrapper {
+    position: relative;
+  }
+
+  .deco-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+  }
+
+  .activity-text {
+    padding: 0 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .image-wrapper {
+    position: relative;
+    width: 100%;
+    /* box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3); */
+    
+    &::after {
+      content: "";
+      position: relative;
+      display: block;
+      padding-top: 100%;
+      /* background-color: rgba(0, 0, 0, 0.2); */
+      z-index: 2
+    }
+    
+    &::before {
+      content: "";
+      display: block;
+      width: 15%;
+      height: 15%;
+      position: absolute;
+      top: 0%;
+      transform: translate(-50%, -50%);
+      background-color: var(--weirdo-color-accent-2);
+      z-index: -1;
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+    }
+  }
+</style>
