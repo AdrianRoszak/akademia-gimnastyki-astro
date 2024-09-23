@@ -37,7 +37,7 @@ export interface HomePage {
   activities: {
     title: string
     lead: string
-    activities: ActivityType[]
+    activities: ActivityType[] | null
   }
   values: {
     title: string
@@ -57,7 +57,7 @@ export function digestHomePageData(source): HomePage | null {
       lead: source[0].home_about_us_block.about_us_block_lead,
       body: source[0].home_about_us_block.about_us_block_content,
     },
-    activities: digestActivities(source[0].home_activities_block),
+    activities: (source[0].home_activities_block && digestActivities(source[0].home_activities_block)) || null,
     values: digestValues(source[0].home_values_block),
   }
 }
