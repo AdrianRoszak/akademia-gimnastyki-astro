@@ -9,10 +9,9 @@ import icon from 'astro-icon'
 const { PUBLIC_SANITY_PROJECT_ID, PUBLIC_SANITY_API_VERSION, PUBLIC_SANITY_DATASET, SANITY_API_TOKEN, IS_PRODUCTION } =
   loadEnv(import.meta.env.MODE, process.cwd(), '')
 
-const isProduction = IS_PRODUCTION === 'true'
-
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://ksakademiagimnastyki.pl',
   prefetch: true,
   output: 'hybrid',
   adapter: vercel(),

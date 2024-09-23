@@ -1,5 +1,6 @@
 ---
 import { AstroFont } from 'astro-font'
+import { SEO } from 'astro-seo'
 
 import '../styles/index.css'
 import '../styles/scss/styles.scss'
@@ -9,16 +10,39 @@ import { getGlobalData } from '../data/get-global-data'
 
 interface Props {
   title: string
+  description: string
 }
 
 const globalData = await getGlobalData()
 
-const { title } = Astro.props
+const { title, description } = Astro.props
+const pathname = Astro.url.pathname.replace(/^\/+/, '')
+const siteUrl = `${Astro.site}${pathname}`
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="pl">
 	<head>
+    <SEO
+      title={title}
+      titleTemplate="%s  | KS Akademia Gimnastyki"
+      description={description}
+      charset="UTF-8"
+      canonical={siteUrl}
+      openGraph={{
+        basic: {
+          title,
+          type: "website",
+          url: siteUrl,
+          image: `${siteUrl}/logo_blue.svg`,
+        },
+        optional: {
+          description,
+          locale: "pl_PL",
+          siteName: "KS Akademia Gimnastyki",
+        },
+      }}
+    />
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
