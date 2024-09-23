@@ -4,7 +4,7 @@ import { getHomePageData } from '../data/get-home-page-data'
 
 import Banner from '../components/organisms/Banner.astro'
 import SectionAbout from '../components/templates/SectionAbout.astro'
-import SectionActivities from '../components/templates/SectionActivities.astro'
+// import SectionActivities from '../components/templates/SectionActivities.astro'
 import SectionValues from '../components/templates/SectionValues.astro'
 import Layout from '../layouts/Layout.astro'
 
@@ -17,7 +17,7 @@ const { values, banners, about, activities } = (await getHomePageData()) as Home
 			<Banner data={banner} />
 		))}
 		{about && <SectionAbout data={about} />}
-		{activities && <SectionActivities data={activities}>}
+		<!-- {activities && <SectionActivities data={activities}>} -->
 		{values && (
 			<SectionValues data={values}	/>
 		)}
