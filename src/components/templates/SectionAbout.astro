@@ -15,8 +15,8 @@ const { data } = Astro.props
         <Image src={DecoImage} alt="decoration image" width={600} height={800} class="deco-image" />
       </div>
       <div>
-        <!-- <Heading as="h1" size='md' text={data.title} /> -->
-        <Heading as="h2" size='xl' text={data.lead} />
+        <Heading as="h1" size='md' text={data.title} />
+        <!-- <Heading as="h2" size='xl' text={data.lead} /> -->
         <div class="portable-text-wrapper">
           <PortableText value={data.body}/>
         </div>
