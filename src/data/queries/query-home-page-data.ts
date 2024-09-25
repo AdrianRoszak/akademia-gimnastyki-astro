@@ -32,5 +32,20 @@ export const queryHomePage = `*[_type == 'home'] {
         value_item_icon
       }
     }
+  },
+  home_events_block {
+    events_block_heading,
+    events_block_lead,
+    events_block_events_selector {
+      event_selector_list[]-> {
+        event_item_name,
+        event_item_link,
+        event_item_place,
+        event_item_description,
+        event_item_image,
+        event_start_date,
+        event_end_date
+      }
+    }
   }
 }`

@@ -1,0 +1,28 @@
+---
+import { PortableText } from 'astro-portabletext'
+import type { HomePage } from '../../data/digests/digest-home-page-data'
+import Container from '../atoms/Container.astro'
+import Heading from '../molecules/Heading.astro'
+
+interface Props {
+  data: HomePage['events']
+}
+
+const { data } = Astro.props
+---
+
+<section id="events">
+  <Container>
+    <Heading as="h1" size="lg" text={data.title} />
+    <p>{data.lead}</p>
+    <ul class="tiles-wrapper">
+      {data.events.map((event, index) => {
+        return (
+          <li class="tile-wrapper">
+            <Heading as="h2" size="md" text={event.name} />
+            <PortableText value={event.description} />
+          </li>
+        )
+      })}
+  </Container>
+</section>

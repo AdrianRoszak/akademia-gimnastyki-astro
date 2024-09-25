@@ -44,11 +44,26 @@ export interface HomePage {
     lead: string
     values: ValueType[]
   }
+  events: {
+    title: string
+    lead: string
+    events: {
+      name: string
+      link: string
+      place: string
+      description: TypedObject
+      image: ImageType
+      startDate: string
+      endDate: string
+    }[]
+  }
 }
 
 //@ts-ignore
 export function digestHomePageData(source): HomePage | null {
   if (!source) return null
+
+  console.log(source[0].home_events_block)
 
   return {
     banners: digestBanners(source[0].home_banner_selector),
@@ -59,8 +74,32 @@ export function digestHomePageData(source): HomePage | null {
     },
     activities: (source[0].home_activities_block && digestActivities(source[0].home_activities_block)) || null,
     values: digestValues(source[0].home_values_block),
+    events: (source[0].home_events_block && digestEvents(source[0].home_events_block)) || null,
   }
 }
+
+//@ts-ignore
+function digestEvents(source): HomePage['events'] {
+  return {
+    title: source.events_block_heading,
+    lead: source.events_block_lead,
+    events: source.events_block_events_selector.event_selector_list.map(
+      //@ts-ignore
+      (event) => {
+        return {
+          name: event.event_item_name,
+          link: event.event_item_link,
+          place: event.event_item_place,
+          description: event.event_item_description,
+          image: secureImage(event.event_item_image),
+          startDate: event.event_start_date,
+          endDate: event.event_end_date,
+        }
+      },
+    ),
+  }
+}
+
 //@ts-ignore
 function digestActivities(source): HomePage['activities'] {
   return {
