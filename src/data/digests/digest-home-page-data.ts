@@ -2,6 +2,11 @@ import type { TypedObject } from 'astro-portabletext/types'
 import type { ImageType } from '../types'
 import { secureImage } from './utils'
 
+export type DateTimeType = {
+  date: string
+  time: string
+}
+
 export type BannerType = {
   title: string
   lead: string
@@ -51,10 +56,11 @@ export interface HomePage {
       name: string
       link: string
       place: string
+      price: string
       description: TypedObject
       image: ImageType
-      startDate: string
-      endDate: string
+      startDate: DateTimeType
+      endDate: DateTimeType
     }[]
   }
 }
@@ -62,8 +68,6 @@ export interface HomePage {
 //@ts-ignore
 export function digestHomePageData(source): HomePage | null {
   if (!source) return null
-
-  console.log(source[0].home_events_block)
 
   return {
     banners: digestBanners(source[0].home_banner_selector),
@@ -75,6 +79,19 @@ export function digestHomePageData(source): HomePage | null {
     activities: (source[0].home_activities_block && digestActivities(source[0].home_activities_block)) || null,
     values: digestValues(source[0].home_values_block),
     events: (source[0].home_events_block && digestEvents(source[0].home_events_block)) || null,
+  }
+}
+
+function digestDate(source: string): DateTimeType {
+  const date = new Date(source)
+
+  return {
+    date: date.toLocaleDateString('pl-PL', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    }),
+    time: date.toLocaleTimeString('pl-PL'),
   }
 }
 
@@ -92,8 +109,9 @@ function digestEvents(source): HomePage['events'] {
           place: event.event_item_place,
           description: event.event_item_description,
           image: secureImage(event.event_item_image),
-          startDate: event.event_start_date,
+          startDate: digestDate(event.event_start_date),
           endDate: event.event_end_date,
+          price: `${event.event_item_price} zł`,
         }
       },
     ),

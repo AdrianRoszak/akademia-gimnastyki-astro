@@ -1,7 +1,13 @@
 ---
+import { Image } from 'astro:assets'
 import { PortableText } from 'astro-portabletext'
 import type { HomePage } from '../../data/digests/digest-home-page-data'
+import { urlForImage } from '../../utils'
 import Container from '../atoms/Container.astro'
+import ArrowRight from '../atoms/icons/ArrowRight.astro'
+import CalendarIcon from '../atoms/icons/CalendarIcon.astro'
+import PinIcon from '../atoms/icons/PinIcon.astro'
+import PriceIcon from '../atoms/icons/PriceIcon.astro'
 import Heading from '../molecules/Heading.astro'
 
 interface Props {
@@ -13,16 +19,171 @@ const { data } = Astro.props
 
 <section id="events">
   <Container>
-    <Heading as="h1" size="lg" text={data.title} />
-    <p>{data.lead}</p>
+    <div class="heading-wrapper">
+      <Heading as="h1" size="xl" text={data.title} />
+      <p>{data.lead}</p>
+    </div>
     <ul class="tiles-wrapper">
-      {data.events.map((event, index) => {
+      {data.events.map((event) => {
         return (
           <li class="tile-wrapper">
-            <Heading as="h2" size="md" text={event.name} />
-            <PortableText value={event.description} />
+            <div class="tile-image-wrapper">
+              <div class="image-wrapper">
+              <Image
+            src={urlForImage(event.image.source)
+            .width(600)
+            .format("webp")
+            .quality(80)
+            .url()}
+              alt={event.image.alt}
+              width={600}
+              height={600}
+            />
+              </div>
+            </div>
+            <div class="tile-content">
+              <div class="tile-heading-wrapper" >
+                <Heading as="h2" size="lg" text={event.name} />
+                <div class="tile-heading-details">
+                  <div>
+                    {event.startDate && (
+                      <time>
+                        <p><CalendarIcon width={40}/> {event.startDate.date}</p>
+                        <p> {event.startDate.time}</p>
+                      </time>
+                    )}
+                    {event.place && <p><PinIcon width={40} /> {event.place}</p>}
+                  </div>
+                  <div>
+                    {event.price && <p><PriceIcon width={40} />{event.price}</p>}
+                  </div>
+                </div>
+                <time>{event.startDate.date}</time>
+              </div>
+              <div class="tile-portable-text-wrapper">
+              <PortableText value={event.description} />
+              </div>
+              {event.link && (
+                <a href={event.link} class="weirdo-button--color-accent-2" target="_blank">
+                  Zapisy na wydarzenie
+                  <ArrowRight width={24} />
+                </a>
+              )  
+              }
+            </div>
           </li>
         )
       })}
   </Container>
 </section>
+
+<style>
+  .heading-wrapper {
+    text-align: center;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .tiles-wrapper {
+    display: grid;
+    gap: 1rem;
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .tile-wrapper {
+    position: relative;
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    gap: 5rem;
+  }
+
+  .tile-image-wrapper {
+    position: relative;
+    background-color: var(--weirdo-color-accent-3);
+  }
+
+  .image-wrapper {
+    position: relative;
+    width: 100%;
+
+    &::after {
+      content: "";
+      display: block;
+      padding-bottom: 100%;
+    }
+    
+
+    img {
+      position: absolute;
+      top: 25%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+      transform: scale(1.25) rotate(-15deg);
+    }
+
+  }
+
+  .tile-portable-text-wrapper {
+    margin-bottom: 3rem;
+    p {
+      margin-bottom: 0.5em;
+      line-height: 1.25;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .tile-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .tile-heading-wrapper {
+    position:relative;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+  }
+
+  .tile-heading-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    
+    svg, g, path {
+      fill: var(--weirdo-color-accent-1);
+    }
+
+    p {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+  }
+
+  .tile-footer {
+    /* border-top: 2px solid var(--weirdo-color-accent-3);
+    border-bottom: 2px solid var(--weirdo-color-accent-3); */
+    padding: 0 0 1rem;
+    margin-bottom: 1rem;
+
+    p span {
+      font-weight: bold;
+    }
+  }
+  
+</style>
