@@ -46,7 +46,7 @@ export const queryHomePage = `*[_type == 'home'] {
         event_start_date,
         event_end_date,
         event_item_price
-      }
+      } | order(event_start_date asc)
     }
   }
 }`

@@ -160,11 +160,23 @@ const { data } = Astro.props
     @media(min-width: 768px) {
       display: grid;    
     }
+
+    &:first-child {
+      .tile-image-wrapper {
+        background-color: var(--weirdo-color-accent-2);
+      }
+    }
+
+    &:nth-child(2) {
+      .tile-image-wrapper {
+        background-color: var(--weirdo-color-accent-3);
+      }
+    }
   }
 
   .tile-image-wrapper {
     position: relative;
-    background-color: var(--weirdo-color-accent-3);
+    /* background-color: var(--weirdo-color-accent-3); */
   }
 
   .image-wrapper {
