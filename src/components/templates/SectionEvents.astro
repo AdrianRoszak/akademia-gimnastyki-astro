@@ -6,6 +6,7 @@ import { urlForImage } from '../../utils'
 import Container from '../atoms/Container.astro'
 import ArrowRight from '../atoms/icons/ArrowRight.astro'
 import CalendarIcon from '../atoms/icons/CalendarIcon.astro'
+import ClockIcon from '../atoms/icons/ClockIcon.astro'
 import PinIcon from '../atoms/icons/PinIcon.astro'
 import PriceIcon from '../atoms/icons/PriceIcon.astro'
 import Heading from '../molecules/Heading.astro'
@@ -45,31 +46,79 @@ const { data } = Astro.props
               <div class="tile-heading-wrapper" >
                 <Heading as="h2" size="lg" text={event.name} />
                 <div class="tile-heading-details">
-                  <div>
-                    {event.startDate && (
-                      <time>
-                        <p><CalendarIcon width={40}/> {event.startDate.date}</p>
-                        <p> {event.startDate.time}</p>
-                      </time>
+                  <div class="tile-details-wrapper">
+                    {event.price && (
+                      <div class="tile-detail">
+                        <div class="tile-icon-wrapper">
+                          <PriceIcon width={26} />
+                        </div>
+                        {event.price}
+                      </div>
+                      )}
+                    {event.place && (
+                      <div class="tile-detail">
+                        <div class="tile-icon-wrapper">
+                          <PinIcon width={26} />
+                        </div>
+                        {event.place}                        
+                      </div>
                     )}
-                    {event.place && <p><PinIcon width={40} /> {event.place}</p>}
                   </div>
-                  <div>
-                    {event.price && <p><PriceIcon width={40} />{event.price}</p>}
+                  <div class="tile-heading-time">
+                    {event.startDate && (
+                      <div class="tile-details-wrapper">
+                        <strong>Zaczynamy: </strong>
+                        <time>
+                          <div class="tile-detail">
+                            <div class="tile-icon-wrapper">
+                              <CalendarIcon width={26}/>
+                              </div>
+                               {event.startDate.date}
+                            </div>
+                            </time>
+                            <time>
+                          <div class="tile-detail">
+                            <div class="tile-icon-wrapper">
+                              <ClockIcon width={26} />
+                               </div>
+                               {event.startDate.time}
+                            </div>
+                        </time>
+                      </div>
+                    )}
+                    {event.endDate && (
+                      <div class="tile-details-wrapper">
+                        <strong>Kończymy:</strong>
+                        <time>
+                          <div class="tile-detail">
+                            <div class="tile-icon-wrapper">
+                              <CalendarIcon width={26}/>
+                              </div>
+                               {event.endDate.date}
+                            </div>
+                            </time>
+                            <time>
+                          <div class="tile-detail">
+                            <div class="tile-icon-wrapper">
+                              <ClockIcon width={26} />
+                               </div>
+                               {event.endDate.time}
+                            </div>
+                        </time>
+                      </div>
+                    )}
                   </div>
                 </div>
-                <time>{event.startDate.date}</time>
               </div>
               <div class="tile-portable-text-wrapper">
-              <PortableText value={event.description} />
+                <PortableText value={event.description} />
               </div>
               {event.link && (
                 <a href={event.link} class="weirdo-button--color-accent-2" target="_blank">
                   Zapisy na wydarzenie
                   <ArrowRight width={24} />
                 </a>
-              )  
-              }
+              )}
             </div>
           </li>
         )
@@ -90,16 +139,27 @@ const { data } = Astro.props
   .tiles-wrapper {
     display: grid;
     gap: 1rem;
-    width: 70%;
     margin: 0 auto;
+    
+    @media(min-width: 768px) {
+      width: 90%;
+    }
+
+    @media(min-width: 1280px) {
+      width: 70%;
+
+    }
   }
 
   .tile-wrapper {
     position: relative;
-    display: grid;
     grid-template-columns: 30% 1fr;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     gap: 5rem;
+
+    @media(min-width: 768px) {
+      display: grid;    
+    }
   }
 
   .tile-image-wrapper {
@@ -111,28 +171,41 @@ const { data } = Astro.props
     position: relative;
     width: 100%;
 
+    
     &::after {
       content: "";
       display: block;
-      padding-bottom: 100%;
+      padding-bottom: 66%;  
+    }
+
+    @media (min-width: 768px) {
+      &::after {
+        padding-bottom: 100%;
+      }
     }
     
 
     img {
       position: absolute;
-      top: 25%;
+      top: 0%;
       left: 0;
       width: 100%;
       height: 100%;
       object-fit: contain;
       filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
-      transform: scale(1.25) rotate(-15deg);
+      transform: scale(0.8) rotate(-15deg);
+
+      @media (min-width: 768px) {
+        top: 25%;
+        transform: scale(1.25) rotate(-15deg);
+      }
     }
 
   }
 
   .tile-portable-text-wrapper {
     margin-bottom: 3rem;
+
     p {
       margin-bottom: 0.5em;
       line-height: 1.25;
@@ -144,7 +217,7 @@ const { data } = Astro.props
   }
 
   .tile-content {
-    padding: 1rem;
+    padding: 0 1rem 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -155,14 +228,26 @@ const { data } = Astro.props
     display: flex;
     gap: 1rem;
     flex-direction: column;
-    margin-bottom: 1rem;
+    border-top: 2px solid var(--weirdo-color-accent-3);
+    border-bottom: 2px solid var(--weirdo-color-accent-3);
+    padding: 1.5rem 0;
+    margin-bottom: 1.5rem;
 
   }
 
+  .tile-heading-time {
+    justify-content: space-between;
+    gap: 0.5rem;
+    
+    @media(min-width: 768px) {
+      display: flex;
+    }
+  }
+
   .tile-heading-details {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     
     svg, g, path {
       fill: var(--weirdo-color-accent-1);
@@ -172,6 +257,34 @@ const { data } = Astro.props
       display: flex;
       gap: 0.5rem;
       align-items: center;
+    }
+  }
+
+  .tile-details-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .tile-detail {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .tile-icon-wrapper {
+    display: inline-flex;
+    background: var(--weirdo-color-accent-1);
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    padding: 0.2em;
+    align-items: center ;
+    justify-content: center;
+
+    svg, g, path {
+      fill: white;
     }
   }
 

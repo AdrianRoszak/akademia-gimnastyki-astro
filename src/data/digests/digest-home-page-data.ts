@@ -91,7 +91,10 @@ function digestDate(source: string): DateTimeType {
       month: 'long',
       year: 'numeric',
     }),
-    time: date.toLocaleTimeString('pl-PL'),
+    time: date.toLocaleTimeString('pl-PL', {
+      hour: '2-digit',
+      minute: '2-digit',
+    }),
   }
 }
 
@@ -110,7 +113,7 @@ function digestEvents(source): HomePage['events'] {
           description: event.event_item_description,
           image: secureImage(event.event_item_image),
           startDate: digestDate(event.event_start_date),
-          endDate: event.event_end_date,
+          endDate: digestDate(event.event_end_date),
           price: `${event.event_item_price} zł`,
         }
       },
