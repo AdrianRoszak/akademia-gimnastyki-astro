@@ -8,4 +8,5 @@ export interface GlobalData {
   companyLogo: ImageType | null
   companyPhone: string
   companyEmail: string
+  companyAccountNumber: string
 }

@@ -1,3 +1,4 @@
+import type { GlobalData } from '../types'
 import { secureImage } from './utils'
 
 //@ts-ignore
@@ -7,5 +8,6 @@ export function digestGlobalData(source): GlobalData {
     companyLogo: secureImage(source[0].company_data_logo),
     companyPhone: source[0].company_data_phone,
     companyEmail: source[0].company_data_email,
+    companyAccountNumber: source[0].company_data_account_number,
   }
 }

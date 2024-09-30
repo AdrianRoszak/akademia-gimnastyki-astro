@@ -1,9 +1,14 @@
 ---
+import type { GlobalData } from '../../data/types'
 import Container from '../atoms/Container.astro'
 import ArrowRight from '../atoms/icons/ArrowRight.astro'
 import Mail from '../atoms/icons/MailIcon.astro'
 import Phone from '../atoms/icons/Phone.astro'
 import Heading from '../molecules/Heading.astro'
+
+interface Props {
+  data: GlobalData
+}
 
 const { data } = Astro.props
 ---
@@ -23,6 +28,9 @@ const { data } = Astro.props
             <Mail size={28}/>
             {data.companyEmail}
           </a>
+          {data.companyAccountNumber && (
+            <p>Nr konta do wpłat: {data.companyAccountNumber}</p>
+          )}
         </div>
       )}
       </div>
