@@ -19,12 +19,12 @@ const { data } = Astro.props
       <Heading as='h1' size='xl' text={data.title} />
     </div>
     <div class="activities-wrapper">
-      <div data-weirdo='deco-wrapper' data-weirdo-items={data.activities.length} class="deco-wrapper">
-      </div>
-      {data.activities.map((activity) => (
+      {data.activities && data.activities.map((activity) => (
         <div class="activity-item">
-          <div class="activity-text">
+          <div class="activity-text" data-weirdo="activity-text">
+            <div data-weirdo="activity-heading">
             <Heading as="h2" size='lg' text={activity.name}/>
+            </div>
             <div class="portable-text-wrapper">
             <BodyText text={activity.description} />
             </div>
@@ -49,31 +49,47 @@ const { data } = Astro.props
 </section>
 
 <script>
-  const decoWrapper: HTMLDivElement | null = document.querySelector('[data-weirdo="deco-wrapper"]')
-  const numberOfItems = decoWrapper!.getAttribute('data-weirdo-items')
-
-  if (decoWrapper && numberOfItems) {
-    decoWrapper.style = `grid-template-rows: repeat(${numberOfItems}, 1fr); grid-template-columns: repeat(${numberOfItems}, 1fr);`
-  }
-
+  window.addEventListener('load', () => {
+    const activityTexts: NodeListOf<HTMLElement> = document.querySelectorAll('[data-weirdo="activity-text"]')
+    
+    if (activityTexts) {
+      activityTexts.forEach((activityText) => {
+        
+        const activityHeading: HTMLHeadingElement | null = activityText.querySelector('[data-weirdo="activity-heading"]');
+        
+        if (activityHeading) {
+          const activityHeadingHeight = activityHeading.offsetHeight;
+          activityText.style.transform = `translateY(calc(100% - ${activityHeadingHeight}px))`
+        }
+      })
+    }
+  })
 </script>
 
-<style>
+<style lang="scss">
   .heading-wrapper {
     text-align: center;
     margin-bottom: 2rem;
   }
 
-  .activity-item {
+  .activities-wrapper {
+    position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 1px;
+  }
+
+  .activity-item {
+    position: relative;
+    display: grid;
+    overflow: hidden;
 
     &:nth-child(even) {
-      .image-wrapper {
+      .activity-text {
 
         &::before {
-          right: 0;
-          transform: translate(25%, -25%);
+          left: 0;
+          
         }
       }
     }
@@ -81,58 +97,75 @@ const { data } = Astro.props
     &:nth-child(odd) {
       .image-wrapper {
         grid-row: 1 / 1;
+      }
 
+      .activity-text {
         &::before {
-          left: 0;
+          right: 0;
         }
+      }
+    }
+
+    &:hover {
+      .activity-text {
+        transform: translateY(0) !important;
       }
     }
   }
 
-  .activities-wrapper {
-    position: relative;
-  }
-
-  .deco-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: grid;
-  }
 
   .activity-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     padding: 0 4rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-  }
+    // justify-content: center;
+    z-index: 5;
+    transition: transform 0.3s ease-in-out;
 
-  .image-wrapper {
-    position: relative;
-    width: 100%;
-    /* box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3); */
-    
     &::after {
       content: "";
-      position: relative;
       display: block;
-      padding-top: 100%;
-      /* background-color: rgba(0, 0, 0, 0.2); */
-      z-index: 2
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: var(--weirdo-color-accent-2);
+      opacity: 0.8;
+      z-index: -1;
+    }
+
+    div[data-weirdo="activity-heading"] {
+      padding: 1rem 0;
     }
     
-    &::before {
+
+    /* &::before {
       content: "";
       display: block;
       width: 15%;
       height: 15%;
       position: absolute;
       top: 0%;
-      transform: translate(-50%, -50%);
       background-color: var(--weirdo-color-accent-2);
       z-index: -1;
+    } */
+  }
+
+  .image-wrapper {
+    position: relative;
+    width: 100%;
+    
+    &::after {
+      content: "";
+      position: relative;
+      display: block;
+      padding-top: 100%;
+      // z-index: 2
     }
 
     img {
