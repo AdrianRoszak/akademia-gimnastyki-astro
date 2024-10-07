@@ -5,7 +5,7 @@ import Heading from '../molecules/Heading.astro'
 const { data } = Astro.props
 ---
 
-<section>
+<section class="">
   <Container>
     <h1>{data.values.title}</h1>
     <p>{data.values.lead}</p>
@@ -29,7 +29,7 @@ const { data } = Astro.props
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
-    margin-bottom: 8rem;
+    margin-bottom: 4rem;
 
     @media(min-width: 768px) {
       grid-template-columns: repeat(2, 1fr);

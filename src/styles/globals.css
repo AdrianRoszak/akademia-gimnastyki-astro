@@ -21,3 +21,17 @@ main {
     }
   }
 }
+
+.section {
+  position: relative;
+  padding: 3rem 0 5rem;
+
+  @media (min-width: 768px) {
+    padding: 5rem 0;
+    text-align: center;
+  }
+
+  @media (min-width: 1366px) {
+    padding: 7rem 0;
+  }
+}

@@ -18,10 +18,10 @@ const { values, banners, about, activities, events } = (await getHomePageData())
 			<Banner data={banner} />
 		))}
 		{about && <SectionAbout data={about} />}
-		{activities && <SectionActivities data={activities}>}
 		{values && (
 			<SectionValues data={values}	/>
 		)}
+		{activities && <SectionActivities data={activities}>}
 		{events && (
 			<SectionEvents data={events} />
 		)}
