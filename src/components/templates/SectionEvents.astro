@@ -240,10 +240,13 @@ const { data } = Astro.props
     display: flex;
     gap: 1rem;
     flex-direction: column;
-    border-top: 2px solid var(--weirdo-color-accent-3);
     border-bottom: 2px solid var(--weirdo-color-accent-3);
     padding: 1.5rem 0;
     margin-bottom: 1.5rem;
+    
+    @media (min-width: 768px) {
+      border-top: 2px solid var(--weirdo-color-accent-3);
+    }
 
   }
 
