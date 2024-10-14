@@ -15,7 +15,7 @@ const { data } = Astro.props
 
 <header class="weirdo-header">
   <Container>
-    <div class="wrapper">
+    <nav class="wrapper">
       {data.companyLogo && (
         <div class="weirdo-logo">
           <Image
@@ -32,6 +32,17 @@ const { data } = Astro.props
           />
         </div>
       )}
+      <div class="links-wrapper">
+        <a href='/' data-weirdo-nav="link" data-weirdo-nav-target-id="about">
+          O nas
+        </a>
+        <a href='/' data-weirdo-nav="link" data-weirdo-nav-target-id="activities">
+          Dyscypliny
+        </a>
+        <a href='/' data-weirdo-nav="link" data-weirdo-nav-target-id="events">
+          Wydarzenia
+        </a>
+      </div>
       <div class="icons-wrapper">
         <a href={`tel:${data.companyPhone}`} class="icon-link">
           <Phone size={28} color="var(--weirdo-color-white" />
@@ -39,14 +50,81 @@ const { data } = Astro.props
         <a href={`mailto:${data.companyEmail}`} class="icon-link">
           <MailIcon size={28} color="var(--weirdo-color-white" />
         </a>
+        <button data-weirdo-nav-burger class:list={["icon-link", 'burger-wrapper']}>
+            <div class="bar"></div>
+        </button>
       </div>
-    </div>
+    </nav>
   </Container>
+  <div class="mobile-nav-wrapper" data-weirdo="mobile-nav">
+    <nav class="mobile-nav" >
+      <a href='/' data-weirdo-nav="link" data-weirdo-nav-target-id="about">
+        O nas
+      </a>
+      <a href='/' data-weirdo-nav="link" data-weirdo-nav-target-id="activities">
+        Dyscypliny
+      </a>
+      <a href='/' data-weirdo-nav="link" data-weirdo-nav-target-id="events">
+        Wydarzenia
+      </a>
+    </nav>
+  </div>
 </header>
 
+<script>
+  window.addEventListener('load', () => {
+    const navLinks = document.querySelectorAll('[data-weirdo-nav="link"]')
+    const targets = document.querySelectorAll('[data-weirdo-nav-target]')
+    const burgerButton = document.querySelector('[data-weirdo-nav-burger]')
+    const mobileNav = document.querySelector('[data-weirdo="mobile-nav"]')
+
+    navLinks.forEach(link => {
+      const targetId = link.getAttribute('data-weirdo-nav-target-id')
+
+      link.addEventListener('click', (e) => {
+        e.preventDefault()
+        if (targets) {
+          targets.forEach(target => {
+            const id = target.getAttribute('data-weirdo-nav-target')
+            const offset = target.getBoundingClientRect().top + window.scrollY - 50
+            if (id === targetId) {
+              window.scrollTo({
+                top: offset,
+                behavior: 'smooth'
+              })
+            }
+          })
+        }
+      })
+    })
+
+    if (burgerButton && mobileNav) {
+      burgerButton.addEventListener('click', () => {
+        if (document.documentElement.style.overflow === 'hidden') {
+          document.documentElement.style.overflow = 'auto'
+        } else {
+          document.documentElement.style.overflow = 'hidden'
+        }
+        mobileNav.classList.toggle('open')
+        burgerButton.classList.toggle('active')
+      })
+
+      mobileNav.addEventListener('click', () => {
+        document.documentElement.style.overflow = 'auto'
+
+        window.setTimeout(() => {
+          mobileNav.classList.remove('open')
+          burgerButton.classList.remove('active')
+        }, 400)
+        // mobileNav.classList.remove('open')
+        // burgerButton.classList.remove('active')
+      })
+    }
+  })
+
+    </script>
+
 <style>
-
-
   .wrapper {
     margin: 0 auto;
     box-shadow: var(--weirdo-shadow-default);
@@ -54,11 +132,13 @@ const { data } = Astro.props
     padding: 0.5rem;
     background: #fafafa;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 2rem;
+    justify-content: space-between;
 
     @media (min-width: 768px) {
       width: 90%;
+      justify-content: flex-start;
     }
 
     @media (min-width:1200px) {
@@ -66,11 +146,132 @@ const { data } = Astro.props
       padding: 1rem;
     }
 
-    .icons-wrapper {
+    .links-wrapper {
+      display: none;
+      flex-grow: 1;
+      padding-left: 2rem;
+      align-items: center;
+      gap: 2rem;
 
+      @media (min-width: 768px) {
+        display: flex;
+      }
+
+      a {
+        
+        &:hover {
+          color: var(--weirdo-color-accent-2);
+        }
+      }
+    }
+
+    .burger-wrapper {
+      display: block;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: var(--weirdo-color-white);
+      display: flex;
+      align-items: center;
+      z-index: 101;
+      position: relative;
+
+      @media (min-width: 768px) {
+        display: none;
+      }
+
+      .bar {
+        position: relative;
+        width: 50%;
+        height: 2px;
+        background: var(--weirdo-color-white);
+        transition: transform 0.3s ease-in;
+        z-index: 102;
+
+        &::before, &::after {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: var(--weirdo-color-white);
+          transition: transform 0.1s ease-in;
+          left: 0;
+        }
+
+        &::before {
+          top: -5px;
+        }
+
+        &::after {
+          top: 5px;
+        }
+
+      }
+      &.active {
+        &::after {
+          background-color: var(--weirdo-color-accent-3);
+        }
+
+        .bar {
+          background-color: var(--weirdo-color-white);
+          transform: rotate(45deg);
+
+          &::before {
+            transform: rotate(90deg);
+            top: 0;
+          }
+  
+          &::after {
+            transform: rotate(90deg);
+            top: 0;
+          }
+        }
+      }
+    }
+
+    .icons-wrapper {
       display: flex;
       align-items: center;
       gap: 1rem;
+    }
+  }
+
+  .mobile-nav-wrapper {
+    background: var(--weirdo-color-accent-3);
+    padding: 1rem;
+    display: flex;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 100;
+    transform: translateY(-100%);
+
+    transition: transform 0.3s ease-in;
+
+    &.open {
+      transform: translateY(0);
+    }
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      padding-top: 10rem;
+      width: 100%;
+    }
+
+    a {
+      color: var(--weirdo-color-white);
+      font-size: var(--weirdo-text-3xl);
+      margin: 0 1rem;
     }
   }
 </style>

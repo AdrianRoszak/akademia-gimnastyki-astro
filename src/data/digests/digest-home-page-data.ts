@@ -85,8 +85,6 @@ export function digestHomePageData(source): HomePage | null {
 function digestDate(source: string): DateTimeType {
   const date = new Date(source)
 
-  console.log(source)
-
   return {
     date: date.toLocaleDateString('pl-PL', {
       day: '2-digit',

@@ -1,0 +1,37 @@
+---
+import ArrowRight from './icons/ArrowRight.astro'
+---
+
+<button
+      data-weirdo-scroll="scroll-to-top"
+      class:list={["scroll-to-top", "hidden", "icon-link"]}
+    >
+    <ArrowRight width={40} />
+    </button>
+
+    <style>
+      .scroll-to-top {
+        position: fixed;
+        bottom: 40px;
+        right: 20px;
+        border: none;
+        cursor: pointer;
+        transition: opacity 0.3s ease-in;
+        color: var(--weirdo-color-white);
+        box-shadow: var(--weirdo-shadow-default);
+        border-radius: 50%;
+
+        @media (min-width: 520px) {
+          right: 40px;
+        }
+
+        svg {
+          transform: rotate(-90deg);
+        }
+
+        &.hidden {
+          opacity: 0;
+          transform: scale(0);
+        }
+      }
+    </style>

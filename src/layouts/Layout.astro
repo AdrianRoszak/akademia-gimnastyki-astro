@@ -4,6 +4,7 @@ import { SEO } from 'astro-seo'
 
 import '../styles/index.css'
 import '../styles/scss/styles.scss'
+import ScrollToTop from '../components/atoms/ScrollToTop.astro'
 import Footer from '../components/organisms/Footer.astro'
 import Header from '../components/organisms/Header.astro'
 import { getGlobalData } from '../data/get-global-data'
@@ -79,5 +80,28 @@ const siteUrl = `${Astro.site}${pathname}`
     <Header data={globalData} />
 		<slot />
     <Footer data={globalData} />
+    <ScrollToTop />
+    <script>
+      const scrollToTopButton = document.querySelector(
+        "[data-weirdo-scroll='scroll-to-top']",
+      )
+
+      if (scrollToTopButton) {
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 500) {
+            scrollToTopButton.classList.remove("hidden")
+          } else {
+            scrollToTopButton.classList.add("hidden")
+          }
+        })
+        scrollToTopButton.addEventListener("click", () => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          })
+        })
+      }
+    </script>
 	</body>
 </html>
+
