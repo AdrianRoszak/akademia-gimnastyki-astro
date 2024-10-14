@@ -22,7 +22,7 @@ const { values, banners, about, activities, events } = (await getHomePageData())
 			<SectionValues data={values}	/>
 		)}
 		{activities && <SectionActivities data={activities}>}
-		{events && (
+		{events && events.events.length > 0 && (
 			<SectionEvents data={events} />
 		)}
 	</main>
