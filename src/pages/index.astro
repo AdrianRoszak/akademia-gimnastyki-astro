@@ -3,6 +3,7 @@ import type { HomePage } from '../data/digests/digest-home-page-data'
 import { getHomePageData } from '../data/get-home-page-data'
 
 import Banner from '../components/organisms/Banner.astro'
+import BannerSlider from '../components/organisms/BannerSlider.astro'
 import SectionAbout from '../components/templates/SectionAbout.astro'
 import SectionActivities from '../components/templates/SectionActivities.astro'
 import SectionEvents from '../components/templates/SectionEvents.astro'
@@ -14,9 +15,10 @@ const { values, banners, about, activities, events, metaData } = (await getHomeP
 
 <Layout title={metaData.metaTitle} description={metaData.metaDescription}>
 	<main>
-		{banners && banners.map((banner) => (
-			<Banner data={banner} />
-		))}
+		{banners.length > 1 
+			? <BannerSlider data={banners} />
+		 	: <Banner data={banners[0]} />
+		}
 		{about && <SectionAbout data={about} />}
 		{values && (
 			<SectionValues data={values}	/>
@@ -27,3 +29,8 @@ const { values, banners, about, activities, events, metaData } = (await getHomeP
 		)}
 	</main>
 </Layout>
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
