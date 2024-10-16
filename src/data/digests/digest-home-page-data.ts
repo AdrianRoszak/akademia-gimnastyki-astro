@@ -2,6 +2,11 @@ import type { TypedObject } from 'astro-portabletext/types'
 import type { ImageType } from '../types'
 import { secureImage } from './utils'
 
+export type MetaDataType = {
+  metaTitle: string
+  metaDescription: string
+}
+
 export type DateTimeType = {
   date: string
   time: string
@@ -63,6 +68,7 @@ export interface HomePage {
       endDate: DateTimeType
     }[]
   }
+  metaData: MetaDataType
 }
 
 //@ts-ignore
@@ -79,6 +85,10 @@ export function digestHomePageData(source): HomePage | null {
     activities: (source[0].home_activities_block && digestActivities(source[0].home_activities_block)) || null,
     values: digestValues(source[0].home_values_block),
     events: (source[0].home_events_block && digestEvents(source[0].home_events_block)) || null,
+    metaData: {
+      metaTitle: source[0].home_meta_data_block.meta_data_site_title,
+      metaDescription: source[0].home_meta_data_block.meta_data_site_description,
+    },
   }
 }
 

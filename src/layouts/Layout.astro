@@ -26,7 +26,7 @@ const siteUrl = `${Astro.site}${pathname}`
 	<head>
     <SEO
       title={title}
-      titleTemplate="%s  | KS Akademia Gimnastyki"
+      titleTemplate="%s | KS Akademia Gimnastyki"
       description={description}
       charset="UTF-8"
       canonical={siteUrl}
@@ -40,12 +40,12 @@ const siteUrl = `${Astro.site}${pathname}`
         optional: {
           description,
           locale: "pl_PL",
-          siteName: "KS Akademia Gimnastyki",
+          siteName: "Klub Sportowy Akademia Gimnastyki",
         },
       }}
     />
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />

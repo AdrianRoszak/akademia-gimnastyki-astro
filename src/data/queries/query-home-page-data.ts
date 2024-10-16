@@ -53,5 +53,9 @@ export const queryHomePage = `*[_type == 'home'] {
         event_item_price
       } | order(event_start_date asc)[event_end_date > "${getCurrentDate()}"]
     }
+  },
+  home_meta_data_block {
+    meta_data_site_title,
+    meta_data_site_description  
   }
 }`

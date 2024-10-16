@@ -9,10 +9,10 @@ import SectionEvents from '../components/templates/SectionEvents.astro'
 import SectionValues from '../components/templates/SectionValues.astro'
 import Layout from '../layouts/Layout.astro'
 
-const { values, banners, about, activities, events } = (await getHomePageData()) as HomePage
+const { values, banners, about, activities, events, metaData } = (await getHomePageData()) as HomePage
 ---
 
-<Layout title="Klub Sportowy Akademia Gimnastyki" description='Witaj na stronie KS Akademii Gimnastyki'>
+<Layout title={metaData.metaTitle} description={metaData.metaDescription}>
 	<main>
 		{banners && banners.map((banner) => (
 			<Banner data={banner} />
