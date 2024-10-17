@@ -19,10 +19,12 @@ const { data } = Astro.props
           <Heading as="h2" size="2xl" text={data.title} />
           <BodyText text={data.lead} />
         </div>
-        <a href="https://forms.office.com/r/zPghF4cykx" class="weirdo-button--color-accent-2" target="_blank">
-          Zapisz swoje dziecko
-          <ArrowRight width={30}/>
-        </a>
+        <div class="slider-button">
+          <a href="https://forms.office.com/r/zPghF4cykx" class="weirdo-button--color-accent-2" target="_blank">
+            Zapisz swoje dziecko
+            <ArrowRight width={30}/>
+          </a>
+        </div>
       </div>
       <div class="image-wrapper">
         <div class="transparent-image-background" />
