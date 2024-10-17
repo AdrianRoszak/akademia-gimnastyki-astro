@@ -104,6 +104,7 @@ function digestDate(source: string): DateTimeType {
     time: date.toLocaleTimeString('pl-PL', {
       hour: '2-digit',
       minute: '2-digit',
+      timeZone: 'Europe/Warsaw',
     }),
   }
 }
