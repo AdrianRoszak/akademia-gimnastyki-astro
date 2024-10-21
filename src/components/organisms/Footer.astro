@@ -19,7 +19,7 @@ const { data } = Astro.props
       
       {data && (
         <Heading as="h1" size="md" text={data.companyName} />
-        <div>
+          <div class="items-wrapper">
           <a class="link" href={`tel:${data.companyPhone}`}>
             <Phone size={28} />
             {data.companyPhone}
@@ -28,12 +28,24 @@ const { data } = Astro.props
             <Mail size={28}/>
             {data.companyEmail}
           </a>
-          {data.companyAccountNumber && (
-            <p>Nr konta do wpłat: {data.companyAccountNumber}</p>
-          )}
-        </div>
+          </div>
       )}
       </div>
+      <div class="regulations-wrapper">
+        <div class="grid-wrapper">
+          <div class="items-wrap">
+            <a class="link" href='/regulamin-klubu-sportowego-akademia-gimnastyki'>Regulamin Klubu Sportowego Akademia Gimnastyki</a>
+          </div>
+          <div>
+            {data.companyAccountNumber && (
+              <p><strong>Dane do przelewu:</strong></p>
+              <p>{data.companyName}</p>
+              <p>Nr konta do wpłat: {data.companyAccountNumber}</p>
+              <p>W tytule przelewu proszę wpisać: <br /> składka członkowska, imię i nazwisko zawodnika oraz miesiąc, którego dotyczy opłata.</p>
+            )}
+            </div>
+        </div>
+      </div>  
   </Container>
 </footer>
 
@@ -68,5 +80,28 @@ const { data } = Astro.props
         fill: var(--weirdo-color-white);
       }
     }
+  }
+
+  .items-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .grid-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+    @media(min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .regulations-wrapper {
+    font-size: var(--weirdo-text-md);
+    border-top: 1px solid var(--weirdo-color-black);
+    margin-top: 2rem;
+    padding-top: 1rem;
   }
 </style>
