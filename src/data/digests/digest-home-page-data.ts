@@ -125,7 +125,7 @@ function digestEvents(source): HomePage['events'] {
           image: secureImage(event.event_item_image),
           startDate: digestDate(event.event_start_date),
           endDate: digestDate(event.event_end_date),
-          price: `${event.event_item_price} zł`,
+          price: event.event_item_price !== 0 ? `${event.event_item_price} zł` : 'Wydarzenie bezpłatne',
         }
       },
     ),
