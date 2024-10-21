@@ -17,20 +17,22 @@ const { data } = Astro.props
   <Container>
     <nav class="wrapper">
       {data.companyLogo && (
-        <div class="weirdo-logo">
-          <Image
-            src={urlForImage(data.companyLogo.source)
-              .width(100)
-              .format('webp')
-              .quality(100)
-              .url()
-            }
-            alt={data.companyName}
-            width={100}
-            height={100}
-            class="logo"
-          />
-        </div>
+        <a href='/' data-weirdo-nav="link" data-weirdo-nav-target-id="home">
+          <div class="weirdo-logo">
+            <Image
+              src={urlForImage(data.companyLogo.source)
+                .width(100)
+                .format('webp')
+                .quality(100)
+                .url()
+              }
+              alt={data.companyName}
+              width={100}
+              height={100}
+              class="logo"
+            />
+          </div>
+        </a>
       )}
       <div class="links-wrapper">
         <a href='/' data-weirdo-nav="link" data-weirdo-nav-target-id="about">
@@ -77,12 +79,17 @@ const { data } = Astro.props
     const targets = document.querySelectorAll('[data-weirdo-nav-target]')
     const burgerButton = document.querySelector('[data-weirdo-nav-burger]')
     const mobileNav = document.querySelector('[data-weirdo="mobile-nav"]')
+    const isHomePage = window.location.pathname === '/'
 
     navLinks.forEach(link => {
       const targetId = link.getAttribute('data-weirdo-nav-target-id')
 
       link.addEventListener('click', (e) => {
         e.preventDefault()
+        if (!isHomePage) {
+          window.location.href = `/#${targetId}`
+        }
+        
         if (targets) {
           targets.forEach(target => {
             const id = target.getAttribute('data-weirdo-nav-target')
@@ -94,6 +101,8 @@ const { data } = Astro.props
               })
             }
           })
+        } else {
+          console.error('No targets found')
         }
       })
     })

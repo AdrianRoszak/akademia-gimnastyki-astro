@@ -15,10 +15,12 @@ const { values, banners, about, activities, events, metaData } = (await getHomeP
 
 <Layout title={metaData.metaTitle} description={metaData.metaDescription}>
 	<main>
+		<section id="home" data-weirdo-nav-target="home">
 		{banners.length > 1 
 			? <BannerSlider data={banners} />
 		 	: <Banner data={banners[0]} />
 		}
+		</section>
 		{about && <SectionAbout data={about} />}
 		{values && (
 			<SectionValues data={values}	/>
