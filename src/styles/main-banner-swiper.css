@@ -56,3 +56,7 @@
     }
   }
 }
+
+.swiper-pagination-bullet-active {
+  background: var(--weirdo-color-accent-2) !important;
+}
