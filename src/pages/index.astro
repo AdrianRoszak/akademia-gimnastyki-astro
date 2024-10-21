@@ -22,7 +22,7 @@ const { values, banners, about, activities, events, metaData } = (await getHomeP
 			<SectionValues data={values}	/>
 		)}
 		{activities && <SectionActivities data={activities}>}
-		{events && events.events.length > 0 && (
+		{events && (
 			<SectionEvents data={events} />
 		)}
 	</main>
