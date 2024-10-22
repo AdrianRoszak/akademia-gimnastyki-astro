@@ -1,0 +1,137 @@
+---
+import { PortableText } from 'astro-portabletext'
+import Container from '../components/atoms/Container.astro'
+import Heading from '../components/molecules/Heading.astro'
+import type { FaqData } from '../data/digests/digest-faq-data'
+import { getFaqData } from '../data/get-faq-data'
+import Layout from '../layouts/Layout.astro'
+
+const { title, lead, questions, meta } = (await getFaqData()) as FaqData
+
+console.log(lead)
+---
+
+<Layout title={meta.title} description={meta.description}>
+  <main>
+    <section>
+      <Container>
+        <div class="heading-wrapper">
+          <Heading as="h1" text={title} size='xl' />
+          <p>{lead}</p>
+        </div>
+      {questions.map(({ question, answer }, index) => (
+        <details class="faq-details">
+          <summary aria-expanded="false" >
+            <small>0{index+1}</small>
+            <Heading as="h2" size="md" text={question} />
+            </summary>
+            <div class="portable-text-wrapper" data-weirdo-show >
+              <PortableText value={answer} />
+            </div>
+        </details>
+      ))}
+      </Container>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  section {
+    padding-top: 14rem;
+  }
+
+  .heading-wrapper {
+    text-align: center;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+.faq-details {
+  cursor: pointer;
+  margin-bottom: 10px;
+
+  summary {
+    font-size: var(--weirdo-text-md);
+    outline: none;
+    padding: 2rem 1rem;
+    background-color: #fafafa;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+
+    &:hover {
+      background-color: #fcfcfc;
+    }
+
+    &::marker {
+      content: none;
+    }
+
+    small {
+      font-size: var(--weirdo-text-lg);
+      color: var(--weirdo-color-accent-3);
+    }
+
+  }
+
+  div {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+    opacity: 0;
+    padding-bottom: 2rem;
+  }
+  
+}
+
+{
+  div.animate {
+   max-height: 200px; /* Możesz dostosować wartość max-height w zależności od treści */
+   opacity: 1;
+ }
+}
+
+</style>
+
+<script>
+
+  window.addEventListener('load', () => {
+    const itemsToAnimate = document.querySelectorAll('[data-weirdo-show]');
+
+    function closeOpenDetails() {
+      document.querySelectorAll('details').forEach((details) => {
+        if (details.hasAttribute('open')) {
+          details.removeAttribute('open')
+          details.setAttribute('aria-expanded', 'false')
+        }
+      })
+    }
+
+    document.querySelectorAll('details').forEach((details) => {
+  details.addEventListener('toggle', () => {
+    const summary = details.querySelector('summary');
+    const isOpen = details.hasAttribute('open');
+    summary!.setAttribute('aria-expanded', isOpen ? 'true' : 'false'); // Ustawienie na true lub false
+  });
+
+  details.addEventListener('click', () => {
+    if (!details.hasAttribute('open')) {
+      closeOpenDetails(); // Zamyka inne otwarte szczegóły
+    }
+
+  });
+
+  // Ustaw aria-expanded na false dla zamkniętych szczegółów
+  if (!details.hasAttribute('open')) {
+    details!.querySelector('summary')!.setAttribute('aria-expanded', 'false');
+  }
+});
+  })
+
+  </script>

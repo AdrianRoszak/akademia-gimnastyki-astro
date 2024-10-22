@@ -5,10 +5,8 @@ import Heading from '../molecules/Heading.astro'
 const { data } = Astro.props
 ---
 
-<section class="">
+<div class="">
   <Container>
-    <h1>{data.values.title}</h1>
-    <p>{data.values.lead}</p>
       <ul class="tiles-wrapper">
         {data.values.map((value, index) => {
               
@@ -22,7 +20,7 @@ const { data } = Astro.props
             })}
           </ul>  
   </Container>
-</section>
+</div>
 
 <style>
   .tiles-wrapper {
