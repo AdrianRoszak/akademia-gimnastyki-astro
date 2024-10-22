@@ -7,8 +7,6 @@ import { getFaqData } from '../data/get-faq-data'
 import Layout from '../layouts/Layout.astro'
 
 const { title, lead, questions, meta } = (await getFaqData()) as FaqData
-
-console.log(lead)
 ---
 
 <Layout title={meta.title} description={meta.description}>
@@ -42,11 +40,12 @@ console.log(lead)
 
   .heading-wrapper {
     text-align: center;
-    margin-bottom: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    width: clamp(0px, 100%, 800px);
+    margin: 0 auto 4rem;
   }
 
 .faq-details {
@@ -85,13 +84,13 @@ console.log(lead)
     overflow: hidden;
     transition: max-height 0.5s ease, opacity 0.5s ease;
     opacity: 0;
-    padding-bottom: 2rem;
+    padding: 0 0 2rem 3.5rem;
   }
   
 }
 
-{
-  div.animate {
+.faq-details[open]{
+  div {
    max-height: 200px; /* Możesz dostosować wartość max-height w zależności od treści */
    opacity: 1;
  }
@@ -102,8 +101,7 @@ console.log(lead)
 <script>
 
   window.addEventListener('load', () => {
-    const itemsToAnimate = document.querySelectorAll('[data-weirdo-show]');
-
+    
     function closeOpenDetails() {
       document.querySelectorAll('details').forEach((details) => {
         if (details.hasAttribute('open')) {
@@ -112,26 +110,28 @@ console.log(lead)
         }
       })
     }
-
+    
     document.querySelectorAll('details').forEach((details) => {
-  details.addEventListener('toggle', () => {
-    const summary = details.querySelector('summary');
-    const isOpen = details.hasAttribute('open');
-    summary!.setAttribute('aria-expanded', isOpen ? 'true' : 'false'); // Ustawienie na true lub false
-  });
+      const itemToAnimate = details.querySelector('[data-weirdo-show]');
 
-  details.addEventListener('click', () => {
-    if (!details.hasAttribute('open')) {
-      closeOpenDetails(); // Zamyka inne otwarte szczegóły
-    }
+      details.addEventListener('toggle', () => {
+        const summary = details.querySelector('summary');
+        const isOpen = details.hasAttribute('open');
+        summary!.setAttribute('aria-expanded', isOpen ? 'true' : 'false'); // Ustawienie na true lub false
+        itemToAnimate!.classList.toggle('show');
+      });
 
-  });
+      details.addEventListener('click', () => {
+        if (!details.hasAttribute('open')) {
+          closeOpenDetails(); // Zamyka inne otwarte szczegóły
+        }
+      });
 
-  // Ustaw aria-expanded na false dla zamkniętych szczegółów
-  if (!details.hasAttribute('open')) {
-    details!.querySelector('summary')!.setAttribute('aria-expanded', 'false');
-  }
-});
+      // Ustaw aria-expanded na false dla zamkniętych szczegółów
+      if (!details.hasAttribute('open')) {
+        details!.querySelector('summary')!.setAttribute('aria-expanded', 'false');
+      }
+    });
   })
 
   </script>
