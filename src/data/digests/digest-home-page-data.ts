@@ -64,6 +64,7 @@ export interface HomePage {
       price: string
       description: TypedObject
       image: ImageType
+      bgColor: string
       startDate: DateTimeType
       endDate: DateTimeType
     }[]
@@ -123,6 +124,7 @@ function digestEvents(source): HomePage['events'] {
           place: event.event_item_place,
           description: event.event_item_description,
           image: secureImage(event.event_item_image),
+          bgColor: event.event_item_background_color,
           startDate: digestDate(event.event_start_date),
           endDate: digestDate(event.event_end_date),
           price: event.event_item_price !== 0 ? `${event.event_item_price} zł` : 'Wydarzenie bezpłatne',

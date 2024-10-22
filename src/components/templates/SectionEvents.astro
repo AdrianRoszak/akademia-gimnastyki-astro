@@ -16,6 +16,8 @@ interface Props {
 }
 
 const { data } = Astro.props
+
+console.log(data.events[0].bgColor)
 ---
 
 <section id="events" data-weirdo-nav-target="events" class="section">
@@ -31,7 +33,7 @@ const { data } = Astro.props
       {data.events.map((event) => {
         return (
           <li class="tile-wrapper">
-            <div class="tile-image-wrapper">
+            <div class="tile-image-wrapper" style={{ backgroundColor: `${event.bgColor}`}}>
               <div class="image-wrapper">
               <Image
             src={urlForImage(event.image.source)
@@ -164,18 +166,6 @@ const { data } = Astro.props
 
     @media(min-width: 768px) {
       display: grid;    
-    }
-
-    &:first-child {
-      .tile-image-wrapper {
-        background-color: var(--weirdo-color-accent-2);
-      }
-    }
-
-    &:nth-child(2) {
-      .tile-image-wrapper {
-        background-color: var(--weirdo-color-accent-3);
-      }
     }
   }
 

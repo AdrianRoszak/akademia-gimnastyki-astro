@@ -48,6 +48,7 @@ export const queryHomePage = `*[_type == 'home'] {
         event_item_place,
         event_item_description,
         event_item_image,
+        event_item_background_color,
         event_start_date,
         event_end_date,
         event_item_price
