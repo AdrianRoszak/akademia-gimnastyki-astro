@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets'
+import img from '../assets/ag_404.png'
+import Container from '../components/atoms/Container.astro'
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title="Szukana strona nie istnieje" description="Strona nie istnieje">
+  <main>
+    <div class="img-wrapper">
+      <Image src={img} alt="404" />
+    </div>
+  <Container>
+    <h1>
+      <span>4</span>
+      <span>0</span>
+      <span>4</span>
+      </h1>
+    <p>Ups! Wygląda na to, że ta strona nie istnieje. Sprawdź adres lub wróć na <a href='/'>stronę główną.</a></p>
+  </Container>
+  </main>
+
+</Layout>
+
+
+<style>
+  main {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 14rem 0 7rem;
+    position: relative;
+  }
+
+  .img-wrapper {
+    position: absolute;
+    top: 0;
+    right: 10vw;
+    z-index: -1;
+    opacity: 0.15;
+
+    @media (min-width: 768px) {
+      opacity: 1;
+    }
+  }
+
+  h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: -0.1em;
+    font-size: var(--weirdo-text-9xl);
+
+    @media(min-width: 768px) {
+      font-size: var(--weirdo-text-4xl);
+    }
+
+    span {
+
+      &:nth-child(1) {
+        color: var(--weirdo-color-accent-1);
+      }
+
+      &:nth-child(2) {
+        color: var(--weirdo-color-accent-2);
+      }
+
+      &:nth-child(3) {
+        color: var(--weirdo-color-accent-3);
+      }
+    }
+  }
+
+  a {
+    
+    &:hover {
+      color: var(--weirdo-color-accent-2);
+    }
+  }
+</style>
