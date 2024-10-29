@@ -1,0 +1,33 @@
+---
+import Container from '../components/atoms/Container.astro'
+import Heading from '../components/molecules/Heading.astro'
+import type { FaqData } from '../data/digests/digest-faq-data'
+import { getFaqData } from '../data/get-faq-data'
+import Layout from '../layouts/Layout.astro'
+
+const { meta } = (await getFaqData()) as FaqData
+---
+
+<Layout title={meta.title} description={meta.description}>
+  <main>
+    <section>
+      <Container>
+      <div class="wrapper">
+        <Heading as="h1" text="Zapisy" size='xl' />
+        <div class='activenow-form-container activenow-form-8608-container'>
+          <center>
+            <img src='https://www.activenow.io/assets/ripple.gif' width='100px'/>
+          </center>
+          <script async src='https://app.activenow.io/external/signup_form/load_by_js?category=&city_id=&code=5be55bb522562dd90ad58ef127ecb1bc&school_id=3288&signup_form_id=8608&venue_id=&zz='></script></div>
+      </div>
+
+      </Container>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .wrapper {
+    padding-top: 14rem;
+  }
+</style>
