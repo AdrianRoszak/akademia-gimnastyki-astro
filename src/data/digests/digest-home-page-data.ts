@@ -15,11 +15,7 @@ export type DateTimeType = {
 export type BannerType = {
   title: string
   lead: string
-  images: {
-    mainImage: ImageType
-    tabletImage: ImageType | false
-    mobileImage: ImageType | false
-  }
+  images: ImagesType | null
 }
 
 export type ValueType = {
@@ -183,8 +179,16 @@ function digestValues(source) {
   }
 }
 
+type ImagesType = {
+  mainImage: ImageType | null
+  tabletImage: ImageType | false
+  mobileImage: ImageType | false
+}
+
 //@ts-ignore
-function digestImages(images) {
+export function digestImages(images): ImagesType | null {
+  if (!images) return null
+
   return {
     mainImage: secureImage(images.baner_image_block_main_image),
     tabletImage: false,

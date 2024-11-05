@@ -1,11 +1,24 @@
 ---
+import Container from '../components/atoms/Container.astro'
+import type { BirthdayData } from '../data/digests/digest-birthday-data'
+import { getBirthdayData } from '../data/get-birthday-data'
 import Layout from '../layouts/Layout.astro'
+
+const { meta } = (await getBirthdayData()) as BirthdayData
 ---
 
-<Layout title="'urodziny" description="urtodziny">
+<Layout title={meta.title} description={meta.description}>
   <main>
     <section>
-      urodziny
+      <Container>
+        urodziny
+      </Container>
     </section>
   </main>
 </Layout>
+
+<style>
+  section {
+    padding-top: 14rem;
+  }
+</style>

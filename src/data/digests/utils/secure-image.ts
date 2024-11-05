@@ -1,5 +1,7 @@
+import type { ImageType } from '@/data/types'
+
 //@ts-ignore
-export function secureImage(image) {
+export function secureImage(image): ImageType | null {
   if (!image) return null
   if (Object.prototype.hasOwnProperty.call(image, 'image')) {
     return {
