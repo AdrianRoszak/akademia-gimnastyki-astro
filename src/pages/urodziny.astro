@@ -1,17 +1,25 @@
 ---
+import { PortableText } from 'astro-portabletext'
 import Container from '../components/atoms/Container.astro'
+import Heading from '../components/molecules/Heading.astro'
 import type { BirthdayData } from '../data/digests/digest-birthday-data'
 import { getBirthdayData } from '../data/get-birthday-data'
 import Layout from '../layouts/Layout.astro'
 
-const { meta } = (await getBirthdayData()) as BirthdayData
+const { meta, banner, intro, priceSection } = (await getBirthdayData()) as BirthdayData
 ---
 
 <Layout title={meta.title} description={meta.description}>
   <main>
     <section>
       <Container>
-        urodziny
+        {banner && (
+          <Heading as="h1" text={banner.title} size='xl' />
+          <p>{banner.lead}</p>
+        )}
+        {intro && (
+          <PortableText value={intro} />
+        )}
       </Container>
     </section>
   </main>

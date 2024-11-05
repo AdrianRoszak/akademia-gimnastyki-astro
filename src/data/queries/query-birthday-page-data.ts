@@ -3,7 +3,6 @@ export const queryBirthdayPageData = `*[_type == 'birthday'] {
     meta_data_site_title,
     meta_data_site_description
   },
-  birthday_title,
   birthday_banner {
     banner_item_heading,
     banner_item_images,
@@ -14,10 +13,7 @@ export const queryBirthdayPageData = `*[_type == 'birthday'] {
       birthday_price_block_description,
       birthday_price_block_heading,
       birthday_price_block_lead,
-      birthday_price_block_extra_services {
-        birthday_extra_item_name,
-        birthday_extra_item_price
-      }
+      birthday_price_block_extra_services
     },
   birthday_intro,
   birthday_location_block {
