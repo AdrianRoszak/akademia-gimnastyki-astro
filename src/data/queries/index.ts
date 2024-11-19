@@ -1,3 +1,4 @@
+export { queryCampsPageData } from './query-camps-page-data'
 export { queryGlobalData } from './query-global-data'
 export { queryHomePage } from './query-home-page-data'
 export { queryRegulationsSlugs } from './query-regulations-slugs'

@@ -26,8 +26,6 @@ export type BirthdayData = {
 export function digestBirthdayData(source): BirthdayData | null {
   if (!source) return null
 
-  console.log(source)
-
   return {
     banners: digestBanners(source[0].birthday_banner_selector),
     intro: source[0].birthday_intro,

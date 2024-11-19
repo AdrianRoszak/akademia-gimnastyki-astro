@@ -1,11 +1,34 @@
 ---
+import { PortableText } from 'astro-portabletext'
+import Container from '../../components/atoms/Container.astro'
+import CampTile from '../../components/molecules/CampTile.astro'
+import Heading from '../../components/molecules/Heading.astro'
+import type { CampsData } from '../../data/digests/digest-camps-data'
+import { getCampsData } from '../../data/get-camps-data'
 import Layout from '../../layouts/Layout.astro'
+
+const { meta, intro, upcomingCamps } = (await getCampsData()) as CampsData
 ---
 
-<Layout title="Obozy" description='obozy'>
+<Layout title={meta.title} description={meta.description}>
   <main>
     <section>
-      Obozy
+      <Container>
+        <div class="portable-text-wrapper">
+          <PortableText value={intro}/>
+        </div>
+      </Container>
+    <section>
+      <Container>
+      {upcomingCamps && (
+        <>
+        <Heading as="h2" size='xl' text='Nadchodzące obozy' />
+        <div class="camps-wrapper">
+        {upcomingCamps.map(camp => <CampTile data={camp} />)}
+        </div>
+       </>
+       )}
+      </Container>
       </section>
   </main>
 </Layout>
@@ -13,5 +36,11 @@ import Layout from '../../layouts/Layout.astro'
 <style>
   section {
     padding-top: 14rem;
+  }
+
+  .camps-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
   }
 </style>
