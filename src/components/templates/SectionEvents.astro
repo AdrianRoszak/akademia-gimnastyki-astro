@@ -16,8 +16,6 @@ interface Props {
 }
 
 const { data } = Astro.props
-
-console.log(data.events[0].bgColor)
 ---
 
 <section id="events" data-weirdo-nav-target="events" class="section">
@@ -26,7 +24,7 @@ console.log(data.events[0].bgColor)
       <Heading as="h1" size="xl" text={data.title} />
       <p>{data.lead}</p>
     </div>
-    {data.events.length === 0 ? (
+    {!data.events || data.events.length === 0 ? (
       <p>Brak wydarzeń do wyświetlenia</p>
     ) : (
     <ul class="tiles-wrapper">

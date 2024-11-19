@@ -3,10 +3,15 @@ import { urlForImage } from '../../utils'
 
 import { Image } from 'astro:assets'
 
+import type { BannerType } from '../../data/digests/digest-home-page-data'
 import Container from '../atoms/Container.astro'
 import ArrowRight from '../atoms/icons/ArrowRight.astro'
 import BodyText from '../molecules/BodyText.astro'
 import Heading from '../molecules/Heading.astro'
+
+interface Props {
+  data: BannerType
+}
 
 const { data } = Astro.props
 ---
@@ -19,26 +24,30 @@ const { data } = Astro.props
           <Heading as="h2" size="2xl" text={data.title} />
           <BodyText text={data.lead} />
         </div>
+        {data.button && (
         <div class="slider-button">
           <a href="https://forms.office.com/r/zPghF4cykx" class="weirdo-button--color-accent-2" target="_blank">
             Zapisz swoje dziecko
             <ArrowRight width={30}/>
           </a>
         </div>
+          )}
       </div>
-      <div class="image-wrapper">
-        <div class="transparent-image-background" />
-        <Image
-          src={urlForImage(data.images.mainImage.source)
-          .width(900)
-          .format("webp")
-          .quality(80)
-          .url()}
-            alt={data.images.mainImage.alt}
-            width={900}
-            height={600}
-        />
-      </div>
+      {data.images && (
+        <div class="image-wrapper">
+          <div class="transparent-image-background" />
+          <Image
+            src={urlForImage(data.images.mainImage!.source)
+            .width(900)
+            .format("webp")
+            .quality(80)
+            .url()}
+              alt={data.images.mainImage!.alt}
+              width={900}
+              height={600}
+          />
+        </div>
+      )}
     </div>
   </Container>
 </div>

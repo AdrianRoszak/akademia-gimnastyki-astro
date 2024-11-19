@@ -16,6 +16,7 @@ export type BannerType = {
   title: string
   lead: string
   images: ImagesType | null
+  button?: string
 }
 
 export type ValueType = {
@@ -53,17 +54,19 @@ export interface HomePage {
   events: {
     title: string
     lead: string
-    events: {
-      name: string
-      link: string
-      place: string
-      price: string
-      description: TypedObject
-      image: ImageType
-      bgColor: string
-      startDate: DateTimeType
-      endDate: DateTimeType
-    }[]
+    events:
+      | {
+          name: string
+          link: string
+          place: string
+          price: string
+          description: TypedObject
+          image: ImageType
+          bgColor: string
+          startDate: DateTimeType
+          endDate: DateTimeType
+        }[]
+      | null
   }
   metaData: MetaDataType
 }
@@ -111,22 +114,24 @@ function digestEvents(source): HomePage['events'] {
   return {
     title: source.events_block_heading,
     lead: source.events_block_lead,
-    events: source.events_block_events_selector.event_selector_list.map(
-      //@ts-ignore
-      (event) => {
-        return {
-          name: event.event_item_name,
-          link: event.event_item_link,
-          place: event.event_item_place,
-          description: event.event_item_description,
-          image: secureImage(event.event_item_image),
-          bgColor: event.event_item_background_color,
-          startDate: digestDate(event.event_start_date),
-          endDate: digestDate(event.event_end_date),
-          price: event.event_item_price !== 0 ? `${event.event_item_price} zł` : 'Wydarzenie bezpłatne',
-        }
-      },
-    ),
+    events: source.events_block_events_selector.event_selector_list
+      ? source.events_block_events_selector.event_selector_list.map(
+          //@ts-ignore
+          (event) => {
+            return {
+              name: event.event_item_name,
+              link: event.event_item_link,
+              place: event.event_item_place,
+              description: event.event_item_description,
+              image: secureImage(event.event_item_image),
+              bgColor: event.event_item_background_color,
+              startDate: digestDate(event.event_start_date),
+              endDate: digestDate(event.event_end_date),
+              price: event.event_item_price !== 0 ? `${event.event_item_price} zł` : 'Wydarzenie bezpłatne',
+            }
+          },
+        )
+      : null,
   }
 }
 
@@ -149,13 +154,14 @@ function digestActivities(source): HomePage['activities'] {
 }
 
 //@ts-ignore
-function digestBanners(source): HomePage['banners'] {
+export function digestBanners(source): BannerType[] {
   //@ts-ignore
   return source.banner_selector_list.map((banner) => {
     return {
       title: banner.banner_item_heading,
       lead: banner.banner_item_lead,
       images: digestImages(banner.banner_item_images),
+      button: banner.banner_item_button || null,
     }
   })
 }

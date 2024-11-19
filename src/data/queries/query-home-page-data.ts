@@ -8,7 +8,8 @@ export const queryHomePage = `*[_type == 'home'] {
     banner_selector_list[]-> {
       banner_item_heading,
       banner_item_lead,
-      banner_item_images
+      banner_item_images,
+      banner_item_button
     }
   },
   home_about_us_block {

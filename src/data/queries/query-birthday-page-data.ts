@@ -1,4 +1,11 @@
 export const queryBirthdayPageData = `*[_type == 'birthday'] {
+birthday_banner_selector {
+    banner_selector_list[]-> {
+      banner_item_heading,
+      banner_item_lead,
+      banner_item_images
+    }
+  },
   birthday_meta_data_block {
     meta_data_site_title,
     meta_data_site_description
