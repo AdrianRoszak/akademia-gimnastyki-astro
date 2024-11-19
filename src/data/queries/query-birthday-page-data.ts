@@ -10,11 +10,6 @@ birthday_banner_selector {
     meta_data_site_title,
     meta_data_site_description
   },
-  birthday_banner {
-    banner_item_heading,
-    banner_item_images,
-    banner_item_lead
-  },
   birthday_price_block {
     birthday_price_block_price,
       birthday_price_block_description,
