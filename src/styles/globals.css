@@ -17,7 +17,7 @@ main {
   }
 
   p {
-    margin-bottom: 1.5em;
+    margin-bottom: 1em;
     text-wrap: balance;
 
     @media (min-width: 768px) {
@@ -26,17 +26,18 @@ main {
   }
 
   ul {
-    padding-left: 1.5em;
-    margin-bottom: 1.5em;
+    padding-left: 0.5em;
+    margin-bottom: 1em;
     list-style-type: none;
 
     @media (min-width: 768px) {
-      margin-bottom: 1.25em;
+      padding-left: 1.5em;
+      margin-bottom: 0.7em;
     }
 
     li {
       position: relative;
-      padding-left: 0.5em;
+      padding-left: 0.25em;
       margin-bottom: 0.5em;
 
       &::before {
