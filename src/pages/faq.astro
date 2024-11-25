@@ -59,10 +59,13 @@ const { title, lead, questions, meta } = (await getFaqData()) as FaqData
     background-color: #fafafa;
     transition: background-color 0.3s ease;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    display: flex;
     align-items: center;
     gap: 1rem;
-
+    display: block;
+    
+    @media screen and (min-width: 768px) {
+      display: flex;
+    }
 
     &:hover {
       background-color: #fcfcfc;
@@ -84,14 +87,18 @@ const { title, lead, questions, meta } = (await getFaqData()) as FaqData
     overflow: hidden;
     transition: max-height 0.5s ease, opacity 0.5s ease;
     opacity: 0;
-    padding: 0 0 2rem 3.5rem;
+    padding: 0 0 2rem 1rem;
+
+    @media (min-width: 768px) {
+          padding: 0 0 2rem 3.5rem;
+    }
   }
   
 }
 
 .faq-details[open]{
   div {
-   max-height: 200px; /* Możesz dostosować wartość max-height w zależności od treści */
+   /* max-height: 200px; Możesz dostosować wartość max-height w zależności od treści */
    opacity: 1;
  }
 }
@@ -114,10 +121,14 @@ const { title, lead, questions, meta } = (await getFaqData()) as FaqData
     document.querySelectorAll('details').forEach((details) => {
       const itemToAnimate = details.querySelector('[data-weirdo-show]');
 
+      // Obliczanie wysokości elementu do animacji
+      const itemToAnimateHeight = itemToAnimate.scrollHeight;
+
       details.addEventListener('toggle', () => {
         const summary = details.querySelector('summary');
         const isOpen = details.hasAttribute('open');
         summary!.setAttribute('aria-expanded', isOpen ? 'true' : 'false'); // Ustawienie na true lub false
+        itemToAnimate!.style.maxHeight = isOpen ? `${itemToAnimateHeight}px` : '0px';
         itemToAnimate!.classList.toggle('show');
       });
 

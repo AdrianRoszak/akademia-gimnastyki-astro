@@ -10,7 +10,9 @@ import type { BirthdayData } from '../data/digests/digest-birthday-data'
 import { getBirthdayData } from '../data/get-birthday-data'
 import Layout from '../layouts/Layout.astro'
 
-const { meta, banners, intro, priceSection } = (await getBirthdayData()) as BirthdayData
+const { meta, banners, intro, priceSection, locationSection } = (await getBirthdayData()) as BirthdayData
+
+console.log(await getBirthdayData())
 ---
 
 <Layout title={meta.title} description={meta.description}>
@@ -26,7 +28,7 @@ const { meta, banners, intro, priceSection } = (await getBirthdayData()) as Birt
       </div>
       <Container>
         {intro && (
-          <div class:list={["intro-wrapper", "text-center"]}>
+          <div class:list={["intro-wrapper"]}>
             <Heading as='h1' size='xl' text="Urodziny z Akademią Gimnastyki" />
             <div class:list={["portable-text-wrapper"]}>
               <PortableText value={intro} />
@@ -43,11 +45,22 @@ const { meta, banners, intro, priceSection } = (await getBirthdayData()) as Birt
               <Heading as='h1' size='xl' text={priceSection.heading} />
             )}
             <div class="description-wrapper">
+              <p>Cena:</p>
               <Heading as='h2' size="lg" text={priceSection.price} />
               <div class="portable-text-wrapper">
                 <PortableText value={priceSection.description} />
               </div>
             </div>
+            {priceSection.extraServices && (
+              <div class="extraservices-wrapper">
+                <p>Dodatkowe usługi:</p>
+                <ul>
+                {priceSection.extraServices.map((service) => (
+                    <li>{service.name}: <strong>{service.price}</strong></li>
+                  ))}
+                  </ul>
+              </div>
+            )}
           </div>
           <div class="images-wrapper">
             <div class="image-wrapper" data-weirdo="images-move">
@@ -60,13 +73,33 @@ const { meta, banners, intro, priceSection } = (await getBirthdayData()) as Birt
         </div>
       </Container>
     </section>
+    <section class="location-section">
+      <Container>
+        <div class="wrapper">
+          <Heading text={locationSection.heading} as='h1' size='xl' />
+        </div>
+        {locationSection.locations && (
+        <div>
+          {locationSection.locations.map((location) => (
+            <div>
+              <PortableText value={location.info} />
+            </div>
+          ))}
+        </div>
+          )}
+        </Container>
+    </section>
   </main>
 </Layout>
 
 <style>
   .section-intro {
     position: relative;
-    padding: 150px 0;
+    padding: 100px 0;
+
+    @media (min-width: 1180px) {
+      padding: 150px 0;
+    }
   }
 
   .background-image {
@@ -108,8 +141,11 @@ const { meta, banners, intro, priceSection } = (await getBirthdayData()) as Birt
   }
 
   .description-wrapper {
+    padding-top: 1.25rem;
+    
     h2 {
       color: var(--weirdo-color-accent-3);
+      padding-top: 0.5rem;
     }
   }
 
@@ -151,6 +187,10 @@ const { meta, banners, intro, priceSection } = (await getBirthdayData()) as Birt
   .intro-wrapper {
     width: clamp(390px, 100%, 800px);
     margin: 0 auto;
+
+    @media (min-width: 1180px) {
+      text-align: center;
+    }
   }
 
   .images-wrapper {
@@ -221,6 +261,22 @@ const { meta, banners, intro, priceSection } = (await getBirthdayData()) as Birt
       height: 100%;
       object-fit: cover;
     }
+  }
+
+  .extraservices-wrapper {
+    padding-top: 1.25rem;
+
+    p {
+    margin-bottom: 1em;
+    text-wrap: balance;
+
+    @media (min-width: 768px) {
+      margin-bottom: 0.7em;
+    }
+  }
+  strong {
+    color: var(--weirdo-color-accent-3)
+  }
   }
 </style>
 

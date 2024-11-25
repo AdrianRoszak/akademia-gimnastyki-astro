@@ -6,6 +6,7 @@ module.exports = {
     'no-duplicate-selectors': true,
     'scss/no-global-function-names': null,
     'scss/at-extend-no-missing-placeholder': null,
+    'no-descending-specificity': null,
   },
   ignoreFiles: ['node_modules/**/*', 'dist/**/*'],
 }

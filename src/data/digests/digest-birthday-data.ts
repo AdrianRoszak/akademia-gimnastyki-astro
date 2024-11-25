@@ -16,6 +16,13 @@ export type BirthdayData = {
         }[]
       | null
   }
+  locationSection: {
+    heading: string
+    locations: {
+      info: TypedObject
+      location: string
+    }[]
+  }
   meta: {
     title: string
     description: string
@@ -45,11 +52,23 @@ export function digestBirthdayData(source): BirthdayData | null {
             } => {
               return {
                 name: item.birthday_extra_item_name,
-                price: item.birthday_extra_item_price,
+                price: `${item.birthday_extra_item_price} zł`,
               }
             },
           )
         : null,
+    },
+    locationSection: {
+      heading: source[0].birthday_location_block.birthday_location_block_title,
+      locations:
+        source[0].birthday_location_block.birthday_location_block_location_selector.birthday_location_selector_list.map(
+          (item) => {
+            return {
+              info: item.birthday_location_item_info,
+              location: item.birthday_location_item_location_selector,
+            }
+          },
+        ),
     },
     meta: {
       title: source[0].birthday_meta_data_block.meta_data_site_title,

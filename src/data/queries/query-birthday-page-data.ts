@@ -19,6 +19,7 @@ birthday_banner_selector {
     },
   birthday_intro,
   birthday_location_block {
+    birthday_location_block_title,
     birthday_location_block_location_selector {
       birthday_location_selector_list[]-> {
         birthday_location_item_info,
