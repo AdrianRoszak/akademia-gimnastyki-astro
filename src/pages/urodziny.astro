@@ -1,6 +1,10 @@
 ---
+import { Image } from 'astro:assets'
 import { PortableText } from 'astro-portabletext'
+import birthdayBackground from '../assets/ag-birthday-confetti.png'
+import birthdayPlaceholder from '../assets/birthday-placeholder.jpg'
 import Container from '../components/atoms/Container.astro'
+import Heading from '../components/molecules/Heading.astro'
 import Banner from '../components/organisms/Banner.astro'
 import type { BirthdayData } from '../data/digests/digest-birthday-data'
 import { getBirthdayData } from '../data/get-birthday-data'
@@ -16,12 +20,206 @@ const { meta, banners, intro, priceSection } = (await getBirthdayData()) as Birt
 		 	    <Banner data={banners[0]} />
         )}
     </section>
-    <section>
+    <section class="section-intro">
+      <div class="background-image">
+        <Image src={birthdayBackground} alt="placeholder" width={1920} />
+      </div>
       <Container>
         {intro && (
-          <PortableText value={intro} />
+          <div class:list={["intro-wrapper", "text-center"]}>
+          <Heading as='h1' size='xl' text="Urodziny z Akademią Gimnastyki" />
+          <div class:list={[ "portable-text-wrapper"]}>
+            <PortableText value={intro} />
+          </div>
+
+          </div>
+          
         )}
+      </Container>
+    </section>
+    <section>
+      <Container>
+        <div class="grid-wrapper">
+          <div class="content-wrapper">
+            {priceSection.heading && (
+              <Heading as='h1' size='xl' text={priceSection.heading} />
+            )}
+            <div class="description-wrapper">
+              <Heading as='h2' size="lg" text={priceSection.price}  />
+              <div class="portavle-text-wrappe">
+                <PortableText value={priceSection.description} />
+              </div>
+            </div>
+          </div>
+          <div class="images-wrapper">
+            
+                      <div class="image-wrapper" data-weirdo="images-move">
+                        <Image src={birthdayPlaceholder} alt="placeholder" />
+                      </div>
+                      <div class="image-wrapper" data-weirdo="images-move">
+                        <Image src={birthdayPlaceholder} alt="placeholder" />
+                        </div>  
+                    </div>
+        </div>
       </Container>
     </section>
   </main>
 </Layout>
+
+<style>
+  .section-intro {
+    position: relative;
+    padding: 150px 0;
+  }
+
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.25;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(0, rgba(255, 255, 255, 1) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(255, 255, 255, 1) 100%);
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .description-wrapper {
+
+    @media(min-width: 1180px) {
+          padding: 0 4rem;
+        }
+    h2 {
+      color: var(--weirdo-color-accent-3)
+    }
+  }
+
+  .content-wrapper {
+    position: relative;
+    padding: 100px 0;
+    margin-top: 100px;
+
+    &::after, &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 4rem;
+      height: 4rem;
+    }
+
+    &::before {
+      background: var(--weirdo-color-accent-2);
+      top: 0;
+      left: 0;
+    }
+
+    &::after {
+      background: var(--weirdo-color-accent-1);
+      bottom: 0;
+      right: 0;
+    }
+  }
+
+  .intro-wrapper {
+    width: clamp(390px, 100%, 800px);
+    margin: 0 auto;
+  }
+
+  .images-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .image-wrapper {
+    position: relative;
+    width: 375px;
+    z-index: -1;
+
+    &:first-child {
+      top: -80px;
+      transform: rotate(-5deg);
+
+      &::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding-top: 100%;
+        background: var(--weirdo-color-accent-2);
+        position: absolute;
+        top: 1%;
+        left: 1%;
+        z-index: -1;
+      }
+    }
+
+    &:last-child {
+      top: 80px;
+      transform: rotate(5deg);
+
+      &::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding-top: 100%;
+        background: var(--weirdo-color-accent-2);
+        position: absolute;
+        top: 1%;
+        left: 1%;
+        z-index: -1;
+      }
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+    
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+</style>
+
+<script>
+  
+  //function that moves images parallax up or down when user scrolls
+  const images = document.querySelectorAll('[data-weirdo="images-move"]');
+
+  window.addEventListener('scroll', () => {
+    images.forEach((image, index) => {
+      const speed = 0.25;
+      image.style.transform = `translateY(-${window.scrollY * speed}px) rotate(${index % 2 === 0 ? -5 : 5}deg)`;
+    });
+  });
+  
+</script>

@@ -32,7 +32,7 @@ export function digestBirthdayData(source): BirthdayData | null {
     priceSection: {
       heading: source[0].birthday_price_block.birthday_price_block_heading,
       lead: source[0].birthday_price_block.birthday_price_block_lead,
-      price: source[0].birthday_price_block.birthday_price_block_price,
+      price: `${source[0].birthday_price_block.birthday_price_block_price} zł`,
       description: source[0].birthday_price_block.birthday_price_block_description,
       extraServices: source[0].birthday_price_block.birthday_price_block_extra_services
         ? source[0].birthday_price_block.birthday_price_block_extra_services.map(

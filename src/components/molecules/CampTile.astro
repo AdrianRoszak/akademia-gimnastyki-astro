@@ -1,15 +1,20 @@
 ---
+import { PortableText } from 'astro-portabletext'
 import type { CampItem } from '../../data/digests/digest-camps-data'
 
 interface Props {
   data: CampItem
 }
 
-const { name } = Astro.props.data
+const { name, startDate, endDate, location, price, description } = Astro.props.data
 ---
 
 <div class="camp-tile">
-  {name}
+  <h3>{name}</h3>
+  <p>{startDate} - {endDate}</p>
+  <p>{location}</p>
+  <p>{price}</p>
+  <PortableText value{description}/>
 </div>
 
 <style>

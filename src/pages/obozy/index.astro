@@ -7,7 +7,7 @@ import type { CampsData } from '../../data/digests/digest-camps-data'
 import { getCampsData } from '../../data/get-camps-data'
 import Layout from '../../layouts/Layout.astro'
 
-const { meta, intro, upcomingCamps } = (await getCampsData()) as CampsData
+const { meta, intro, upcomingCamps, pastCamps } = (await getCampsData()) as CampsData
 ---
 
 <Layout title={meta.title} description={meta.description}>
@@ -25,6 +25,18 @@ const { meta, intro, upcomingCamps } = (await getCampsData()) as CampsData
         <Heading as="h2" size='xl' text='Nadchodzące obozy' />
         <div class="camps-wrapper">
         {upcomingCamps.map(camp => <CampTile data={camp} />)}
+        </div>
+       </>
+       )}
+      </Container>
+      </section>
+      <section>
+      <Container>
+      {pastCamps && pastCamps && (
+        <>
+        <Heading as="h2" size='xl' text='Poprzednie obozy' />
+        <div class="camps-wrapper">
+        {pastCamps.map(camp => <CampTile data={camp} />)}
         </div>
        </>
        )}
