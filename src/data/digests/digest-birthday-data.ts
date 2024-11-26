@@ -42,29 +42,24 @@ export function digestBirthdayData(source): BirthdayData | null {
       price: `${source[0].birthday_price_block.birthday_price_block_price} zł`,
       description: source[0].birthday_price_block.birthday_price_block_description,
       extraServices: source[0].birthday_price_block.birthday_price_block_extra_services
-        ? source[0].birthday_price_block.birthday_price_block_extra_services.map(
-            (
-              //@ts-ignore
-              item,
-            ): {
-              name: string
-              price: string
-            } => {
-              return {
-                name: item.birthday_extra_item_name,
-                price: `${item.birthday_extra_item_price} zł`,
-              }
-            },
-          )
+        ? // @ts-expect-error
+          source[0].birthday_price_block.birthday_price_block_extra_services.map((item) => {
+            return {
+              name: item.birthday_extra_item_name,
+              price: `${item.birthday_extra_item_price} zł`,
+            }
+          })
         : null,
     },
     locationSection: {
       heading: source[0].birthday_location_block.birthday_location_block_title,
       locations:
+        // @ts-expect-error
         source[0].birthday_location_block.birthday_location_block_location_selector.birthday_location_selector_list.map(
           (item) => {
             return {
               info: item.birthday_location_item_info,
+              // @ts-expect-error
               location: item.birthday_location_item_location_list.map((location) => {
                 return {
                   name: location.birthday_location_item_name,
