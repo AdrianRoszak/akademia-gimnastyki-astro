@@ -54,8 +54,8 @@ export function digestBirthdayData(source): BirthdayData | null {
     locationSection: {
       heading: source[0].birthday_location_block.birthday_location_block_title,
       locations:
-        // @ts-expect-error
         source[0].birthday_location_block.birthday_location_block_location_selector.birthday_location_selector_list.map(
+          // @ts-expect-error
           (item) => {
             return {
               info: item.birthday_location_item_info,
