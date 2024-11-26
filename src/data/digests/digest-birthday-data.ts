@@ -65,7 +65,12 @@ export function digestBirthdayData(source): BirthdayData | null {
           (item) => {
             return {
               info: item.birthday_location_item_info,
-              location: item.birthday_location_item_location_selector,
+              location: item.birthday_location_item_location_list.map((location) => {
+                return {
+                  name: location.birthday_location_item_name,
+                  address: location.birthday_location_item_address,
+                }
+              }),
             }
           },
         ),
