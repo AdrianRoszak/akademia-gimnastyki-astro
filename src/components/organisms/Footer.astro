@@ -1,7 +1,6 @@
 ---
 import type { GlobalData } from '../../data/types'
 import Container from '../atoms/Container.astro'
-import ArrowRight from '../atoms/icons/ArrowRight.astro'
 import Mail from '../atoms/icons/MailIcon.astro'
 import Phone from '../atoms/icons/Phone.astro'
 import Heading from '../molecules/Heading.astro'
@@ -37,11 +36,12 @@ const { data } = Astro.props
             <a class="link" href='/regulamin-klubu-sportowego-akademia-gimnastyki'>Regulamin Klubu Sportowego Akademia Gimnastyki</a>
           </div>
           <div>
-            {data.companyAccountNumber && (
+            {console.log(data.companyAccountDetails)}
+            {data.companyAccountDetails && (
               <p><strong>Dane do przelewu:</strong></p>
-              <p>{data.companyName}</p>
-              <p>Nr konta do wpłat: {data.companyAccountNumber}</p>
-              <p>W tytule przelewu proszę wpisać: <br /> składka członkowska, imię i nazwisko zawodnika oraz miesiąc, którego dotyczy opłata.</p>
+              <p>{data.companyAccountDetails.companyAccountName}</p>
+              <p>Nr konta do wpłat: {data.companyAccountDetails.companyAccountNumber}</p>
+              <p>{data.companyAccountDetails.companyAccountDescription}</p>
             )}
             </div>
         </div>
@@ -80,6 +80,11 @@ const { data } = Astro.props
         fill: var(--weirdo-color-white);
       }
     }
+  }
+
+  .items-wrap {
+    display: flex;
+    align-items: flex-end;
   }
 
   .items-wrapper {

@@ -27,7 +27,7 @@ main {
 }
 
 .portable-text-wrapper ul,
-ul {
+.custom-list {
   padding-left: 0.5em;
   margin-bottom: 1em;
   list-style-type: none;

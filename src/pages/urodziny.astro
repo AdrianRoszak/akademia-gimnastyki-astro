@@ -52,7 +52,7 @@ const { meta, banners, intro, priceSection } = (await getBirthdayData()) as Birt
             {priceSection.extraServices && (
               <div class="extraservices-wrapper">
                 <p>Dodatkowe usługi:</p>
-                <ul>
+                <ul class="custom-list">
                 {priceSection.extraServices.map((service) => (
                     <li>{service.name}: <strong>{service.price}</strong></li>
                   ))}
