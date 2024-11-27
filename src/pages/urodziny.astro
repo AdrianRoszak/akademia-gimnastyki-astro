@@ -77,7 +77,7 @@ const { meta, banners, intro, priceSection, locationSection } = (await getBirthd
           <Heading text={locationSection.heading} as='h1' size='xl' />
         </div>
         {locationSection.locations && (
-        <div>
+        <div class="locations-grid">
           {locationSection.locations.map((location) => (
             <div>
               <Heading text={location.location.name} as='h2' size='lg' />
@@ -304,6 +304,24 @@ const { meta, banners, intro, priceSection, locationSection } = (await getBirthd
   strong {
     color: var(--weirdo-color-accent-3)
   }
+  }
+
+  .location-section {
+    padding: 100px 0;
+
+    @media (min-width: 1180px) {
+      padding: 150px 0;
+    }
+  }
+
+  .locations-grid {
+    display: grid;
+    gap: 20px;
+    padding-top: 50px;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 </style>
 

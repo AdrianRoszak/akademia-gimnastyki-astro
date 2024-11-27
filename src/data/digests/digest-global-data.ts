@@ -10,7 +10,7 @@ export function digestGlobalData(source): GlobalData {
     companyEmail: source[0].company_data_email,
     companyAccountDetails: {
       companyAccountName: source[0].company_data_account_details.company_data_account_details_name,
-      companyAccountDescription: source[0].company_data_account_details.company_data_account_details_description,
+      companyAccountDescription: `W tytule ${source[0].company_data_account_details.company_data_account_details_description}`,
       companyAccountNumber: source[0].company_data_account_details.company_data_account_number,
     },
   }
