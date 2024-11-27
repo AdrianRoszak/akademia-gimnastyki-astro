@@ -9,7 +9,10 @@ export const queryHomePage = `*[_type == 'home'] {
       banner_item_heading,
       banner_item_lead,
       banner_item_images,
-      banner_item_button
+      banner_item_button {
+        button_block_text,
+        button_block_link
+      }
     }
   },
   home_about_us_block {

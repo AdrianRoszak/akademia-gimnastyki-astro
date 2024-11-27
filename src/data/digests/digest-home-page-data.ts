@@ -16,7 +16,10 @@ export type BannerType = {
   title: string
   lead: string
   images: ImagesType | null
-  button?: string
+  button?: {
+    text: string
+    link: string
+  }
 }
 
 export type ValueType = {
@@ -153,6 +156,13 @@ function digestActivities(source): HomePage['activities'] {
   }
 }
 
+export function processButtonLink(link: string): string {
+  if (link.includes('@')) {
+    return `mailto:${link}`
+  }
+  return link
+}
+
 //@ts-ignore
 export function digestBanners(source): BannerType[] {
   //@ts-ignore
@@ -161,7 +171,12 @@ export function digestBanners(source): BannerType[] {
       title: banner.banner_item_heading,
       lead: banner.banner_item_lead,
       images: digestImages(banner.banner_item_images),
-      button: banner.banner_item_button || null,
+      button: banner.banner_item_button
+        ? {
+            text: banner.banner_item_button.button_block_text,
+            link: banner.banner_item_button.button_block_link,
+          }
+        : null,
     }
   })
 }

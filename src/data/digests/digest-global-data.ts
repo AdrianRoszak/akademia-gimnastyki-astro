@@ -3,7 +3,6 @@ import { secureImage } from './utils'
 
 //@ts-ignore
 export function digestGlobalData(source): GlobalData {
-  console.log(source)
   return {
     companyName: source[0].company_data_name,
     companyLogo: secureImage(source[0].company_data_logo),

@@ -26,8 +26,8 @@ const { data } = Astro.props
         </div>
         {data.button && (
         <div class="slider-button">
-          <a href="https://forms.office.com/r/zPghF4cykx" class="weirdo-button--color-accent-2" target="_blank">
-            Zapisz swoje dziecko
+          <a href={data.button.link} class="weirdo-button--color-accent-2" target="_blank">
+            {data.button.text}
             <ArrowRight width={30}/>
           </a>
         </div>

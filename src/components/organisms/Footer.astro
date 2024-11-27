@@ -36,7 +36,6 @@ const { data } = Astro.props
             <a class="link" href='/regulamin-klubu-sportowego-akademia-gimnastyki'>Regulamin Klubu Sportowego Akademia Gimnastyki</a>
           </div>
           <div>
-            {console.log(data.companyAccountDetails)}
             {data.companyAccountDetails && (
               <p><strong>Dane do przelewu:</strong></p>
               <p>{data.companyAccountDetails.companyAccountName}</p>
