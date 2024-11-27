@@ -174,7 +174,7 @@ export function digestBanners(source): BannerType[] {
       button: banner.banner_item_button
         ? {
             text: banner.banner_item_button.button_block_text,
-            link: banner.banner_item_button.button_block_link,
+            link: processButtonLink(banner.banner_item_button.button_block_link),
           }
         : null,
     }

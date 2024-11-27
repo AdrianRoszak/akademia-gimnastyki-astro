@@ -1,3 +1,5 @@
+import { bannerFragment } from './fragments'
+
 export function getCurrentDate() {
   const currentDate = new Date().toISOString().split('T')[0]
   return currentDate
@@ -6,13 +8,7 @@ export function getCurrentDate() {
 export const queryHomePage = `*[_type == 'home'] {
   home_banner_selector {
     banner_selector_list[]-> {
-      banner_item_heading,
-      banner_item_lead,
-      banner_item_images,
-      banner_item_button {
-        button_block_text,
-        button_block_link
-      }
+      ${bannerFragment}
     }
   },
   home_about_us_block {

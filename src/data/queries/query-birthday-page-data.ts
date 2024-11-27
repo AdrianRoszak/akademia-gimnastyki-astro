@@ -23,7 +23,10 @@ birthday_banner_selector {
     birthday_location_block_location_selector {
       birthday_location_selector_list[]-> {
         birthday_location_item_info,
-        birthday_location_item_location_list[]->
+        birthday_location_item_location_list[]-> {
+        location_item_name,
+        location_item_address
+        }
       }
     }
   }

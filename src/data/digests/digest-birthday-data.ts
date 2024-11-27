@@ -20,7 +20,10 @@ export type BirthdayData = {
     heading: string
     locations: {
       info: TypedObject
-      location: string
+      location: {
+        name: string
+        address: string
+      }
     }[]
   }
   meta: {
@@ -59,13 +62,10 @@ export function digestBirthdayData(source): BirthdayData | null {
           (item) => {
             return {
               info: item.birthday_location_item_info,
-              // @ts-expect-error
-              location: item.birthday_location_item_location_list.map((location) => {
-                return {
-                  name: location.birthday_location_item_name,
-                  address: location.birthday_location_item_address,
-                }
-              }),
+              location: {
+                name: item.birthday_location_item_location_list[0].location_item_name,
+                address: item.birthday_location_item_location_list[0].location_item_address,
+              },
             }
           },
         ),
