@@ -1,24 +1,63 @@
 ---
+import { Image } from 'astro:assets'
 import { PortableText } from 'astro-portabletext'
 import type { CampItem } from '../../data/digests/digest-camps-data'
+import { urlForImage } from '../../utils'
+import Heading from './Heading.astro'
 
 interface Props {
   data: CampItem
 }
 
-const { name, startDate, endDate, location, price, description } = Astro.props.data
+const { name, startDate, endDate, location, price, description, image } = Astro.props.data
 ---
 
 <div class="camp-tile">
-  <h3>{name}</h3>
-  <p>{startDate} - {endDate}</p>
-  <p>{location}</p>
-  <p>{price}</p>
-  <PortableText value{description}/>
+  <div class="campt-tile-image-wrapper">
+    <Image
+      src={urlForImage(image!.source)
+        .width(600)
+        .format("webp")
+        .quality(80)
+        .url()}
+      alt={image!.alt}
+      width={600}
+      height={600}
+    />
+  </div>
+  <div class="camp-tile-wrapper">
+    <Heading as="h2" size="lg" text={name} />
+    <p>{startDate} - {endDate}</p>
+    <p>{location}</p>
+    <p>{price}</p>
+    <PortableText value={description} />
+  </div>
 </div>
 
 <style>
   .camp-tile {
     box-shadow: var(--weirdo-shadow-default);
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .camp-tile h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    color: var(--weirdo-color-primary);
+  }
+
+  .camp-tile img {
+    margin-bottom: 1rem;
+  }
+
+  .camp-tile p {
+    margin: 0.5rem 0;
+    color: var(--weirdo-color-secondary);
   }
 </style>

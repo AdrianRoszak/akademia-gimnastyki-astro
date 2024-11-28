@@ -1,5 +1,6 @@
 import type { TypedObject } from 'astro-portabletext/types'
 import type { ImageType } from '../types'
+import { type CampItem, digestCampItem } from './digest-camps-data'
 import { secureImage } from './utils'
 
 export type MetaDataType = {
@@ -31,6 +32,10 @@ export type ValueType = {
   }
 }
 
+export type CampType = {
+  name: string
+}
+
 export type ActivityType = {
   name: string
   description: string
@@ -53,6 +58,11 @@ export interface HomePage {
     title: string
     lead: string
     values: ValueType[]
+  }
+  camps: {
+    title: string
+    lead: string
+    camps: CampItem[] | null
   }
   events: {
     title: string
@@ -85,6 +95,13 @@ export function digestHomePageData(source): HomePage | null {
       lead: source[0].home_about_us_block.about_us_block_lead,
       body: source[0].home_about_us_block.about_us_block_content,
     },
+    camps: {
+      title: source[0].home_camp_block.camps_block_heading,
+      lead: source[0].home_camp_block.camps_block_lead,
+      camps:
+        source[0].home_camp_block.camps_block_camps_selector &&
+        digestCamps(source[0].home_camp_block.camps_block_camps_selector),
+    },
     activities: (source[0].home_activities_block && digestActivities(source[0].home_activities_block)) || null,
     values: digestValues(source[0].home_values_block),
     events: (source[0].home_events_block && digestEvents(source[0].home_events_block)) || null,
@@ -93,6 +110,12 @@ export function digestHomePageData(source): HomePage | null {
       metaDescription: source[0].home_meta_data_block.meta_data_site_description,
     },
   }
+}
+
+//@ts-expect-error
+function digestCamps(source): CampType[] {
+  // @ts-expect-error
+  return source.camp_selector_list.map((camp) => digestCampItem(camp))
 }
 
 function digestDate(source: string): DateTimeType {

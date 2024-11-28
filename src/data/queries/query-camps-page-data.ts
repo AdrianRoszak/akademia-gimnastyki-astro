@@ -1,7 +1,10 @@
-import { getCurrentDate } from './query-home-page-data'
+import { getCurrentDate } from '..'
 
-const campsItemFragment = `
+const currentDate = getCurrentDate()
+
+export const campsItemFragment = `
   camp_item_name,
+  camp_item_image,
   camp_item_start_date,
   camp_item_end_date,
   camp_item_description,
@@ -15,10 +18,10 @@ export const queryCampsPageData = `*[_type == 'camps'] {
     meta_data_site_title,
     meta_data_site_description
   },
-  "upcomingCamps": *[_type == 'camp_item' && camp_item_start_date > "${getCurrentDate()}"] {
+  "upcomingCamps": *[_type == 'camp_item' && camp_item_start_date > "${currentDate}"] {
     ${campsItemFragment}
   },
-  "pastCamps": *[_type == 'camp_item' && camp_item_end_date < "${getCurrentDate()}"] {
+  "pastCamps": *[_type == 'camp_item' && camp_item_end_date < "${currentDate}"] {
     ${campsItemFragment}
   }
 }`

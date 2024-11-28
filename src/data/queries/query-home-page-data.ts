@@ -1,9 +1,6 @@
+import { getCurrentDate } from '..'
 import { bannerFragment } from './fragments'
-
-export function getCurrentDate() {
-  const currentDate = new Date().toISOString().split('T')[0]
-  return currentDate
-}
+import { campsItemFragment } from './query-camps-page-data'
 
 export const queryHomePage = `*[_type == 'home'] {
   home_banner_selector {
@@ -35,6 +32,15 @@ export const queryHomePage = `*[_type == 'home'] {
         value_item_description,
         value_item_title,
         value_item_icon
+      }
+    }
+  },
+  home_camp_block {
+    camps_block_heading,
+    camps_block_lead,
+    camps_block_camps_selector {
+      camp_selector_list[]-> {
+        ${campsItemFragment}
       }
     }
   },

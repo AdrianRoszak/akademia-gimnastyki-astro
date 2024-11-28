@@ -1,0 +1,16 @@
+---
+import type { HomePage } from '../../data/digests/digest-home-page-data'
+import Container from '../atoms/Container.astro'
+import Heading from '../molecules/Heading.astro'
+import CampsGrid from '../organisms/CampsGrid.astro'
+
+const { title, lead, camps } = Astro.props.data as HomePage['camps']
+---
+
+<section>
+  <Container>
+    <Heading text={title} as="h1" size="xl" />
+    <p>{lead}</p>
+    <CampsGrid data={camps} />
+  </Container>
+</section>

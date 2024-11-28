@@ -1,12 +1,15 @@
 import type { TypedObject } from 'astro-portabletext/types'
+import type { ImageType } from '../types'
+import { secureImage } from './utils'
 
 export type CampItem = {
   name: string
+  image: ImageType | null
   startDate: string
   endDate: string
   description: TypedObject
   location: string
-  price: number
+  price: string
 }
 
 export type CampsData = {
@@ -40,10 +43,11 @@ export function digestCampItem(source): CampItem | null {
 
   return {
     name: source.camp_item_name,
+    image: secureImage(source.camp_item_image),
     startDate: source.camp_item_start_date,
     endDate: source.camp_item_end_date,
     description: source.camp_item_description,
     location: source.camp_item_location,
-    price: source.camp_item_price,
+    price: `${source.camp_item_price} zł`,
   }
 }
