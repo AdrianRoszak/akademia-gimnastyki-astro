@@ -3,6 +3,10 @@ import { Image } from 'astro:assets'
 import { PortableText } from 'astro-portabletext'
 import type { CampItem } from '../../data/digests/digest-camps-data'
 import { urlForImage } from '../../utils'
+import ArrowRight from '../atoms/icons/ArrowRight.astro'
+import CalendarIcon from '../atoms/icons/CalendarIcon.astro'
+import PinIcon from '../atoms/icons/PinIcon.astro'
+import PriceIcon from '../atoms/icons/PriceIcon.astro'
 import Heading from './Heading.astro'
 
 interface Props {
@@ -13,7 +17,7 @@ const { name, startDate, endDate, location, price, description, image } = Astro.
 ---
 
 <div class="camp-tile">
-  <div class="campt-tile-image-wrapper">
+  <div class="camp-tile-image-wrapper">
     <Image
       src={urlForImage(image!.source)
         .width(600)
@@ -25,32 +29,103 @@ const { name, startDate, endDate, location, price, description, image } = Astro.
       height={600}
     />
   </div>
-  <div class="camp-tile-wrapper">
-    <Heading as="h2" size="lg" text={name} />
-    <p>{startDate} - {endDate}</p>
-    <p>{location}</p>
-    <p>{price}</p>
-    <PortableText value={description} />
+  <div class="tile-content">
+    <div class="tile-heading-wrapper">
+      <Heading as="h2" size="lg" text={name} />
+      <div class="tile-heading-details">
+        <div class="tile-details-wrapper">
+          {price && (
+            <div class="tile-detail">
+              <div class="tile-icon-wrapper">
+                <PriceIcon width={26} />
+              </div>
+              {price}
+            </div>
+          )}
+          {location && (
+            <div class="tile-detail">
+              <div class="tile-icon-wrapper">
+                <PinIcon width={26} />
+              </div>
+              {location}
+            </div>
+          )}
+        </div>
+        <div class="tile-heading-time">
+          {startDate && (
+            <div class="tile-details-wrapper">
+              <strong>Zaczynamy: </strong>
+              <time>
+                <div class="tile-detail">
+                  <div class="tile-icon-wrapper">
+                    <CalendarIcon width={26} />
+                  </div>
+                  {startDate}
+                </div>
+              </time>
+            </div>
+          )}
+          {endDate && (
+            <div class="tile-details-wrapper">
+              <strong>Kończymy:</strong>
+              <time>
+                <div class="tile-detail">
+                  <div class="tile-icon-wrapper">
+                    <CalendarIcon width={26} />
+                  </div>
+                  {endDate}
+                </div>
+              </time>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+    <div class="tile-portable-text-wrapper">
+      <PortableText value={description} />
+    </div>
   </div>
 </div>
 
 <style>
   .camp-tile {
     box-shadow: var(--weirdo-shadow-default);
-    padding: 1rem;
-    border-radius: 8px;
     background-color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
   }
 
-  .camp-tile-wrapper {
+  .camp-tile-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    
+    @media (min-width: 768px) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .camp-tile-image-wrapper::after {
+    content: '';
+    display: block;
+    padding-bottom: 66%;
+  }
+
+  .camp-tile-image-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .camp-tile-text-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    padding: 0 1rem;
   }
 
   .camp-tile h2 {
@@ -59,12 +134,104 @@ const { name, startDate, endDate, location, price, description, image } = Astro.
     color: var(--weirdo-color-primary);
   }
 
-  .camp-tile img {
-    margin-bottom: 1rem;
-  }
-
   .camp-tile p {
     margin: 0.5rem 0;
     color: var(--weirdo-color-secondary);
+  }
+
+  .details-wrapper {
+    border-top: 1px solid var(--weirdo-color-accent-3);
+    border-bottom: 1px solid var(--weirdo-color-accent-3);
+  }
+
+  .tile-content {
+    padding: 0 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .tile-heading-wrapper {
+    position: relative;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    border-bottom: 2px solid var(--weirdo-color-accent-3);
+    padding: 1.5rem 0;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .tile-heading-wrapper {
+      border-top: 2px solid var(--weirdo-color-accent-3);
+    }
+  }
+
+  .tile-heading-time {
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .tile-heading-time {
+      display: flex;
+    }
+  }
+
+  .tile-heading-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .tile-heading-details svg,
+  .tile-heading-details g,
+  .tile-heading-details path {
+    fill: var(--weirdo-color-accent-1);
+  }
+
+  .tile-heading-details p {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .tile-details-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .tile-detail {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .tile-icon-wrapper {
+    display: inline-flex;
+    background: var(--weirdo-color-accent-1);
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    padding: 0.2em;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tile-icon-wrapper svg,
+  .tile-icon-wrapper g,
+  .tile-icon-wrapper path {
+    fill: white;
+  }
+
+  .tile-footer {
+    padding: 0 0 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .tile-footer p span {
+    font-weight: bold;
   }
 </style>

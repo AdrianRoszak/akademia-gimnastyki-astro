@@ -1,3 +1,39 @@
 .text-center {
   text-align: center;
 }
+
+.heading-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.tile-heading-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--weirdo-color-accent-3);
+
+  @media (min-width: 768px) {
+    border-top: 2px solid var(--weirdo-color-accent-3);
+  }
+}
+
+.tile-portable-text-wrapper {
+  margin-bottom: 3rem;
+
+  p {
+    margin-bottom: 0.5em;
+    line-height: 1.25;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
