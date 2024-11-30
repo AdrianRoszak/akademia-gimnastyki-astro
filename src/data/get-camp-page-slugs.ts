@@ -8,7 +8,5 @@ export async function getCampPageSlugs() {
 export async function fetchCampPageSlugs() {
   const query = `*[_type == "camp_item"] { camp_item_slug {current} }`
   const data = await sanityClient.fetch(query)
-
-  console.log(data)
   return data
 }
