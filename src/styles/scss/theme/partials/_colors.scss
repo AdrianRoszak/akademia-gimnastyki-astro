@@ -53,6 +53,8 @@ $color-accent-1-80: hsla($accent-1-h, $accent-1-s, $accent-1-l, 0.8);
 $color-accent-2-80: hsla($accent-2-h, $accent-2-s, $accent-2-l, 0.8);
 $color-accent-3-80: hsla($accent-3-h, $accent-3-s, $accent-3-l, 0.8);
 
+$color-accent-3-20: hsla($accent-3-h, $accent-3-s, $accent-3-l, 0.2);
+
 $colors: (
   "color-black": $color-black,
   "color-grey": $color-grey,
@@ -64,6 +66,7 @@ $colors: (
   "color-accent-1-80": $color-accent-1-80,
   "color-accent-2-80": $color-accent-2-80,
   "color-accent-3-80": $color-accent-3-80,
+  "color-accent-3-20": $color-accent-3-20,
 );
 
 // generate color variables

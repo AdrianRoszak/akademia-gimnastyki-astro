@@ -1,0 +1,75 @@
+---
+import type { HomePage } from '../../data/digests/digest-home-page-data'
+import Container from '../atoms/Container.astro'
+import ArrowRight from '../atoms/icons/ArrowRight.astro'
+import Heading from '../molecules/Heading.astro'
+import CampsGrid from '../organisms/CampsGrid.astro'
+
+const { title, lead, camps } = Astro.props.data as HomePage['camps']
+---
+
+<section class="section-camps">
+  <Container>
+    <div class="heading-wrapper">
+      <Heading as="h1" size="xl" text={title} />
+      <p>{lead}</p>
+    </div>
+    <CampsGrid data={camps} />
+    <div class="button-wrapper">
+      <a href="/obozy" class="weirdo-button--color-white">
+        Zobacz wszystkie obozy
+        <ArrowRight width={24} />
+      </a>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .section-camps {
+    position: relative;
+    margin: 3rem 0;
+    padding: 3rem 0 6rem;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      clip-path: polygon(100% 100%, 100% 100%, 100% 100%);
+    background: var(--weirdo-color-accent-3);
+    z-index: -1;
+    transition: clip-path 1.5s ease-in-out;
+  }
+
+  &.in-view::after {
+    clip-path: polygon(100% 25%, -25% 100%, 100% 100%);
+  }
+  }
+
+  .button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const section = document.querySelector(".section-camps");
+
+  if (section) {
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          section.classList.add("in-view");
+        }
+      });
+    });
+    
+    observer.observe(section);
+  }
+});
+</script>

@@ -1,0 +1,28 @@
+---
+import type { CampItem } from '../../data/digests/digest-camps-data'
+import CampTile from '../molecules/CampTile.astro'
+
+const data = Astro.props.data as CampItem[]
+---
+
+<div class="camps-grid">
+  {data.map((camp) => (
+    <CampTile data={camp} />
+  ))}
+</div>
+
+<style>
+  .camps-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+
+    @media(min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media(min-width: 1200px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -6,11 +6,12 @@ import Banner from '../components/organisms/Banner.astro'
 import BannerSlider from '../components/organisms/BannerSlider.astro'
 import SectionAbout from '../components/templates/SectionAbout.astro'
 import SectionActivities from '../components/templates/SectionActivities.astro'
+import SectionCamps from '../components/templates/SectionCamps.astro'
 import SectionEvents from '../components/templates/SectionEvents.astro'
 import SectionValues from '../components/templates/SectionValues.astro'
 import Layout from '../layouts/Layout.astro'
 
-const { values, banners, about, activities, events, metaData } = (await getHomePageData()) as HomePage
+const { values, banners, about, activities, camps, events, metaData } = (await getHomePageData()) as HomePage
 ---
 
 <Layout title={metaData.metaTitle} description={metaData.metaDescription}>
@@ -26,6 +27,9 @@ const { values, banners, about, activities, events, metaData } = (await getHomeP
 			<SectionValues data={values}	/>
 		)}
 		{activities && <SectionActivities data={activities}>}
+		{camps && (
+			<SectionCamps data={camps} />
+		)}
 		{events && (
 			<SectionEvents data={events} />
 		)}

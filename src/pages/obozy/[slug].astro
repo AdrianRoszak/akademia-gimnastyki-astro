@@ -1,0 +1,42 @@
+---
+import type { CampItem } from '../../data/digests/digest-camps-data'
+import { getCampPageSlugs } from '../../data/get-camp-page-slugs'
+import { getSingleCampData } from '../../data/get-camps-data'
+import Layout from '../../layouts/Layout.astro'
+
+export async function getStaticPaths() {
+  async function obtainTeamMemberSlugs() {
+    const slugs = await getCampPageSlugs()
+
+    type Slug = {
+      camp_item_slug: {
+        current: string
+      }
+    }
+
+    return slugs.map((slug: Slug) => {
+      return {
+        params: {
+          slug: slug.camp_item_slug.current,
+        },
+      }
+    })
+  }
+
+  const slugs = await obtainTeamMemberSlugs()
+
+  return [...slugs]
+}
+
+const { slug } = Astro.params
+const { meta, name, description } = (await getSingleCampData(slug)) as CampItem
+---
+
+<Layout title={meta.title} description={meta.description}>
+  <main>
+    <section>
+      <h1>{name}</h1>
+      <p>{description}</p>
+    </section>
+  </main>
+</Layout>
