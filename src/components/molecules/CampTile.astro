@@ -3,6 +3,7 @@ import { Image } from 'astro:assets'
 import { PortableText } from 'astro-portabletext'
 import type { CampItem } from '../../data/digests/digest-camps-data'
 import { urlForImage } from '../../utils'
+import ArrowRight from '../atoms/icons/ArrowRight.astro'
 import CalendarIcon from '../atoms/icons/CalendarIcon.astro'
 import PinIcon from '../atoms/icons/PinIcon.astro'
 import PriceIcon from '../atoms/icons/PriceIcon.astro'
@@ -83,10 +84,9 @@ const { name, startDate, endDate, location, price, description, image, slug } = 
     <div class="tile-portable-text-wrapper">
       <PortableText value={description} />
     </div>
-    <a href={`/obozy/${slug}`} class="tile-footer">
-      <p>
+    <a href={`/obozy/${slug}`} class="weirdo-button--color-accent-3">
         <span>Więcej informacji</span>
-      </p>
+        <ArrowRight width={24} />
     </a>
   </div>
 </div>

@@ -8,6 +8,9 @@ export type CampItem = {
   startDate: string
   endDate: string
   description: TypedObject
+  longDescription?: TypedObject
+  program?: TypedObject
+  priceDetails?: TypedObject
   location: string
   price: string
   slug: string
@@ -55,6 +58,9 @@ export function digestCampItem(source): CampItem | null {
     location: source.camp_item_place,
     price: `${source.camp_item_price} zł`,
     slug: source.camp_item_slug.current,
+    longDescription: source.camp_item_long_description,
+    program: source.camp_item_program,
+    priceDetails: source.camp_item_price_details,
     meta: {
       title: source.camp_item_meta_data_block.meta_data_site_title,
       description: source.camp_item_meta_data_block.meta_data_site_description,

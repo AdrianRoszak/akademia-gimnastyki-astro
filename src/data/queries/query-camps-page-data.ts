@@ -35,5 +35,8 @@ export const queryCampsPageData = `*[_type == 'camps'] {
 
 export const querySingleCampItemData = `*[_type == 'camp_item' && camp_item_slug.current == $slug] {
   camp_item_intro,
-  ${campsItemFragment}
+  ${campsItemFragment},
+  camp_item_long_description,
+  camp_item_program,
+  camp_item_price_details
 }`
