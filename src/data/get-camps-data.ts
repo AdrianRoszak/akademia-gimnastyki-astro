@@ -11,6 +11,6 @@ export async function getCampsData(): Promise<CampsData | null> {
 
 export async function getSingleCampData(slug: string): Promise<CampItem | null> {
   const data = await fetchSanityData(querySingleCampItemData, slug)
-  const digestedData = digestCampItem(data)
+  const digestedData = digestCampItem(data[0])
   return digestedData
 }

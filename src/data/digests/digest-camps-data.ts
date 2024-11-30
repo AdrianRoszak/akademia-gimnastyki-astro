@@ -47,17 +47,17 @@ export function digestCampItem(source): CampItem | null {
   if (!source) return null
 
   return {
-    name: source[0].camp_item_name,
-    image: secureImage(source[0].camp_item_image),
-    startDate: source[0].camp_item_start_date,
-    endDate: source[0].camp_item_end_date,
-    description: source[0].camp_item_description,
-    location: source[0].camp_item_place,
-    price: `${source[0].camp_item_price} zł`,
-    slug: source[0].camp_item_slug,
+    name: source.camp_item_name,
+    image: secureImage(source.camp_item_image),
+    startDate: source.camp_item_start_date,
+    endDate: source.camp_item_end_date,
+    description: source.camp_item_description,
+    location: source.camp_item_place,
+    price: `${source.camp_item_price} zł`,
+    slug: source.camp_item_slug.current,
     meta: {
-      title: source[0].camp_item_meta_data_block.meta_data_site_title,
-      description: source[0].camp_item_meta_data_block.meta_data_site_description,
+      title: source.camp_item_meta_data_block.meta_data_site_title,
+      description: source.camp_item_meta_data_block.meta_data_site_description,
     },
   }
 }

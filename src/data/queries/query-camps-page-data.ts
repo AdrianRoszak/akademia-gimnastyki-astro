@@ -12,6 +12,10 @@ export const campsItemFragment = `
   camp_item_price,
   camp_item_slug {
     current
+  },
+  camp_item_meta_data_block {
+    meta_data_site_title,
+    meta_data_site_description
   }
 `
 
@@ -31,9 +35,5 @@ export const queryCampsPageData = `*[_type == 'camps'] {
 
 export const querySingleCampItemData = `*[_type == 'camp_item' && camp_item_slug.current == $slug] {
   camp_item_intro,
-  camp_item_meta_data_block {
-    meta_data_site_title,
-    meta_data_site_description
-  },
   ${campsItemFragment}
 }`
