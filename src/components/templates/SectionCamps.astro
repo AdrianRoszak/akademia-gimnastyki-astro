@@ -1,6 +1,7 @@
 ---
 import type { HomePage } from '../../data/digests/digest-home-page-data'
 import Container from '../atoms/Container.astro'
+import ArrowRight from '../atoms/icons/ArrowRight.astro'
 import Heading from '../molecules/Heading.astro'
 import CampsGrid from '../organisms/CampsGrid.astro'
 
@@ -14,6 +15,12 @@ const { title, lead, camps } = Astro.props.data as HomePage['camps']
       <p>{lead}</p>
     </div>
     <CampsGrid data={camps} />
+    <div class="button-wrapper">
+      <a href="/obozy" class="weirdo-button--color-white">
+        Zobacz wszystkie obozy
+        <ArrowRight width={24} />
+      </a>
+    </div>
   </Container>
 </section>
 
@@ -39,6 +46,12 @@ const { title, lead, camps } = Astro.props.data as HomePage['camps']
   &.in-view::after {
     clip-path: polygon(100% 0%, 0% 100%, 100% 100%);
   }
+  }
+
+  .button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
   }
 </style>
 
