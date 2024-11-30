@@ -13,43 +13,47 @@ const { meta, intro, upcomingCamps, pastCamps } = (await getCampsData()) as Camp
 
 <Layout title={meta.title} description={meta.description}>
   <main>
-    <section>
+    <section class="camps-section-intro">
       <Container>
         <div class="portable-text-wrapper">
           <PortableText value={intro}/>
         </div>
       </Container>
-    <section>
+    </section>
+    {upcomingCamps && (
+        <section>
       <Container>
-      {upcomingCamps && (
-        <>
-          <Heading as="h2" size='xl' text='Nadchodzące obozy' />
+        <div class="camps-wrapper">
+          <Heading as="h1" size='xl' text='Nadchodzące obozy' />
           <CampsGrid data={upcomingCamps} />
-        </>
-       )}
+        </div>
       </Container>
-      </section>
+    </section>
+       )}
+
+      {pastCamps && pastCamps.length > 0 && (
       <section>
       <Container>
-      {pastCamps && pastCamps.length > 0 && (
-        <>
-        <Heading as="h2" size='xl' text='Poprzednie obozy' />
+        <div class="camps-wrapper">
+        <Heading as="h1" size='xl' text='Poprzednie obozy' />
         <CampsGrid data={pastCamps} />
-       </>
-       )}
+       </div>
       </Container>
-      </section>
+    </section>
+       )}
   </main>
 </Layout>
 
 <style>
-  section {
+  .camps-section-intro {
     padding-top: 14rem;
   }
 
   .camps-wrapper {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    margin: 5rem 0;
+
+    h1 {
+      margin-bottom: 4rem;
+    }
   }
 </style>

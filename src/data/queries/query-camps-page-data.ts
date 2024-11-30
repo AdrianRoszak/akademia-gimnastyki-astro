@@ -8,7 +8,7 @@ export const campsItemFragment = `
   camp_item_start_date,
   camp_item_end_date,
   camp_item_description,
-  camp_item_location,
+  camp_item_place,
   camp_item_price,
 `
 

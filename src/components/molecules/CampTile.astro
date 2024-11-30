@@ -127,20 +127,23 @@ const { name, startDate, endDate, location, price, description, image } = Astro.
     padding: 0 1rem;
   }
 
-  .camp-tile h2 {
-    margin-bottom: 0.5rem;
-    font-size: 1.5rem;
-    color: var(--weirdo-color-primary);
-  }
-
-  .camp-tile p {
-    margin: 0.5rem 0;
-    color: var(--weirdo-color-secondary);
-  }
-
   .details-wrapper {
     border-top: 1px solid var(--weirdo-color-accent-3);
     border-bottom: 1px solid var(--weirdo-color-accent-3);
+  }
+
+  .tile-heading-wrapper {
+     h2{
+      height: calc(2em * 1.3);
+      overflow: hidden;
+     }
+  }
+
+  .tile-portable-text-wrapper {
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .tile-content {
@@ -148,16 +151,6 @@ const { name, startDate, endDate, location, price, description, image } = Astro.
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-  }
-
-  .tile-heading-wrapper {
-    position: relative;
-    display: flex;
-    gap: 1rem;
-    flex-direction: column;
-    border-bottom: 2px solid var(--weirdo-color-accent-3);
-    padding: 1.5rem 0;
-    margin-bottom: 1.5rem;
   }
 
   @media (min-width: 768px) {

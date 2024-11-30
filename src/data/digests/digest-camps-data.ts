@@ -47,7 +47,7 @@ export function digestCampItem(source): CampItem | null {
     startDate: source.camp_item_start_date,
     endDate: source.camp_item_end_date,
     description: source.camp_item_description,
-    location: source.camp_item_location,
+    location: source.camp_item_place,
     price: `${source.camp_item_price} zł`,
   }
 }

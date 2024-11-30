@@ -7,8 +7,10 @@
   flex-direction: column;
   gap: 1rem;
   align-items: center;
-  margin-bottom: 4rem;
+  width: clamp(0px, 100%, 800px);
+  margin: 0 auto 4rem;
   text-align: center;
+  text-wrap: balance;
 }
 
 .tile-heading-wrapper {

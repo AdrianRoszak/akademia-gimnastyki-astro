@@ -44,7 +44,7 @@ const { title, lead, camps } = Astro.props.data as HomePage['camps']
   }
 
   &.in-view::after {
-    clip-path: polygon(100% 0%, 0% 100%, 100% 100%);
+    clip-path: polygon(100% 25%, -25% 100%, 100% 100%);
   }
   }
 
@@ -59,14 +59,17 @@ const { title, lead, camps } = Astro.props.data as HomePage['camps']
   document.addEventListener("DOMContentLoaded", () => {
   const section = document.querySelector(".section-camps");
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        section.classList.add("in-view");
-      }
+  if (section) {
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          section.classList.add("in-view");
+        }
+      });
     });
-  });
-
-  observer.observe(section);
+    
+    observer.observe(section);
+  }
 });
 </script>
