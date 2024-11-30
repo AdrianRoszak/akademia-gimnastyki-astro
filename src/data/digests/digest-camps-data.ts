@@ -10,6 +10,7 @@ export type CampItem = {
   description: TypedObject
   location: string
   price: string
+  slug: string
 }
 
 export type CampsData = {
@@ -49,5 +50,6 @@ export function digestCampItem(source): CampItem | null {
     description: source.camp_item_description,
     location: source.camp_item_place,
     price: `${source.camp_item_price} zł`,
+    slug: source.camp_item_slug.current,
   }
 }

@@ -10,6 +10,9 @@ export const campsItemFragment = `
   camp_item_description,
   camp_item_place,
   camp_item_price,
+  camp_item_slug {
+    current
+  }
 `
 
 export const queryCampsPageData = `*[_type == 'camps'] {
@@ -24,4 +27,13 @@ export const queryCampsPageData = `*[_type == 'camps'] {
   "pastCamps": *[_type == 'camp_item' && camp_item_end_date < "${currentDate}"] {
     ${campsItemFragment}
   }
+}`
+
+export const querySingleCampItemData = `*[_type == 'camp_item'] {
+camps_intro,
+  camps_meta_data_block {
+    meta_data_site_title,
+    meta_data_site_description
+  },
+  ${campsItemFragment}
 }`

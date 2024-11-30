@@ -12,7 +12,8 @@ interface Props {
   data: CampItem
 }
 
-const { name, startDate, endDate, location, price, description, image } = Astro.props.data
+const { name, startDate, endDate, location, price, description, image, slug } = Astro.props.data
+console.log(slug)
 ---
 
 <div class="camp-tile">
@@ -83,6 +84,11 @@ const { name, startDate, endDate, location, price, description, image } = Astro.
     <div class="tile-portable-text-wrapper">
       <PortableText value={description} />
     </div>
+    <a href={`/obozy/${slug}`} class="tile-footer">
+      <p>
+        <span>Więcej informacji</span>
+      </p>
+    </a>
   </div>
 </div>
 

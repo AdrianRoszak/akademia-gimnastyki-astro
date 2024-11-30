@@ -1,0 +1,38 @@
+---
+import { getCampPageSlugs } from '../../data/get-camp-page-slugs'
+import { getSingleCampData } from '../../data/get-camps-data'
+
+export async function getStaticPaths() {
+  async function obtainTeamMemberSlugs() {
+    const slugs = await getCampPageSlugs()
+
+    type Slug = {
+      camp_item_slug: {
+        current: string
+      }
+    }
+
+    return slugs.map((slug: Slug) => {
+      return {
+        params: {
+          slug: slug.camp_item_slug.current,
+        },
+      }
+    })
+  }
+
+  const slugs = await obtainTeamMemberSlugs()
+
+  return [...slugs]
+}
+
+const { slug } = Astro.params
+const data = await getSingleCampData(slug)
+
+console.log('single', data)
+---
+
+<div>
+  <h1>{data.name}</h1>
+  <p>{data.description}</p>
+</div>
