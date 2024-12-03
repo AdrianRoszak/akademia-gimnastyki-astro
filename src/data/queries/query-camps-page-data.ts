@@ -20,12 +20,13 @@ export const campsItemFragment = `
 `
 
 export const queryCampsPageData = `*[_type == 'camps'] {
+  camps_page_title,
   camps_intro,
   camps_meta_data_block {
     meta_data_site_title,
     meta_data_site_description
   },
-  "upcomingCamps": *[_type == 'camp_item' && camp_item_start_date > "${currentDate}"] {
+  "upcomingCamps": *[_type == 'camp_item' && camp_item_start_date > "${currentDate}"] | order(camp_item_start_date asc) {
     ${campsItemFragment}
   },
   "pastCamps": *[_type == 'camp_item' && camp_item_end_date < "${currentDate}"] {

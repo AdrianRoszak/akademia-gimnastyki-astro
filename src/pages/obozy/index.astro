@@ -8,15 +8,18 @@ import type { CampsData } from '../../data/digests/digest-camps-data'
 import { getCampsData } from '../../data/get-camps-data'
 import Layout from '../../layouts/Layout.astro'
 
-const { meta, intro, upcomingCamps, pastCamps } = (await getCampsData()) as CampsData
+const { meta, intro, upcomingCamps, pastCamps, title } = (await getCampsData()) as CampsData
 ---
 
 <Layout title={meta.title} description={meta.description}>
   <main>
     <section class="camps-section-intro">
       <Container>
-        <div class="portable-text-wrapper">
-          <PortableText value={intro}/>
+        <div class="heading-wrapper">
+          <Heading as="h1" size='xl' text={title} />
+          <div class="portable-text-wrapper">
+            <PortableText value={intro}/>
+          </div>
         </div>
       </Container>
     </section>

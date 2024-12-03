@@ -21,6 +21,7 @@ export type CampItem = {
 }
 
 export type CampsData = {
+  title: string
   intro: TypedObject
   meta: {
     title: string
@@ -35,6 +36,7 @@ export function digestCampsData(source): CampsData | null {
   if (!source) return null
 
   return {
+    title: source[0].camps_page_title,
     intro: source[0].camps_intro,
     meta: {
       title: source[0].camps_meta_data_block.meta_data_site_title,
