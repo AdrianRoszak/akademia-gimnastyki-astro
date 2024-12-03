@@ -1,0 +1,141 @@
+---
+import CalendarIcon from '../atoms/icons/CalendarIcon.astro'
+import ClockIcon from '../atoms/icons/ClockIcon.astro'
+import PinIcon from '../atoms/icons/PinIcon.astro'
+import PriceIcon from '../atoms/icons/PriceIcon.astro'
+
+interface Props {
+  price: string
+  location: string
+  startDate: string
+  startTime?: string
+  endDate: string
+  endTime?: string
+}
+
+const { price, location, startDate, startTime, endDate, endTime } = Astro.props
+---
+
+<div class="event-tile-details">
+  <div class="tile-details-wrapper">
+    {price && (
+      <div class="tile-detail">
+        <div class="tile-icon-wrapper">
+          <PriceIcon width={26} />
+        </div>
+        {price}
+      </div>
+    )}
+    {location && (
+      <div class="tile-detail">
+        <div class="tile-icon-wrapper">
+          <PinIcon width={26} />
+        </div>
+        {location}
+      </div>
+    )}
+  </div>
+  <div class="event-tile-time">
+    {startDate && (
+      <div class="tile-details-wrapper">
+        <strong>Zaczynamy: </strong>
+        <time>
+          <div class="tile-detail">
+            <div class="tile-icon-wrapper">
+              <CalendarIcon width={26} />
+            </div>
+            {startDate}
+          </div>
+        </time>
+        {startTime && (
+          <time>
+            <div class="tile-detail">
+              <div class="tile-icon-wrapper">
+                <ClockIcon width={26} />
+              </div>
+              {startTime}
+            </div>
+          </time>
+        )}
+      </div>
+    )}
+    {endDate && (
+      <div class="tile-details-wrapper">
+        <strong>Kończymy:</strong>
+        <time>
+          <div class="tile-detail">
+            <div class="tile-icon-wrapper">
+              <CalendarIcon width={26} />
+            </div>
+            {endDate}
+          </div>
+        </time>
+        {endTime && (
+          <time>
+            <div class="tile-detail">
+              <div class="tile-icon-wrapper">
+                <ClockIcon width={26} />
+              </div>
+              {endTime}
+            </div>
+          </time>
+        )}
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  .event-tile-details {
+    width: clamp(0px, 100%, 600px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    p {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+  }
+
+  .event-tile-time {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    
+    @media (min-width: 768px) {
+    }
+  }
+
+  .tile-details-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .tile-detail {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .tile-icon-wrapper {
+    display: inline-flex;
+    background: var(--weirdo-color-accent-1);
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    padding: 0.2em;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tile-icon-wrapper svg,
+  .tile-icon-wrapper g,
+  .tile-icon-wrapper path {
+    fill: white;
+  }
+</style>

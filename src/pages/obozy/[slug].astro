@@ -2,9 +2,8 @@
 import { Image } from 'astro:assets'
 import { PortableText } from 'astro-portabletext'
 import Container from '../../components/atoms/Container.astro'
-import CalendarIcon from '../../components/atoms/icons/CalendarIcon.astro'
-import PinIcon from '../../components/atoms/icons/PinIcon.astro'
-import PriceIcon from '../../components/atoms/icons/PriceIcon.astro'
+import ArrowRight from '../../components/atoms/icons/ArrowRight.astro'
+import EventTileDetails from '../../components/molecules/EventTileDetails.astro'
 import Heading from '../../components/molecules/Heading.astro'
 import type { CampItem } from '../../data/digests/digest-camps-data'
 import { getCampPageSlugs } from '../../data/get-camp-page-slugs'
@@ -59,75 +58,42 @@ const { meta, name, description, image, longDescription, price, endDate, startDa
             />
           </div>
           <div class="intro-text-wrapper">
-            <div class="intro-heading-wrapper">
-              <Heading text={name} size="xl" as="h1" />
-            </div>
-            <div class="portable-text-wrapper">
-              <PortableText value={description} />
-            </div>
-            <div class="tile-heading-details camp-slug-details-wrapper">
-              <div class="tile-details-wrapper">
-                {price && (
-                  <div class="tile-detail">
-                    <div class="tile-icon-wrapper">
-                      <PriceIcon width={26} />
-                    </div>
-                    {price}
-                  </div>
-                )}
-                {location && (
-                  <div class="tile-detail">
-                    <div class="tile-icon-wrapper">
-                      <PinIcon width={26} />
-                    </div>
-                    {location}
-                  </div>
-                )}
+            <div>
+              <div class="intro-heading-wrapper">
+                <Heading text={name} size="xl" as="h1" />
               </div>
-              <div class="tile-heading-time">
-                {startDate && (
-                  <div class="tile-details-wrapper">
-                    <strong>Zaczynamy: </strong>
-                    <time>
-                      <div class="tile-detail">
-                        <div class="tile-icon-wrapper">
-                          <CalendarIcon width={26} />
-                        </div>
-                        {startDate}
-                      </div>
-                    </time>
-                  </div>
-                )}
-                {endDate && (
-                  <div class="tile-details-wrapper">
-                    <strong>Kończymy:</strong>
-                    <time>
-                      <div class="tile-detail">
-                        <div class="tile-icon-wrapper">
-                          <CalendarIcon width={26} />
-                        </div>
-                        {endDate}
-                      </div>
-                    </time>
-                  </div>
-                )}
+              <div class="portable-text-wrapper">
+                <PortableText value={description} />
               </div>
+              <EventTileDetails 
+                price={price} 
+                location={location} 
+                startDate={startDate} 
+                endDate={endDate} 
+              />
             </div>
+                <a href='https://wypoczynekdzieci.pl/rejestracja-uczestnikow/' class="weirdo-button--color-accent-2" target="_blank">
+                  Zapisy na obóz
+                  <ArrowRight width={24} />
+                </a>
           </div>
         </div>
+          {longDescription && (
+            <div class="long-description-wrapper portable-text-wrapper">
+              <PortableText value={longDescription} />
+            </div>
+          )}
         <div class="body-wrapper">
           {program && (
             <div class="program-wrapper portable-text-wrapper">
               <PortableText value={program} />
             </div>
           )}
-          <div class="portable-text-wrapper">
             {priceDetails && (
-              <div class="price-details-wrapper">
+                <div class="price-details-wrapper portable-text-wrapper">
                 <PortableText value={priceDetails} />
-              </div>
+                </div>
             )}
-          </div>
         </div>
       </Container>
     </section>
@@ -136,28 +102,51 @@ const { meta, name, description, image, longDescription, price, endDate, startDa
 
 <style>
   .camp-slug-section {
-    padding: 14rem 0 0;
+    padding-top: 8rem;
+    padding-bottom: 4rem;
+
+    @media(min-width: 768px) {
+      padding-top: 11rem;
+      padding-bottom: 0;
+    }
+
+    @media(min-width: 1024px) {
+      padding-top: 14rem;
+    }
   }
 
+  .intro-wrapper {
+    @media(min-width: 768px) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4rem;
+    }
+
+    @media(min-width: 1200px) {
+      grid-template-columns: repeat(3, 1fr);
+  }
+}
+
   .intro-text-wrapper {
-    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     
+    @media(min-width: 1200px) {
+      grid-column: span 2;
+    }
   }
 
   .intro-heading-wrapper {
     margin-bottom: 2rem;
   }
 
-  .intro-wrapper {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 4rem;
-  }
 
   .intro-image-wrapper {
     position: relative;
     width: 100%;
     height: fit-content;
+    margin-bottom: 2rem;
     
     &::after, &::before {
       content: '';
@@ -171,115 +160,71 @@ const { meta, name, description, image, longDescription, price, endDate, startDa
     }
 
     &::before {
-        height: 100%;
-        background: var(--weirdo-color-accent-2);
-        position: absolute;
-        top: 1%;
-        left: 1%;
-        z-index: -1;
-      }
+      height: 100%;
+      background: var(--weirdo-color-accent-2);
+      position: absolute;
+      top: 1%;
+      left: 1%;
+      z-index: -1;
+    }
 
-      img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 2;
-      }
+    @media(min-width: 768px) {
+      margin-bottom: 0;
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 2;
+    }
+  }
+
+  .long-description-wrapper {
+    padding-top: 4rem;
   }
 
   .body-wrapper {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
     box-shadow: var(--weirdo-shadow-default);
-    margin-top: 4rem;
+    margin-top: 2rem;
+    
+    @media (min-width: 1024px) {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 4rem;
+    }
   }
 
   .price-details-wrapper {
-    padding: 2rem;
+    padding: 1rem;
     background: var(--weirdo-color-accent-2);
     height: 100%;
+    
+    @media (min-width: 1024px) {
+      padding: 2rem;
+    }
 
     li::before {
       background-color: black;
     }
+
   }
 
   .program-wrapper {
     grid-column: span 2;
     border: 2px solid var(--weirdo-color-accent-2);
-    padding: 2rem;
+    padding: 1rem;
+
+    @media (min-width: 1024px) {
+      padding: 2rem;
+    }
   }
 
   .portable-text-wrapper {
     margin: 0;
     
-  }
-
-  /* ---- */
-
-  .camp-slug-details-wrapper {
-    width: clamp(0px, 100%, 600px);
-  }
-
-  .tile-heading-time {
-    justify-content: space-between;
-    gap: 0.5rem;
-  }
-
-  @media (min-width: 768px) {
-    .tile-heading-time {
-      display: flex;
-    }
-  }
-
-  .tile-heading-details {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .tile-heading-details svg,
-  .tile-heading-details g,
-  .tile-heading-details path {
-    fill: var(--weirdo-color-accent-1);
-  }
-
-  .tile-heading-details p {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-  }
-
-  .tile-details-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    margin-bottom: 1rem;
-  }
-
-  .tile-detail {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-  }
-
-  .tile-icon-wrapper {
-    display: inline-flex;
-    background: var(--weirdo-color-accent-1);
-    color: white;
-    width: fit-content;
-    height: fit-content;
-    padding: 0.2em;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .tile-icon-wrapper svg,
-  .tile-icon-wrapper g,
-  .tile-icon-wrapper path {
-    fill: white;
   }
 </style>

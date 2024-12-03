@@ -5,10 +5,7 @@ import type { HomePage } from '../../data/digests/digest-home-page-data'
 import { urlForImage } from '../../utils'
 import Container from '../atoms/Container.astro'
 import ArrowRight from '../atoms/icons/ArrowRight.astro'
-import CalendarIcon from '../atoms/icons/CalendarIcon.astro'
-import ClockIcon from '../atoms/icons/ClockIcon.astro'
-import PinIcon from '../atoms/icons/PinIcon.astro'
-import PriceIcon from '../atoms/icons/PriceIcon.astro'
+import EventTileDetails from '../molecules/EventTileDetails.astro'
 import Heading from '../molecules/Heading.astro'
 
 interface Props {
@@ -49,68 +46,14 @@ const { data } = Astro.props
               <div class="tile-heading-wrapper" >
                 <Heading as="h2" size="lg" text={event.name} />
                 <div class="tile-heading-details">
-                  <div class="tile-details-wrapper">
-                    {event.price && (
-                      <div class="tile-detail">
-                        <div class="tile-icon-wrapper">
-                          <PriceIcon width={26} />
-                        </div>
-                        {event.price}
-                      </div>
-                      )}
-                    {event.place && (
-                      <div class="tile-detail">
-                        <div class="tile-icon-wrapper">
-                          <PinIcon width={26} />
-                        </div>
-                        {event.place}                        
-                      </div>
-                    )}
-                  </div>
-                  <div class="tile-heading-time">
-                    {event.startDate && (
-                      <div class="tile-details-wrapper">
-                        <strong>Zaczynamy: </strong>
-                        <time>
-                          <div class="tile-detail">
-                            <div class="tile-icon-wrapper">
-                              <CalendarIcon width={26}/>
-                              </div>
-                               {event.startDate.date}
-                            </div>
-                            </time>
-                            <time>
-                          <div class="tile-detail">
-                            <div class="tile-icon-wrapper">
-                              <ClockIcon width={26} />
-                               </div>
-                               {event.startDate.time}
-                            </div>
-                        </time>
-                      </div>
-                    )}
-                    {event.endDate && (
-                      <div class="tile-details-wrapper">
-                        <strong>Kończymy:</strong>
-                        <time>
-                          <div class="tile-detail">
-                            <div class="tile-icon-wrapper">
-                              <CalendarIcon width={26}/>
-                              </div>
-                               {event.endDate.date}
-                            </div>
-                            </time>
-                            <time>
-                          <div class="tile-detail">
-                            <div class="tile-icon-wrapper">
-                              <ClockIcon width={26} />
-                               </div>
-                               {event.endDate.time}
-                            </div>
-                        </time>
-                      </div>
-                    )}
-                  </div>
+                  <EventTileDetails 
+                    price={event.price} 
+                    location={event.place} 
+                    startDate={event.startDate.date} 
+                    endDate={event.endDate.date} 
+                    startTime={event.startDate.time} 
+                    endTime={event.endDate.time}
+                  />
                 </div>
               </div>
               <div class="tile-portable-text-wrapper">
@@ -230,59 +173,6 @@ const { data } = Astro.props
     
     @media (min-width: 768px) {
       border-top: 2px solid var(--weirdo-color-accent-3);
-    }
-  }
-
-  .tile-heading-time {
-    justify-content: space-between;
-    gap: 0.5rem;
-    
-    @media(min-width: 768px) {
-      display: flex;
-    }
-  }
-
-  .tile-heading-details {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    
-    svg, g, path {
-      fill: var(--weirdo-color-accent-1);
-    }
-
-    p {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-    }
-  }
-
-  .tile-details-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    margin-bottom: 1rem;
-  }
-
-  .tile-detail {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-  }
-
-  .tile-icon-wrapper {
-    display: inline-flex;
-    background: var(--weirdo-color-accent-1);
-    color: white;
-    width: fit-content;
-    height: fit-content;
-    padding: 0.2em;
-    align-items: center ;
-    justify-content: center;
-
-    svg, g, path {
-      fill: white;
     }
   }
 
