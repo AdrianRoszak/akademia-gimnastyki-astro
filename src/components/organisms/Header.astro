@@ -17,7 +17,7 @@ const { data } = Astro.props
   <Container>
     <nav class="wrapper">
       {data.companyLogo && (
-        <a href='/' data-weirdo-nav="link" data-weirdo-nav-target-id="home">
+        <a href='/' data-weirdo-nav="link" aria-label="Wróc na stronę główną" data-weirdo-nav-target-id="home">
           <div class="weirdo-logo">
             <Image
               src={urlForImage(data.companyLogo.source)
@@ -55,13 +55,13 @@ const { data } = Astro.props
         </a>
       </div>
       <div class="icons-wrapper">
-        <a href={`tel:${data.companyPhone}`} class="icon-link">
+        <a href={`tel:${data.companyPhone}`} data-label="Zadzwoń do nas" class="icon-link">
           <Phone size={28} color="var(--weirdo-color-white" />
         </a>
-        <a href={`mailto:${data.companyEmail}`} class="icon-link">
+        <a href={`mailto:${data.companyEmail}`} aria-label="Napisz do nas" class="icon-link">
           <MailIcon size={28} color="var(--weirdo-color-white" />
         </a>
-        <button data-weirdo-nav-burger class:list={["icon-link", 'burger-wrapper']}>
+        <button data-weirdo-nav-burger aria-label="Otwórz nawigację" class:list={["icon-link", 'burger-wrapper']}>
             <div class="bar"></div>
         </button>
       </div>
