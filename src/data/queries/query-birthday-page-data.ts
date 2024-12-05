@@ -25,7 +25,10 @@ birthday_banner_selector {
         birthday_location_item_info,
         birthday_location_item_location_list[]-> {
         location_item_name,
-        location_item_address
+        location_item_address,
+        location_item_image,
+        location_item_directions_link,
+        location_item_slug
         }
       }
     }

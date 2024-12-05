@@ -1,5 +1,7 @@
 import type { TypedObject } from 'astro-portabletext/types'
+import type { ImageType } from '../types'
 import { type BannerType, digestBanners } from './digest-home-page-data'
+import { secureImage } from './utils'
 
 export type BirthdayData = {
   banners: BannerType[]
@@ -23,6 +25,9 @@ export type BirthdayData = {
       location: {
         name: string
         address: string
+        image: ImageType
+        directionsLink: string
+        slug: string
       }
     }[]
   }
@@ -65,6 +70,9 @@ export function digestBirthdayData(source): BirthdayData | null {
               location: {
                 name: item.birthday_location_item_location_list[0].location_item_name,
                 address: item.birthday_location_item_location_list[0].location_item_address,
+                image: secureImage(item.birthday_location_item_location_list[0].location_item_image),
+                directionsLink: item.birthday_location_item_location_list[0].location_item_directions_link,
+                slug: item.birthday_location_item_location_list[0].location_item_slug,
               },
             }
           },
