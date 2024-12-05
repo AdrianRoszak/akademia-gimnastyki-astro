@@ -55,7 +55,7 @@ const { data } = Astro.props
         </a>
       </div>
       <div class="icons-wrapper">
-        <a href={`tel:${data.companyPhone}`} data-label="Zadzwoń do nas" class="icon-link">
+        <a href={`tel:${data.companyPhone}`} aria-label="Zadzwoń do nas" class="icon-link">
           <Phone size={28} color="var(--weirdo-color-white" />
         </a>
         <a href={`mailto:${data.companyEmail}`} aria-label="Napisz do nas" class="icon-link">
