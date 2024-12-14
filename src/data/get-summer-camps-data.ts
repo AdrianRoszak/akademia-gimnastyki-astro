@@ -2,7 +2,7 @@ import { fetchSanityData } from '.'
 import { type CampItem, digestCampItem } from './digests/digest-camps-data'
 import { secureImage } from './digests/utils'
 
-export async function getSummerCamps(): Promise<CampItem | null> {
+export async function getSummerCamps(): Promise<SummerCamps | null> {
   const data = await fetchSanityData(querySummerCampsData)
   const digestedData = digestSummerCamps(data[0])
   return digestedData
@@ -27,13 +27,22 @@ export const querySummerCampsData = `*[_type == 'summer_camps'] {
   summer_camps_price_details
 }`
 
+export type SummerCamps = Omit<CampItem, 'slug' | 'startDate' | 'endDate'> & {
+  sessions: {
+    startTime: string
+    endTime: string
+    name: string
+  }[]
+}
+
 //@ts-ignore
-export function digestSummerCamps(source): CampItem | null {
+export function digestSummerCamps(source): SummerCamps | null {
   if (!source) return null
 
   return {
     name: source.summer_camps_name,
     image: secureImage(source.summer_camps_image),
+    // @ts-ignore
     sessions: source.summer_camps_sessions.map((session) => {
       return {
         startTime: session.summer_camps_start_date,
@@ -45,7 +54,6 @@ export function digestSummerCamps(source): CampItem | null {
     location: source.summer_camps_place,
     price: `${source.summer_camps_price} zł`,
     longDescription: source.summer_camps_long_description,
-    slug: '',
     program: source.summer_camps_program,
     priceDetails: source.summer_camps_price_details,
     meta: {

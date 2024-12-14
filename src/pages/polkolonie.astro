@@ -6,26 +6,12 @@ import ArrowRight from '../components/atoms/icons/ArrowRight.astro'
 import ClockIcon from '../components/atoms/icons/ClockIcon.astro'
 import EventTileDetails from '../components/molecules/EventTileDetails.astro'
 import Heading from '../components/molecules/Heading.astro'
-import type { CampItem } from '../data/digests/digest-camps-data'
-import { getCampPageSlugs } from '../data/get-camp-page-slugs'
-import { getSummerCamps } from '../data/get-summer-camps-data'
+import { type SummerCamps, getSummerCamps } from '../data/get-summer-camps-data'
 import Layout from '../layouts/Layout.astro'
 import { urlForImage } from '../utils'
 
-const {
-  meta,
-  name,
-  description,
-  sessions,
-  image,
-  longDescription,
-  price,
-  endDate,
-  startDate,
-  location,
-  program,
-  priceDetails,
-} = (await getSummerCamps()) as CampItem
+const { meta, name, description, sessions, image, longDescription, price, location, program, priceDetails } =
+  (await getSummerCamps()) as SummerCamps
 ---
 
 <Layout title={meta.title} description={meta.description}>
@@ -56,8 +42,6 @@ const {
               <EventTileDetails 
                 price={price} 
                 location={location} 
-                startDate={startDate} 
-                endDate={endDate} 
               />
               
             </div>
