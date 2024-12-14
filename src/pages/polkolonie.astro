@@ -1,43 +1,31 @@
 ---
 import { Image } from 'astro:assets'
 import { PortableText } from 'astro-portabletext'
-import Container from '../../components/atoms/Container.astro'
-import ArrowRight from '../../components/atoms/icons/ArrowRight.astro'
-import EventTileDetails from '../../components/molecules/EventTileDetails.astro'
-import Heading from '../../components/molecules/Heading.astro'
-import type { CampItem } from '../../data/digests/digest-camps-data'
-import { getCampPageSlugs } from '../../data/get-camp-page-slugs'
-import { getSingleCampData } from '../../data/get-camps-data'
-import Layout from '../../layouts/Layout.astro'
-import { urlForImage } from '../../utils'
+import Container from '../components/atoms/Container.astro'
+import ArrowRight from '../components/atoms/icons/ArrowRight.astro'
+import ClockIcon from '../components/atoms/icons/ClockIcon.astro'
+import EventTileDetails from '../components/molecules/EventTileDetails.astro'
+import Heading from '../components/molecules/Heading.astro'
+import type { CampItem } from '../data/digests/digest-camps-data'
+import { getCampPageSlugs } from '../data/get-camp-page-slugs'
+import { getSummerCamps } from '../data/get-summer-camps-data'
+import Layout from '../layouts/Layout.astro'
+import { urlForImage } from '../utils'
 
-export async function getStaticPaths() {
-  async function obtainTeamMemberSlugs() {
-    const slugs = await getCampPageSlugs()
-
-    type Slug = {
-      camp_item_slug: {
-        current: string
-      }
-    }
-
-    return slugs.map((slug: Slug) => {
-      return {
-        params: {
-          slug: slug.camp_item_slug.current,
-        },
-      }
-    })
-  }
-
-  const slugs = await obtainTeamMemberSlugs()
-
-  return [...slugs]
-}
-
-const { slug } = Astro.params
-const { meta, name, description, image, longDescription, price, endDate, startDate, location, program, priceDetails } =
-  (await getSingleCampData(slug)) as CampItem
+const {
+  meta,
+  name,
+  description,
+  sessions,
+  image,
+  longDescription,
+  price,
+  endDate,
+  startDate,
+  location,
+  program,
+  priceDetails,
+} = (await getSummerCamps()) as CampItem
 ---
 
 <Layout title={meta.title} description={meta.description}>
@@ -71,13 +59,58 @@ const { meta, name, description, image, longDescription, price, endDate, startDa
                 startDate={startDate} 
                 endDate={endDate} 
               />
+              
             </div>
                 <a href='https://wypoczynekdzieci.pl/rejestracja-uczestnikow/' class="weirdo-button--color-accent-2" target="_blank">
-                  Zapisy na obóz
+                  Zapisy na półkolonie
                   <ArrowRight width={24} />
                 </a>
           </div>
         </div>
+          {sessions && (
+                <div>
+                  <Heading text="Turnusy" size="lg" as="h2" />
+                  <div class="sessions-wrapper">
+                  {sessions.map((session, index) => (
+                      <div class="session-wrapper">
+
+                        <small class="index">{index + 1}</small>
+                        <div></div>
+                        <p>{session.name}</p>
+                        <div class="time-wrapper">
+                        {session.startTime && (
+                          <div class="tile-details-wrapper">
+        <strong>Zaczynamy:</strong>
+          <time>
+            <div class="tile-detail">
+              <div class="tile-icon-wrapper">
+                <ClockIcon width={26} />
+              </div>
+              {session.startTime}
+            </div>
+          </time>
+                          </div>
+        )}
+                       {session.endTime && (
+                          <div class="tile-details-wrapper">
+        <strong>Kończymy:</strong>
+          <time>
+            <div class="tile-detail">
+              <div class="tile-icon-wrapper">
+                <ClockIcon width={26} />
+              </div>
+              {session.endTime}
+            </div>
+          </time>
+                          </div>
+        )}
+
+                        </div>
+                      </div>
+                  ))}
+                  </div>
+                </div>
+              )}
           {longDescription && (
             <div class="long-description-wrapper portable-text-wrapper">
               <PortableText value={longDescription} />
@@ -117,7 +150,6 @@ const { meta, name, description, image, longDescription, price, endDate, startDa
 
   .intro-wrapper {
     margin-bottom: 4rem;
-    
     @media(min-width: 768px) {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -228,5 +260,57 @@ const { meta, name, description, image, longDescription, price, endDate, startDa
   .portable-text-wrapper {
     margin: 0;
     
+  }
+
+  .sessions-wrapper {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    
+
+    @media (min-width: 1024px) {
+      flex-direction: row;      
+      gap: 4rem;
+    }
+  }
+
+  .tile-details-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .tile-detail {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .tile-icon-wrapper {
+    display: inline-flex;
+    background: var(--weirdo-color-accent-1);
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    padding: 0.2em;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tile-icon-wrapper svg,
+  .tile-icon-wrapper g,
+  .tile-icon-wrapper path {
+    fill: white;
+  }
+
+  .time-wrapper {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .index {
+    color: var(--weirdo-color-accent-3);
   }
 </style>

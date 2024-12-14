@@ -88,6 +88,8 @@ export interface HomePage {
 export function digestHomePageData(source): HomePage | null {
   if (!source) return null
 
+  console.log(source)
+
   return {
     banners: digestBanners(source[0].home_banner_selector),
     about: {
@@ -140,24 +142,25 @@ function digestEvents(source): HomePage['events'] {
   return {
     title: source.events_block_heading,
     lead: source.events_block_lead,
-    events: source.events_block_events_selector.event_selector_list
-      ? source.events_block_events_selector.event_selector_list.map(
-          //@ts-ignore
-          (event) => {
-            return {
-              name: event.event_item_name,
-              link: event.event_item_link,
-              place: event.event_item_place,
-              description: event.event_item_description,
-              image: secureImage(event.event_item_image),
-              bgColor: event.event_item_background_color,
-              startDate: digestDate(event.event_start_date),
-              endDate: digestDate(event.event_end_date),
-              price: event.event_item_price !== 0 ? `${event.event_item_price} zł` : 'Wydarzenie bezpłatne',
-            }
-          },
-        )
-      : null,
+    events:
+      source.events_block_events_selector.event_selector_list > 0
+        ? source.events_block_events_selector.event_selector_list.map(
+            //@ts-ignore
+            (event) => {
+              return {
+                name: event.event_item_name,
+                link: event.event_item_link,
+                place: event.event_item_place,
+                description: event.event_item_description,
+                image: secureImage(event.event_item_image),
+                bgColor: event.event_item_background_color,
+                startDate: digestDate(event.event_start_date),
+                endDate: digestDate(event.event_end_date),
+                price: event.event_item_price !== 0 ? `${event.event_item_price} zł` : 'Wydarzenie bezpłatne',
+              }
+            },
+          )
+        : null,
   }
 }
 
