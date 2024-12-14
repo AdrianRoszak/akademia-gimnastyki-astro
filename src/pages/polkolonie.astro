@@ -68,49 +68,48 @@ const {
           </div>
         </div>
           {sessions && (
-                <div>
-                  <Heading text="Turnusy" size="lg" as="h2" />
-                  <div class="sessions-wrapper">
+            <div>
+              <Heading text="Turnusy" size="lg" as="h2" />
+                <div class="sessions-wrapper">
                   {sessions.map((session, index) => (
-                      <div class="session-wrapper">
-
-                        <small class="index">{index + 1}</small>
-                        <div></div>
+                    <div class="session-wrapper">
+                      <small class="index">{index + 1}</small>
+                      <div>
                         <p>{session.name}</p>
                         <div class="time-wrapper">
                         {session.startTime && (
                           <div class="tile-details-wrapper">
-        <strong>Zaczynamy:</strong>
-          <time>
-            <div class="tile-detail">
-              <div class="tile-icon-wrapper">
-                <ClockIcon width={26} />
-              </div>
-              {session.startTime}
-            </div>
-          </time>
+                            <strong>Zaczynamy:</strong>
+                            <time>
+                              <div class="tile-detail">
+                                <div class="tile-icon-wrapper">
+                                  <ClockIcon width={26} />
+                                </div>
+                                {session.startTime}
+                              </div>
+                            </time>
                           </div>
-        )}
+                          )}
                        {session.endTime && (
                           <div class="tile-details-wrapper">
-        <strong>Kończymy:</strong>
-          <time>
-            <div class="tile-detail">
-              <div class="tile-icon-wrapper">
-                <ClockIcon width={26} />
-              </div>
-              {session.endTime}
-            </div>
-          </time>
+                            <strong>Kończymy:</strong>
+                            <time>
+                              <div class="tile-detail">
+                                <div class="tile-icon-wrapper">
+                                  <ClockIcon width={26} />
+                                </div>
+                                {session.endTime}
+                              </div>
+                            </time>
                           </div>
-        )}
-
-                        </div>
+                        )}
                       </div>
-                  ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                ))}
+              </div>
+            </div>
+          )}
           {longDescription && (
             <div class="long-description-wrapper portable-text-wrapper">
               <PortableText value={longDescription} />
@@ -119,11 +118,13 @@ const {
         <div class="body-wrapper">
           {program && (
             <div class="program-wrapper portable-text-wrapper">
+              <Heading text="Program:" size="md" as="h3" />
               <PortableText value={program} />
             </div>
           )}
             {priceDetails && (
                 <div class="price-details-wrapper portable-text-wrapper">
+                <Heading text="Szczegóły ceny:" size="md" as="h3" />
                 <PortableText value={priceDetails} />
                 </div>
             )}
@@ -232,6 +233,12 @@ const {
     }
   }
 
+  .program-wrapper, .price-details-wrapper {
+    h3 {
+      margin-bottom: 0.5em;
+    }
+  }
+
   .price-details-wrapper {
     padding: 1rem;
     background: var(--weirdo-color-accent-2);
@@ -263,15 +270,38 @@ const {
   }
 
   .sessions-wrapper {
-    margin-top: 0.5rem;
-    display: flex;
-    flex-direction: column;
+    margin-top: 1rem;
+    display: grid;
     width: 100%;
-    
+    gap: 1rem;
+
+    @media (min-width: 768px) {
+    margin-top: 0.5rem;
+
+      grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    }
 
     @media (min-width: 1024px) {
-      flex-direction: row;      
-      gap: 4rem;
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .session-wrapper {
+    display: flex;
+    gap: 0.5rem;
+    
+    small {
+      font-size: var(--weirdo-text-4xl);
+      line-height: 1em;
+    }
+
+    @media (min-width: 768px) {
+      gap: 1.5rem;
+
+      small {
+        font-size: var(--weirdo-text-2xl);
+      }
     }
   }
 
@@ -307,7 +337,7 @@ const {
 
   .time-wrapper {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
   }
 
   .index {
