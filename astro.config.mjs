@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config'
 
-import vercel from '@astrojs/vercel/serverless'
+import vercel from '@astrojs/vercel'
 import sanity from '@sanity/astro'
 import { loadEnv } from 'vite'
 
@@ -13,7 +13,7 @@ const { PUBLIC_SANITY_PROJECT_ID, PUBLIC_SANITY_API_VERSION, PUBLIC_SANITY_DATAS
 export default defineConfig({
   site: 'https://ksakademiagimnastyki.pl',
   prefetch: true,
-  output: 'hybrid',
+  output: 'server',
   adapter: vercel(),
   integrations: [
     icon(),
