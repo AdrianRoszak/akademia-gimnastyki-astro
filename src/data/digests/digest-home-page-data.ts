@@ -195,12 +195,18 @@ export function digestBanners(source): BannerType[] {
       title: banner.banner_item_heading,
       lead: banner.banner_item_lead,
       images: digestImages(banner.banner_item_images),
+      //TODO: it should be prepared for more than one button in the future
       button: banner.banner_item_button
         ? {
             text: banner.banner_item_button.button_block_text,
             link: processButtonLink(banner.banner_item_button.button_block_link),
           }
-        : null,
+        : banner.banner_item_internal_link
+          ? {
+              text: banner.banner_item_internal_link.registration_item_name,
+              link: `/zapisy/${banner.banner_item_internal_link.registration_item_slug.current}`,
+            }
+          : null,
     }
   })
 }
