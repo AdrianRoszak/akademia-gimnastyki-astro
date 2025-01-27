@@ -1,0 +1,60 @@
+---
+import Container from '../../components/atoms/Container.astro'
+import Layout from '../../layouts/Layout.astro'
+
+import Heading from '../../components/molecules/Heading.astro'
+import { type RegistrationPage, getRegistrationPage } from '../../data/get-registration-page'
+import { getRegistrationSlugs } from '../../data/get-registration-slugs'
+
+export async function getStaticPaths() {
+  async function obtainRegistrationSlugs() {
+    const slugs = await getRegistrationSlugs()
+
+    type Slug = {
+      registration_item_slug: {
+        current: string
+      }
+    }
+
+    return slugs.map((slug: Slug) => {
+      return {
+        params: {
+          slug: slug.registration_item_slug.current,
+        },
+      }
+    })
+  }
+
+  const slugs = await obtainRegistrationSlugs()
+
+  return [...slugs]
+}
+
+const { slug } = Astro.params
+const { code, name } = (await getRegistrationPage(slug)) as RegistrationPage
+---
+
+<Layout title="zapisy" description='Zapisy'>
+<main>
+  <section>
+    <Container>
+      <div class="wrapper">
+        <Heading as="h1" text={name} size='xl' />
+        <div class='activenow-form-container activenow-form-8608-container'>
+          <center>
+            <img src='https://www.activenow.io/assets/ripple.gif' width='100px'/>
+          </center>
+          <script async src='https://app.activenow.io/external/signup_form/load_by_js?category=&city_id=&code=5be55bb522562dd90ad58ef127ecb1bc&school_id=3288&signup_form_id=8608&venue_id=&zz='></script></div>
+      </div>
+    </Container>
+  </section>
+</main>
+</Layout>
+
+<style>
+  .wrapper {
+    padding-top: 14rem;
+    width: clamp(0px, 100%, 800px);
+    margin: 0 auto;
+  }
+</style>
