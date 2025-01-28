@@ -137,7 +137,6 @@ function digestDate(source: string): DateTimeType {
 
 //@ts-ignore
 function digestEvents(source): HomePage['events'] {
-  console.log(source)
   return {
     title: source.events_block_heading,
     lead: source.events_block_lead,

@@ -40,12 +40,7 @@ const { code, name } = (await getRegistrationPage(slug)) as RegistrationPage
     <Container>
       <div class="wrapper">
         <Heading as="h1" text={name} size='xl' />
-        <div class='activenow-form-container activenow-form-8608-container'>
-          <center>
-            <img src='https://www.activenow.io/assets/ripple.gif' width='100px'/>
-          </center>
-          <script async src='https://app.activenow.io/external/signup_form/load_by_js?category=&city_id=&code=5be55bb522562dd90ad58ef127ecb1bc&school_id=3288&signup_form_id=8608&venue_id=&zz='></script></div>
-      </div>
+        <div set:html={code} />
     </Container>
   </section>
 </main>
@@ -56,5 +51,41 @@ const { code, name } = (await getRegistrationPage(slug)) as RegistrationPage
     padding-top: 14rem;
     width: clamp(0px, 100%, 800px);
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
 </style>
+
+<!-- <script>
+  window.addEventListener('load', () => {
+    const observeScriptLoad = () => {
+    const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'childList') {
+        mutation.addedNodes.forEach((node) => {
+          if (node.tagName === 'SCRIPT') {
+            const submitButton = document.querySelector('button[type="submit"]');
+            if (submitButton) {
+              submitButton.classList.add('weirdo-button--color-accent-2');
+              submitButton.style.border = 'none';
+              submitButton.style.marginTop = '1rem';
+
+            node.onerror = () => {
+              console.error(`Failed to load script: ${node.src}`);
+            };
+          }
+        }
+        });
+      }
+    });
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+};
+
+// Start observing
+observeScriptLoad();
+
+  })
+</script> -->

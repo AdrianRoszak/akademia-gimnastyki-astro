@@ -24,6 +24,6 @@ function digestRegistrationPage(data): RegistrationPage | null {
 
   return {
     name: data.registration_item_name,
-    code: data.registration_code,
+    code: data.registration_code.code,
   }
 }
