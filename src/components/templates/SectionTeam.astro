@@ -1,11 +1,11 @@
 ---
 import { Image } from 'astro:assets'
-import { PortableText } from 'astro-portabletext'
 import type { HomePage } from '../../data/digests/digest-home-page-data'
 import { urlForImage } from '../../utils'
 import Container from '../atoms/Container.astro'
 import Heading from '../molecules/Heading.astro'
 
+//TODO: fix this
 //@ts-expect-error
 const { title, teamMembers } = Astro.props.data as HomePage['team']
 ---
@@ -16,45 +16,83 @@ const { title, teamMembers } = Astro.props.data as HomePage['team']
       <div>
         <Heading as="h1" size="xl" text={title} />
       </div>
-      <div class="tiles-wrapper">
-        {teamMembers && (
-          teamMembers.map((item) => {
-            return (
-              <div class="team-member-tile" style={`width: ${100 / teamMembers.length}%`}>
-                <div class="image-wrapper">
-                  <Image
-                    src={urlForImage(item.image.source)
-                    .width(600)
-                    .format("webp")
-                    .quality(80)
-                    .url()}
-                      alt={item.image.alt}
-                      width={600}
-                      height={600}
-                  /> 
+      <div class:list={["swiper", "tiles-swiper"]}>
+        <div class="swiper-wrapper">
+          {teamMembers && (
+            teamMembers.map((item) => {
+              return (
+                <div class="swiper-slide">
+                  <div class:list={["team-member-tile"]}>
+                    <div class="image-wrapper">
+                      <Image
+                        src={urlForImage(item.image.source)
+                        .width(600)
+                        .format("webp")
+                        .quality(80)
+                        .url()}
+                          alt={item.image.alt}
+                          width={600}
+                          height={600}
+                      /> 
+                    </div>
+                    <div class="text-wrapper">
+                      <Heading as='h2' text={item.name} size="md" />
+                        <p>{item.bio}</p>
+                    </div>
+                  </div>
                 </div>
-                <div class="text-wrapper">
-                  <Heading as='h2' text={item.name} size="md" />
-                    <p>{item.bio}</p>
-                </div>
-              </div>
-            )  
-          })
-        )}
+              )  
+            })
+          )}
+        </div>
       </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
     </div>
   </Container>
 </section>
 
+<script type="module">
+import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
+
+  new Swiper('.tiles-swiper', {
+    autoplay: {
+      delay: 4000,
+    },
+    slidesPerView: 1,
+    spaceBetween: 20,
+    breakpoints: {
+      500: {
+        slidesPerView: 2
+      },
+      720: {
+        slidesPerView: 3,
+      },
+      920: {
+        slidesPerView: 4
+      },
+      1366: {
+        slidesPerView: 5
+      }
+    },
+    speed: 1500,
+    loop: true,
+    // effect: 'fade',
+    // fadeEffect: {
+    //   crossFade: true
+    // },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+  })
+</script>
+
 <style>
   .team-section-wrapper {
+    padding-top: 6rem;
     display: grid;
-    gap: 20px;
-  }
-
-  .tiles-wrapper {
-    display: flex;
-    gap: 20px 10px;
+    gap: 2rem;
   }
 
   .image-wrapper {
@@ -76,16 +114,17 @@ const { title, teamMembers } = Astro.props.data as HomePage['team']
       top: 0;
       left: 0;
       object-fit: cover;
+      box-shadow: var(--weirdo-shadow-default);
     }
   }
 
   .text-wrapper {
     flex-grow: 1;
-    background: var(--weirdo-color-accent-2);
     padding: 1.5rem 1rem;
-
+    
     h2 {
       margin-bottom: 0.5em;
+      /* color: var(--weirdo-color-accent-2); */
     }
 
     p {
@@ -97,4 +136,45 @@ const { title, teamMembers } = Astro.props.data as HomePage['team']
     display: flex;
     flex-direction: column;
   }
+
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    /* position: relative; */
+    color: var(--weirdo-color-white);
+    background-color: var(--weirdo-color-accent-1);
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+  transition: all var(--weirdo-animation-duration);
+
+
+    &::after {
+      position: absolute;
+      font-size: 1rem;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      transform: scale(1.1);
+      background-color: var(--weirdo-color-accent-1-80);
+    }
+  }
+
+  /* .swiper-button-next {
+    @media (max-width: 768px) {
+      background: var(--weirdo-color-white);
+      color: var(--weirdo-color-accent-1);
+
+      &:active, &:focus {
+        background: var(--weirdo-color-white);
+      }
+    }
+  } */
 </style>

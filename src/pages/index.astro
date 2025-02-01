@@ -8,11 +8,11 @@ import SectionAbout from '../components/templates/SectionAbout.astro'
 import SectionActivities from '../components/templates/SectionActivities.astro'
 import SectionCamps from '../components/templates/SectionCamps.astro'
 import SectionEvents from '../components/templates/SectionEvents.astro'
+import SectionTeam from '../components/templates/SectionTeam.astro'
 import SectionValues from '../components/templates/SectionValues.astro'
 import Layout from '../layouts/Layout.astro'
-// import SectionTeam from '../components/templates/SectionTeam.astro'
 
-const { values, banners, about, activities, camps, events, metaData } = (await getHomePageData()) as HomePage
+const { values, banners, about, activities, camps, events, team, metaData } = (await getHomePageData()) as HomePage
 ---
 
 <Layout title={metaData.metaTitle} description={metaData.metaDescription}>
@@ -34,11 +34,6 @@ const { values, banners, about, activities, camps, events, metaData } = (await g
 		{events && (
 			<SectionEvents data={events} />
 		)}
-		{/* {team && (<SectionTeam data={team} />)} */}
+		{team && (<SectionTeam data={team} />)}
 	</main>
 </Layout>
-
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-/>

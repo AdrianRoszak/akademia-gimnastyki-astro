@@ -7891,7 +7891,7 @@ snapshots:
       '@portabletext/patches': 1.1.0
       '@sanity/block-tools': 3.55.0(debug@4.3.6)
       '@sanity/schema': 3.55.0(debug@4.3.6)
-      '@sanity/types': 3.55.0
+      '@sanity/types': 3.55.0(debug@4.3.6)
       '@sanity/util': 3.55.0(debug@4.3.6)
       debug: 4.3.7
       is-hotkey-esm: 1.0.0
@@ -8068,7 +8068,7 @@ snapshots:
 
   '@sanity/block-tools@3.55.0(debug@4.3.6)':
     dependencies:
-      '@sanity/types': 3.55.0
+      '@sanity/types': 3.55.0(debug@4.3.6)
       '@types/react': 18.3.4
       get-random-values-esm: 1.0.2
       lodash: 4.17.21
@@ -8212,7 +8212,7 @@ snapshots:
   '@sanity/insert-menu@1.0.8(@sanity/types@3.55.0(debug@4.3.6))(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
     dependencies:
       '@sanity/icons': 3.4.0(react@18.3.1)
-      '@sanity/types': 3.55.0
+      '@sanity/types': 3.55.0(debug@4.3.6)
       '@sanity/ui': 2.8.8(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       lodash.startcase: 4.4.0
       react: 18.3.1
@@ -8301,7 +8301,7 @@ snapshots:
   '@sanity/schema@3.55.0(debug@4.3.6)':
     dependencies:
       '@sanity/generate-help-url': 3.0.0
-      '@sanity/types': 3.55.0
+      '@sanity/types': 3.55.0(debug@4.3.6)
       arrify: 1.0.1
       groq-js: 1.12.0
       humanize-list: 1.0.1
@@ -8326,7 +8326,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@sanity/types@3.55.0':
+  '@sanity/types@3.55.0(debug@4.3.6)':
     dependencies:
       '@sanity/client': 6.21.3
       '@types/react': 18.3.4
@@ -8367,7 +8367,7 @@ snapshots:
   '@sanity/util@3.55.0(debug@4.3.6)':
     dependencies:
       '@sanity/client': 6.21.3
-      '@sanity/types': 3.55.0
+      '@sanity/types': 3.55.0(debug@4.3.6)
       get-random-values-esm: 1.0.2
       moment: 2.30.1
       rxjs: 7.8.1
@@ -11493,7 +11493,7 @@ snapshots:
 
   postcss@8.4.38:
     dependencies:
-      nanoid: 3.3.7
+      nanoid: 3.3.8
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
@@ -11996,7 +11996,7 @@ snapshots:
       '@sanity/presentation': 1.16.4(@sanity/client@6.21.3)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@sanity/schema': 3.55.0(debug@4.3.6)
       '@sanity/telemetry': 0.7.9(react@18.3.1)
-      '@sanity/types': 3.55.0
+      '@sanity/types': 3.55.0(debug@4.3.6)
       '@sanity/ui': 2.8.8(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(styled-components@6.1.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@sanity/util': 3.55.0(debug@4.3.6)
       '@sanity/uuid': 3.0.2

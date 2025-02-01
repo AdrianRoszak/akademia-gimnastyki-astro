@@ -4,7 +4,7 @@ import Banner from './Banner.astro'
 const { data } = Astro.props
 ---
 
-<div class="swiper main-banner-swiper">
+<div class:list={["swiper", "main-banner-swiper"]}>
   <div class="swiper-wrapper">
     {data && data.map((banner) => (
       <div class="swiper-slide">
@@ -21,7 +21,7 @@ const { data } = Astro.props
 <script type="module">
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
 
-  new Swiper('.swiper', {
+  new Swiper('.main-banner-swiper', {
     autoplay: {
       delay: 4000,
     },
@@ -39,7 +39,7 @@ import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs
         el: ".swiper-pagination",
         clickable: true,
       },
-  });
+  })
 </script>
 
 <style>

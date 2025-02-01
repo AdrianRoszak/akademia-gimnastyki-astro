@@ -89,7 +89,6 @@ export interface HomePage {
 //@ts-ignore
 export function digestHomePageData(source): HomePage | null {
   if (!source) return null
-  console.log(source[0].team)
 
   return {
     banners: digestBanners(source[0].home_banner_selector),
