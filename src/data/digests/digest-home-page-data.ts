@@ -181,7 +181,9 @@ function digestEvents(source): HomePage['events'] {
           (event) => {
             return {
               name: event.event_item_name,
-              link: event.event_item_link,
+              link: event.event_item_link
+                ? event.event_item_link
+                : `/zapisy/${event.event_item_internal_link.registration_item_slug.current}`,
               place: event.event_item_place,
               description: event.event_item_description,
               image: secureImage(event.event_item_image),
