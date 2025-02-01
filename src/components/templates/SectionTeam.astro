@@ -1,0 +1,100 @@
+---
+import { Image } from 'astro:assets'
+import { PortableText } from 'astro-portabletext'
+import type { HomePage } from '../../data/digests/digest-home-page-data'
+import { urlForImage } from '../../utils'
+import Container from '../atoms/Container.astro'
+import Heading from '../molecules/Heading.astro'
+
+//@ts-expect-error
+const { title, teamMembers } = Astro.props.data as HomePage['team']
+---
+
+<section>
+  <Container>
+    <div class="team-section-wrapper">
+      <div>
+        <Heading as="h1" size="xl" text={title} />
+      </div>
+      <div class="tiles-wrapper">
+        {teamMembers && (
+          teamMembers.map((item) => {
+            return (
+              <div class="team-member-tile" style={`width: ${100 / teamMembers.length}%`}>
+                <div class="image-wrapper">
+                  <Image
+                    src={urlForImage(item.image.source)
+                    .width(600)
+                    .format("webp")
+                    .quality(80)
+                    .url()}
+                      alt={item.image.alt}
+                      width={600}
+                      height={600}
+                  /> 
+                </div>
+                <div class="text-wrapper">
+                  <Heading as='h2' text={item.name} size="md" />
+                    <p>{item.bio}</p>
+                </div>
+              </div>
+            )  
+          })
+        )}
+      </div>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .team-section-wrapper {
+    display: grid;
+    gap: 20px;
+  }
+
+  .tiles-wrapper {
+    display: flex;
+    gap: 20px 10px;
+  }
+
+  .image-wrapper {
+    width: 100%;
+    position: relative;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      padding-top: 125%;
+      height: fit-content;
+    }
+
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+    }
+  }
+
+  .text-wrapper {
+    flex-grow: 1;
+    background: var(--weirdo-color-accent-2);
+    padding: 1.5rem 1rem;
+
+    h2 {
+      margin-bottom: 0.5em;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .team-member-tile {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

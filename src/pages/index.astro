@@ -10,6 +10,7 @@ import SectionCamps from '../components/templates/SectionCamps.astro'
 import SectionEvents from '../components/templates/SectionEvents.astro'
 import SectionValues from '../components/templates/SectionValues.astro'
 import Layout from '../layouts/Layout.astro'
+// import SectionTeam from '../components/templates/SectionTeam.astro'
 
 const { values, banners, about, activities, camps, events, metaData } = (await getHomePageData()) as HomePage
 ---
@@ -33,6 +34,7 @@ const { values, banners, about, activities, camps, events, metaData } = (await g
 		{events && (
 			<SectionEvents data={events} />
 		)}
+		{/* {team && (<SectionTeam data={team} />)} */}
 	</main>
 </Layout>
 

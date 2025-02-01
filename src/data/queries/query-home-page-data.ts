@@ -61,6 +61,16 @@ export const queryHomePage = `*[_type == 'home'] {
       } | order(event_start_date asc)[event_end_date > "${getCurrentDate()}"]
     }
   },
+  home_team_block {
+    team_block_title,
+    team_block_team_members {
+      team_member_selector_list[]-> {
+        team_member_name,
+        team_member_bio,
+        team_member_image
+      }
+    }
+  },
   home_meta_data_block {
     meta_data_site_title,
     meta_data_site_description  

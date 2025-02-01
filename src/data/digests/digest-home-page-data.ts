@@ -1,4 +1,5 @@
 import type { TypedObject } from 'astro-portabletext/types'
+import type { PortableTextBlock } from 'sanity'
 import type { ImageType } from '../types'
 import { type CampItem, digestCampItem } from './digest-camps-data'
 import { secureImage } from './utils'
@@ -81,12 +82,14 @@ export interface HomePage {
         }[]
       | null
   }
+  team: Team | null
   metaData: MetaDataType
 }
 
 //@ts-ignore
 export function digestHomePageData(source): HomePage | null {
   if (!source) return null
+  console.log(source[0].team)
 
   return {
     banners: digestBanners(source[0].home_banner_selector),
@@ -105,10 +108,42 @@ export function digestHomePageData(source): HomePage | null {
     activities: (source[0].home_activities_block && digestActivities(source[0].home_activities_block)) || null,
     values: digestValues(source[0].home_values_block),
     events: (source[0].home_events_block && digestEvents(source[0].home_events_block)) || null,
+    team: digestTeam(source[0].home_team_block),
     metaData: {
       metaTitle: source[0].home_meta_data_block.meta_data_site_title,
       metaDescription: source[0].home_meta_data_block.meta_data_site_description,
     },
+  }
+}
+
+type TeamMember = {
+  name: string
+  bio: PortableTextBlock | null
+  image: ImageType
+}
+
+type Team = {
+  title: string
+  teamMembers: TeamMember[] | null
+}
+
+//@ts-ignore
+function digestTeamMember(source): TeamMember | null {
+  if (!source) return null
+
+  return {
+    name: source.team_member_name,
+    bio: source.team_member_bio,
+    image: source.team_member_image && secureImage(source.team_member_image),
+  }
+}
+
+//@ts-ignore
+function digestTeam(source): Team | null {
+  if (!source) return null
+  return {
+    title: source.team_block_title,
+    teamMembers: source.team_block_team_members.team_member_selector_list.map(digestTeamMember),
   }
 }
 
