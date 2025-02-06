@@ -1,4 +1,4 @@
-import { bannerFragment } from './fragments'
+import { bannerFragment } from './fragments';
 
 export const queryBirthdayPageData = `*[_type == 'birthday'] {
 birthday_banner_selector {
@@ -33,4 +33,4 @@ birthday_banner_selector {
       }
     }
   }
-}`
+}`;

@@ -5,6 +5,7 @@ import Heading from '../molecules/Heading.astro'
 
 const { image, name, bio } = Astro.props.data
 ---
+
 <div class:list={["team-member-tile"]}>
                     <div class="image-wrapper">
                       <Image
@@ -25,6 +26,7 @@ const { image, name, bio } = Astro.props.data
                   </div>
 
                   
+                  
 
                   <style>
                     .team-member-tile {
@@ -33,10 +35,11 @@ const { image, name, bio } = Astro.props.data
                     
   }
 
+
   .image-wrapper {
     width: 100%;
     position: relative;
-
+    
     &::after {
       content: '';
       display: block;

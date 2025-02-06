@@ -8,7 +8,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "biome lint --fix && stylelint \"**/*.{css,scss}\" --fix",
+    "lint": "biome lint . --fix && stylelint \"**/*.{css,scss}\" --fix",
     "lint:check": "biome lint && stylelint \"**/*.{css,scss}\"",
     "format": "biome format . --fix && stylelint \"**/*.{css,scss}\" --fix",
     "check": "biome check . && stylelint \"**/*.{css,scss}\""

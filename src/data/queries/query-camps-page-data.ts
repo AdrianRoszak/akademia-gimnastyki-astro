@@ -1,6 +1,6 @@
-import { getCurrentDate } from '..'
+import { getCurrentDate } from '..';
 
-const currentDate = getCurrentDate()
+const currentDate = getCurrentDate();
 
 export const campsItemFragment = `
   camp_item_name,
@@ -17,7 +17,7 @@ export const campsItemFragment = `
     meta_data_site_title,
     meta_data_site_description
   }
-`
+`;
 
 export const queryCampsPageData = `*[_type == 'camps'] {
   camps_page_title,
@@ -32,7 +32,7 @@ export const queryCampsPageData = `*[_type == 'camps'] {
   "pastCamps": *[_type == 'camp_item' && camp_item_end_date < "${currentDate}"] {
     ${campsItemFragment}
   }
-}`
+}`;
 
 export const querySingleCampItemData = `*[_type == 'camp_item' && camp_item_slug.current == $slug] {
   camp_item_intro,
@@ -40,4 +40,4 @@ export const querySingleCampItemData = `*[_type == 'camp_item' && camp_item_slug
   camp_item_long_description,
   camp_item_program,
   camp_item_price_details
-}`
+}`;

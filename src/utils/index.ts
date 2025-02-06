@@ -1,1 +1,1 @@
-export { urlForImage } from './url-for-image'
+export { urlForImage } from './url-for-image';

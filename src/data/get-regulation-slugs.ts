@@ -1,7 +1,7 @@
-import { fetchSanityData } from '.'
-import { queryRegulationsSlugs } from './queries'
+import { fetchSanityData } from '.';
+import { queryRegulationsSlugs } from './queries';
 
 export async function getRegulationSlugs() {
-  const data = await fetchSanityData(queryRegulationsSlugs)
-  return data
+	const data = await fetchSanityData(queryRegulationsSlugs);
+	return data;
 }

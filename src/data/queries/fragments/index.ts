@@ -1,1 +1,1 @@
-export { bannerFragment } from './banner-fragment'
+export { bannerFragment } from './banner-fragment';

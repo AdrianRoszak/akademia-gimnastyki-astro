@@ -1,6 +1,6 @@
-import { getCurrentDate } from '..'
-import { bannerFragment } from './fragments'
-import { campsItemFragment } from './query-camps-page-data'
+import { getCurrentDate } from '..';
+import { bannerFragment } from './fragments';
+import { campsItemFragment } from './query-camps-page-data';
 
 export const queryHomePage = `*[_type == 'home'] {
   home_banner_selector {
@@ -80,4 +80,4 @@ export const queryHomePage = `*[_type == 'home'] {
     meta_data_site_title,
     meta_data_site_description  
   }
-}`
+}`;

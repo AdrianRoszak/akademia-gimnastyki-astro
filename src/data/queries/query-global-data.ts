@@ -1,4 +1,4 @@
-import { defineQuery } from 'groq'
+import { defineQuery } from 'groq';
 
 export const queryGlobalData = defineQuery(`*[_type == 'company_data'] {
   company_data_name,
@@ -6,4 +6,4 @@ export const queryGlobalData = defineQuery(`*[_type == 'company_data'] {
   company_data_phone,
   company_data_email,
   company_data_account_details
-}`)
+}`);

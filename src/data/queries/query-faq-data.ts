@@ -11,4 +11,4 @@ export const queryFaqData = `*[_type == 'faq'] {
     meta_data_site_title,
     meta_data_site_description
   }
-}`
+}`;

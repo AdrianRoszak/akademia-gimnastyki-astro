@@ -11,4 +11,4 @@ export const bannerFragment = `
     registration_item_name,
     registration_code,
   },
-`
+`;
