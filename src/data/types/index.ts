@@ -11,8 +11,8 @@ export type CompanyAccountDetails = {
 
 export interface GlobalData {
 	companyName: string;
-	companyLogo: imagetype | null;
+	companyLogo: ImageType | null;
 	companyPhone: string;
 	companyEmail: string;
-	companyAccountDetails: companyaccountdetails;
+	companyAccountDetails: CompanyAccountDetails;
 }
