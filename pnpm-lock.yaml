@@ -84,9 +84,6 @@ importers:
       lefthook:
         specifier: ^1.7.14
         version: 1.7.14
-      prettier:
-        specifier: ^3.4.2
-        version: 3.4.2
       stylelint:
         specifier: ^16.8.2
         version: 16.8.2(typescript@5.5.4)
