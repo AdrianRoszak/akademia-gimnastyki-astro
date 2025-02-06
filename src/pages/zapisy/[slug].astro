@@ -3,7 +3,10 @@ import Container from '../../components/atoms/Container.astro'
 import Layout from '../../layouts/Layout.astro'
 
 import Heading from '../../components/molecules/Heading.astro'
-import { type RegistrationPage, getRegistrationPage } from '../../data/get-registration-page'
+import {
+  type RegistrationPage,
+  getRegistrationPage,
+} from '../../data/get-registration-page'
 import { getRegistrationSlugs } from '../../data/get-registration-slugs'
 
 export async function getStaticPaths() {

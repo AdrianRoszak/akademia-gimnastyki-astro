@@ -36,8 +36,19 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params
-const { meta, name, description, image, longDescription, price, endDate, startDate, location, program, priceDetails } =
-  (await getSingleCampData(slug)) as CampItem
+const {
+  meta,
+  name,
+  description,
+  image,
+  longDescription,
+  price,
+  endDate,
+  startDate,
+  location,
+  program,
+  priceDetails,
+} = (await getSingleCampData(slug)) as CampItem
 ---
 
 <Layout title={meta.title} description={meta.description}>

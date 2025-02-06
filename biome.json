@@ -55,6 +55,11 @@
   "overrides": [
     {
       "include": ["*.astro"],
+      "formatter": {
+        "indentStyle": "space",
+        "indentWidth": 2,
+        "lineWidth": 80
+      },
       "linter": {
         "rules": {
           "style": {

@@ -10,8 +10,18 @@ import { type SummerCamps, getSummerCamps } from '../data/get-summer-camps-data'
 import Layout from '../layouts/Layout.astro'
 import { urlForImage } from '../utils'
 
-const { meta, name, description, sessions, image, longDescription, price, location, program, priceDetails } =
-  (await getSummerCamps()) as SummerCamps
+const {
+  meta,
+  name,
+  description,
+  sessions,
+  image,
+  longDescription,
+  price,
+  location,
+  program,
+  priceDetails,
+} = (await getSummerCamps()) as SummerCamps
 ---
 
 <Layout title={meta.title} description={meta.description}>

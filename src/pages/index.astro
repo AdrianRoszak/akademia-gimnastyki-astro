@@ -12,7 +12,8 @@ import SectionTeam from '../components/templates/SectionTeam.astro'
 import SectionValues from '../components/templates/SectionValues.astro'
 import Layout from '../layouts/Layout.astro'
 
-const { values, banners, about, activities, camps, events, team, metaData } = (await getHomePageData()) as HomePage
+const { values, banners, about, activities, camps, events, team, metaData } =
+  (await getHomePageData()) as HomePage
 ---
 
 <Layout title={metaData.metaTitle} description={metaData.metaDescription}>
