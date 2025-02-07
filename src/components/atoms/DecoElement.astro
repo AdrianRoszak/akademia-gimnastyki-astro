@@ -1,18 +1,44 @@
 ---
+type CSSValue = `${number}${'px' | 'rem' | 'em' | '%'}`;
 
+type Props = {
+  position: {
+    top?: CSSValue;
+    bottom?: CSSValue
+    left?: CSSValue;
+    right?: CSSValue
+  }
+  size: {
+    width: CSSValue;
+    height: CSSValue
+  }
+  color: 'accent-1' | "accent-2" | "accent-3"
+}
+
+const { position, size, color } = Astro.props;
+
+const { width, height } = size;
+const { top = 'unset', bottom = 'unset', left = 'unset', right= 'unset' } = position;
 ---
 
-<div class=" deco-element"></div>
+<div 
+  class:list={["deco-element"]} 
+  style={{
+    top, 
+    left, 
+    right, 
+    bottom, 
+    width, 
+    height,
+    backgroundColor: `var(--weirdo-color-${color})`
+  }}>
+  </div>
       
 
 
 <style>
   .deco-element {
     position: absolute;
-    top: 50%;
-    left: 0;
-    width: 400px;
-    height: 400px;
     background-color: var(--weirdo-color-accent-2);
   }
 </style>
