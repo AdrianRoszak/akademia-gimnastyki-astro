@@ -14,11 +14,11 @@ const { title, teamMembers } = Astro.props.data as HomePage['team']
   <DecoElement 
     position={{
       top: '20%', 
-      right: '20%'
+      right: '5%'
     }}
     size={{
-      width: '125px',
-      height: '125px'
+      width: '75px',
+      height: '75px'
     }}
     color="accent-1"
   />
@@ -65,7 +65,7 @@ import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs
       delay: 4000,
     },
     slidesPerView: 1,
-    spaceBetween: 20,
+    spaceBetween: 0,
     breakpoints: {
       500: {
         slidesPerView: 2
