@@ -40,5 +40,9 @@ const { top = 'unset', bottom = 'unset', left = 'unset', right= 'unset' } = posi
   .deco-element {
     position: absolute;
     background-color: var(--weirdo-color-accent-2);
+
+    @media(max-width: 512px) {
+      display: none;
+    }
   }
 </style>
