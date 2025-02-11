@@ -9,6 +9,8 @@ import Footer from '../components/organisms/Footer.astro'
 import Header from '../components/organisms/Header.astro'
 import { getGlobalData } from '../data/get-global-data'
 
+import { loadEnv } from 'vite';
+
 interface Props {
   title: string
   description: string
@@ -19,6 +21,10 @@ const globalData = await getGlobalData()
 const { title, description } = Astro.props
 const pathname = Astro.url.pathname.replace(/^\/+/, '')
 const siteUrl = `${Astro.site}${pathname}`
+
+const {
+	GOOGLE_TAG_MANAGER
+} = loadEnv(import.meta.env.MODE, process.cwd(), '');
 ---
 
 <!doctype html>
@@ -49,6 +55,16 @@ const siteUrl = `${Astro.site}${pathname}`
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" sizes="96x96" type="image/png" href="/favicon-96x96.png" />
 		<meta name="generator" content={Astro.generator} />
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEC6VR9KL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', GOOGLE_TAG_MANAGER);
+</script>
 		<AstroFont
       config={[
         {
