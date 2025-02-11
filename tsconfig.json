@@ -11,7 +11,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -22,7 +22,8 @@
       "@/*": ["./src/*"],
       "@/components/*": ["./src/components/*"],
       "@/styles/*": ["./src/styles/*"]
-    }
+    },
+    "jsxImportSource": "react"
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

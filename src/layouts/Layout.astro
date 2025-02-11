@@ -10,6 +10,7 @@ import Header from '../components/organisms/Header.astro'
 import { getGlobalData } from '../data/get-global-data'
 
 import { loadEnv } from 'vite';
+import CookieBanner from '../components/molecules/react-components/cookie-banner.jsx'
 
 interface Props {
   title: string
@@ -96,6 +97,7 @@ const {
     />
 	</head>
 	<body>
+    <CookieBanner client:only />
     <Header data={globalData} />
 		<slot />
     <Footer data={globalData} />
