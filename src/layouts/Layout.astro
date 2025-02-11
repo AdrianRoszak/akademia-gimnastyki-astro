@@ -22,10 +22,6 @@ const globalData = await getGlobalData()
 const { title, description } = Astro.props
 const pathname = Astro.url.pathname.replace(/^\/+/, '')
 const siteUrl = `${Astro.site}${pathname}`
-
-const {
-	GOOGLE_TAG_MANAGER
-} = loadEnv(import.meta.env.MODE, process.cwd(), '');
 ---
 
 <!doctype html>
@@ -64,7 +60,7 @@ const {
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', GOOGLE_TAG_MANAGER);
+      gtag('config', 'G-0YEC6VR9KL');
 </script>
 		<AstroFont
       config={[
