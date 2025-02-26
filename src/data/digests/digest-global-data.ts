@@ -19,7 +19,7 @@ function digestAccount(source): GlobalData['companyAccountDetails'] | null {
 	return {
 		companyAccountName: source.bank_account_item_name,
 		companyAccountReceiver: source.bank_account_item_receiver_name,
-		companyAccountDescription: `W tytule ${source.bank_account_item_description}`,
+		companyAccountDescription: source.bank_account_item_description,
 		companyAccountNumber: source.bank_account_item_number,
 	};
 }

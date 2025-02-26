@@ -3,6 +3,7 @@ import type { GlobalData } from '../../data/types'
 import Container from '../atoms/Container.astro'
 import Mail from '../atoms/icons/MailIcon.astro'
 import Phone from '../atoms/icons/Phone.astro'
+import AccountsBlock from '../molecules/AccountsBlock.astro'
 import Heading from '../molecules/Heading.astro'
 
 interface Props {
@@ -35,14 +36,9 @@ const { data } = Astro.props
           <div class="items-wrap">
             <a class="link" href='/regulamin-klubu-sportowego-akademia-gimnastyki'>Regulamin Klubu Sportowego Akademia Gimnastyki</a>
           </div>
-          <div>
             {data.companyAccountDetails && (
-              <p><strong>Dane do przelewu:</strong></p>
-              <p>{data.companyAccountDetails[0].companyAccountReceiver}</p>
-              <p>Nr konta do wpłat: {data.companyAccountDetails[0].companyAccountNumber}</p>
-              <p>{data.companyAccountDetails[0].companyAccountDescription}</p>
+              <AccountsBlock data={data} />
             )}
-            </div>
         </div>
       </div>  
   </Container>
@@ -93,12 +89,14 @@ const { data } = Astro.props
   }
 
   .grid-wrapper {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2rem;
+    
     @media(min-width: 768px) {
+      display: grid;
       grid-template-columns: 1fr 1fr;
+      gap: 1rem;
     }
   }
 
@@ -106,6 +104,6 @@ const { data } = Astro.props
     font-size: var(--weirdo-text-md);
     border-top: 1px solid var(--weirdo-color-black);
     margin-top: 2rem;
-    padding-top: 1rem;
+    padding-top: 2rem;
   }
 </style>

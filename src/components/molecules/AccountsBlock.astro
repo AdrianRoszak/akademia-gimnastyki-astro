@@ -1,0 +1,30 @@
+---
+
+const data = Astro.props.data
+---
+
+<div class="accounts-wrapper">
+    {data.companyAccountDetails && data.companyAccountDetails.map(account => (
+        <div>
+            <p class="accounts-wrapper__text"><strong>{account.companyAccountName}</strong></p>
+            <p class="accounts-wrapper__text"><small>Nazwa odbiorcy:</small>{account.companyAccountReceiver}</p>
+            <p class="accounts-wrapper__text"><small>Nr konta do wpłat:</small>{account.companyAccountNumber}</p>
+            <p class="accounts-wrapper__text"><small>W tytule:</small>{account.companyAccountDescription}</p>
+        </div>
+    ))}
+  </div>
+
+  <style>
+    .accounts-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+		.accounts-wrapper__text {
+			small {
+				display: inline-block;
+				margin-right: 0.5rem;
+			}
+		}
+  </style>
