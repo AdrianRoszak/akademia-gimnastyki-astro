@@ -5,6 +5,7 @@ export type ImageType = {
 
 export type CompanyAccountDetails = {
 	companyAccountName: string;
+	companyAccountReceiver: string;
 	companyAccountDescription: string;
 	companyAccountNumber: string;
 };
@@ -14,5 +15,5 @@ export interface GlobalData {
 	companyLogo: ImageType | null;
 	companyPhone: string;
 	companyEmail: string;
-	companyAccountDetails: CompanyAccountDetails;
+	companyAccountDetails: CompanyAccountDetails | null;
 }

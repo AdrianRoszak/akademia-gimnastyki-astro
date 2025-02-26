@@ -38,9 +38,9 @@ const { data } = Astro.props
           <div>
             {data.companyAccountDetails && (
               <p><strong>Dane do przelewu:</strong></p>
-              <p>{data.companyAccountDetails.companyAccountName}</p>
-              <p>Nr konta do wpłat: {data.companyAccountDetails.companyAccountNumber}</p>
-              <p>{data.companyAccountDetails.companyAccountDescription}</p>
+              <p>{data.companyAccountDetails[0].companyAccountReceiver}</p>
+              <p>Nr konta do wpłat: {data.companyAccountDetails[0].companyAccountNumber}</p>
+              <p>{data.companyAccountDetails[0].companyAccountDescription}</p>
             )}
             </div>
         </div>

@@ -8,10 +8,18 @@ export function digestGlobalData(source): GlobalData {
 		companyLogo: secureImage(source[0].company_data_logo),
 		companyPhone: source[0].company_data_phone,
 		companyEmail: source[0].company_data_email,
-		companyAccountDetails: {
-			companyAccountName: source[0].company_data_account_details.company_data_account_details_name,
-			companyAccountDescription: `W tytule ${source[0].company_data_account_details.company_data_account_details_description}`,
-			companyAccountNumber: source[0].company_data_account_details.company_data_account_number,
-		},
+		companyAccountDetails: source[0].company_data_accounts.map(digestAccount),
+	};
+}
+
+//@ts-ignore
+function digestAccount(source): GlobalData['companyAccountDetails'] | null {
+	if (!source) return null;
+
+	return {
+		companyAccountName: source.bank_account_item_name,
+		companyAccountReceiver: source.bank_account_item_receiver_name,
+		companyAccountDescription: `W tytule ${source.bank_account_item_description}`,
+		companyAccountNumber: source.bank_account_item_number,
 	};
 }

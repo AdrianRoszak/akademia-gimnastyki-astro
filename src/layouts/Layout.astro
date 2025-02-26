@@ -21,6 +21,7 @@ const globalData = await getGlobalData()
 const { title, description } = Astro.props
 const pathname = Astro.url.pathname.replace(/^\/+/, '')
 const siteUrl = `${Astro.site}${pathname}`
+
 ---
 
 <!doctype html>
