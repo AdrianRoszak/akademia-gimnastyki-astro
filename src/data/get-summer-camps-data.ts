@@ -4,7 +4,7 @@ import { secureImage } from './digests/utils';
 
 export async function getSummerCamps(): Promise<SummerCamps | null> {
 	const data = await fetchSanityData(querySummerCampsData);
-	const digestedData = digestSummerCamps(data[0]);
+	const digestedData = digestSummerCamps(data[data.length - 1]);
 	return digestedData;
 }
 

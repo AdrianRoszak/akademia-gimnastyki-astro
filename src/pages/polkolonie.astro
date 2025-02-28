@@ -22,6 +22,7 @@ const {
   program,
   priceDetails,
 } = (await getSummerCamps()) as SummerCamps
+
 ---
 
 <Layout title={meta.title} description={meta.description}>
@@ -214,6 +215,10 @@ const {
 
   .long-description-wrapper {
     padding-top: 4rem;
+
+    h3, h4 {
+      margin-bottom: 1rem;
+    }
   }
 
   .body-wrapper {
