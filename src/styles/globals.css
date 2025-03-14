@@ -16,6 +16,14 @@ main {
     margin-bottom: 1em;
   }
 
+  h3 {
+    margin-bottom: 0.5em;
+  }
+
+  h4 {
+    margin-bottom: 0.5em;
+  }
+
   p {
     margin-bottom: 1em;
     text-wrap: balance;
