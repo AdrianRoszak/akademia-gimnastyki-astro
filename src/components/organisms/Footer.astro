@@ -34,7 +34,8 @@ const { data } = Astro.props
       <div class="regulations-wrapper">
         <div class="grid-wrapper">
           <div class="items-wrap">
-            <a class="link" href='/regulamin-klubu-sportowego-akademia-gimnastyki'>Regulamin Klubu Sportowego Akademia Gimnastyki</a>
+            <a class="link" href='/regulamin-klubu-sportowego-akademia-gimnastyki'>Regulamin KS Akademia Gimnastyki</a>
+            <a class="link" href='/polityka-prywatnosci'>Polityka prywatności</a>
           </div>
             {data.companyAccountDetails && (
               <AccountsBlock data={data} />
@@ -80,6 +81,7 @@ const { data } = Astro.props
   .items-wrap {
     display: flex;
     align-items: flex-end;
+    gap: 1rem;
   }
 
   .items-wrapper {
@@ -105,5 +107,9 @@ const { data } = Astro.props
     border-top: 1px solid var(--weirdo-color-black);
     margin-top: 2rem;
     padding-top: 2rem;
+
+    .link {
+      font-size: calc(0.8 * var(--weirdo-text-md));
+    }
   }
 </style>

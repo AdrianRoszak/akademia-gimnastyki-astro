@@ -8,7 +8,7 @@ import Heading from '../components/molecules/Heading.astro'
 import type { RegulationData } from '../data/digests/digest-regulation-data'
 import Layout from '../layouts/Layout.astro'
 
-//TODO: implement getStaticPaths
+// TODO: implement getStaticPaths
 // export async function getStaticPaths() {
 //   async function obtainRegulationSlugs() {
 //     const slugs = await getRegulationSlugs()
@@ -33,12 +33,12 @@ import Layout from '../layouts/Layout.astro'
 //   return [...slugs]
 // }
 
-const CURRENT_SLUG = 'regulamin-klubu-sportowego-akademia-gimnastyki'
-const { title, body } = (await getRegulationData(CURRENT_SLUG)) as RegulationData
+const CURRENT_SLUG = 'polityka-prywatnosci'
 
+const { title, body } = (await getRegulationData(CURRENT_SLUG)) as RegulationData
 ---
 
-<Layout title={title} description="Regulamin">
+<Layout title={title} description="Polityka prywatności">
   <main>
     <section>
       <Container>
