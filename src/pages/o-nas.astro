@@ -1,0 +1,27 @@
+---
+import { getAboutPageData } from '../data/get-about-page-data'
+
+import Banner from '../components/organisms/Banner.astro'
+import BannerSlider from '../components/organisms/BannerSlider.astro'
+import SectionTeam from '../components/templates/SectionTeam.astro'
+import type { AboutPage } from '../data/digests/digest-about-page-data'
+import Layout from '../layouts/Layout.astro'
+
+const { banners, team, metaData } =
+  (await getAboutPageData()) as AboutPage
+---
+
+<Layout title={metaData.metaTitle} description={metaData.metaDescription}>
+	<main>
+		<section id="about" data-weirdo-nav-target="about">
+		{banners.length > 1 
+			? <BannerSlider data={banners} />
+		 	: <Banner data={banners[0]} />
+		}
+		</section>
+		<!-- {values && (
+			<SectionValues data={values}	/>
+		)} -->
+		{team && (<SectionTeam data={team} />)}
+	</main>
+</Layout>

@@ -117,19 +117,19 @@ export function digestHomePageData(source): HomePage | null {
 	};
 }
 
-type TeamMember = {
+export type TeamMember = {
 	name: string;
 	bio: PortableTextBlock | null;
 	image: ImageType;
 };
 
-type Team = {
+export type Team = {
 	title: string;
 	teamMembers: TeamMember[] | null;
 };
 
 //@ts-ignore
-function digestTeamMember(source): TeamMember | null {
+export function digestTeamMember(source): TeamMember | null {
 	if (!source) return null;
 
 	return {
@@ -140,7 +140,7 @@ function digestTeamMember(source): TeamMember | null {
 }
 
 //@ts-ignore
-function digestTeam(source): Team | null {
+export function digestTeam(source): Team | null {
 	if (!source) return null;
 	return {
 		title: source.team_block_title,
@@ -149,12 +149,12 @@ function digestTeam(source): Team | null {
 }
 
 //@ts-expect-error
-function digestCamps(source): CampType[] {
+export function digestCamps(source): CampType[] {
 	// @ts-expect-error
 	return source.camp_selector_list.map((camp) => digestCampItem(camp));
 }
 
-function digestDate(source: string): DateTimeType {
+export function digestDate(source: string): DateTimeType {
 	const date = new Date(source);
 
 	return {
@@ -172,7 +172,7 @@ function digestDate(source: string): DateTimeType {
 }
 
 //@ts-ignore
-function digestEvents(source): HomePage['events'] {
+export function digestEvents(source): HomePage['events'] {
 	return {
 		title: source.events_block_heading,
 		lead: source.events_block_lead,
@@ -252,7 +252,7 @@ export function digestBanners(source): BannerType[] {
 }
 
 //@ts-ignore
-function digestValues(source) {
+export function digestValues(source) {
 	return {
 		title: source.values_block_title,
 		lead: source.values_block_lead,
