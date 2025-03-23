@@ -5,6 +5,7 @@ import Heading from '../components/molecules/Heading.astro'
 import type { FaqData } from '../data/digests/digest-faq-data'
 import { getFaqData } from '../data/get-faq-data'
 import Layout from '../layouts/Layout.astro'
+import { highlightRandomWord } from '../utils'
 
 const { title, lead, questions, meta } = (await getFaqData()) as FaqData
 ---
@@ -14,8 +15,8 @@ const { title, lead, questions, meta } = (await getFaqData()) as FaqData
     <section>
       <Container>
         <div class="heading-wrapper">
-          <Heading as="h1" text={title} size='xl' />
-          <p>{lead}</p>
+          <Heading as="h1" text={highlightRandomWord(title)} size='xl' />
+          <p class="lead-color">{lead}</p>
         </div>
       {questions.map(({ question, answer }, index) => (
         <details class="faq-details">
