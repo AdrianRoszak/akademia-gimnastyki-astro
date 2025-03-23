@@ -4,13 +4,14 @@ import { highlightRandomWord } from '../../utils'
 import Container from '../atoms/Container.astro'
 import DecoElement from '../atoms/DecoElement.astro'
 import Heading from '../molecules/Heading.astro'
-import TeamMemeberTile from '../molecules/TeamMemberTile.astro'
+import TeamSlider from '../organisms/TeamSlider.astro'
 
 interface Props {
   data: HomePage['team']
+  variant?: 'default' | 'slider'
 }
 
-const { data } = Astro.props
+const { data, variant = 'slider' } = Astro.props
 
 if(!data) {
   throw new Error('No data provided for SectionTeam')
@@ -48,56 +49,14 @@ data.title = highlightRandomWord(data.title);
       <div>
         <Heading as="h1" size="xl" text={data.title} />
       </div>
-      <div class:list={["swiper", "tiles-swiper"]}>
-        <div class="swiper-wrapper">
-          {data.teamMembers && (
-            data.teamMembers.map((item) => {
-              return (
-                <div class="swiper-slide">
-                  <TeamMemeberTile data={item} />
-                </div>
-              )  
-            })
-          )}
-        </div>
-      </div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
+      {variant === 'slider' && (
+        <TeamSlider items={data.teamMembers} />
+      )}
     </div>
   </Container>
 </section>
 
-<script type="module">
-import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
 
-  new Swiper('.tiles-swiper', {
-    autoplay: {
-      delay: 4000,
-    },
-    slidesPerView: 1,
-    spaceBetween: 0,
-    breakpoints: {
-      500: {
-        slidesPerView: 2
-      },
-      720: {
-        slidesPerView: 3,
-      },
-      920: {
-        slidesPerView: 4
-      },
-      1366: {
-        slidesPerView: 4
-      }
-    },
-    speed: 500,
-    loop: true,
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-  })
-</script>
 
 <style>
   .section {
@@ -110,37 +69,6 @@ import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs
     
     @media(min-width: 768px) {
       padding-top: 6rem;
-    }
-  }
-
-
-  .swiper {
-    width: 100%;
-    height: 100%;
-    margin-top: 4rem;
-  }
-
-  .swiper-button-next,
-  .swiper-button-prev {
-    color: var(--weirdo-color-white);
-    background-color: var(--weirdo-color-accent-1);
-    border-radius: 50%;
-    width: 2.5rem;
-    height: 2.5rem;
-  transition: all var(--weirdo-animation-duration);
-
-
-    &::after {
-      position: absolute;
-      font-size: 1rem;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    &:hover {
-      transform: scale(1.1);
-      background-color: var(--weirdo-color-accent-1-80);
     }
   }
 </style>
