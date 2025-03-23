@@ -4,6 +4,7 @@ import { highlightRandomWord } from '../../utils'
 import Container from '../atoms/Container.astro'
 import DecoElement from '../atoms/DecoElement.astro'
 import Heading from '../molecules/Heading.astro'
+import TeamMemeberTile from '../molecules/TeamMemberTile.astro'
 import TeamSlider from '../organisms/TeamSlider.astro'
 
 interface Props {
@@ -11,7 +12,7 @@ interface Props {
   variant?: 'default' | 'slider'
 }
 
-const { data, variant = 'slider' } = Astro.props
+const { data, variant = 'default' } = Astro.props
 
 if(!data) {
   throw new Error('No data provided for SectionTeam')
@@ -24,7 +25,7 @@ data.title = highlightRandomWord(data.title);
 <section class="section">
   <DecoElement 
     position={{
-      top: '20%', 
+      top: '10%', 
       right: '5%'
     }}
     size={{
@@ -46,11 +47,17 @@ data.title = highlightRandomWord(data.title);
   />
   <Container>
     <div class="team-section-wrapper">
-      <div>
+      <div data-animation="slide-left">
         <Heading as="h1" size="xl" text={data.title} />
       </div>
-      {variant === 'slider' && (
+      {variant === 'slider' ? (
         <TeamSlider items={data.teamMembers} />
+      ) : (
+        <div class="tiles-wrapper">
+          {data!.teamMembers!.map((member) => (
+            <TeamMemeberTile data={member} />
+          ))}
+        </div>
       )}
     </div>
   </Container>
@@ -69,6 +76,28 @@ data.title = highlightRandomWord(data.title);
     
     @media(min-width: 768px) {
       padding-top: 6rem;
+    }
+  }
+
+  .tiles-wrapper {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 4rem 0;
+    padding-top: 4rem;
+
+    @media(min-width: 500px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @media (min-width: 720px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (min-width: 920px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    @media (min-width: 1366px) {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 </style>

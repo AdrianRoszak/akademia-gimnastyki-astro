@@ -7,7 +7,7 @@ const { image, name, bio } = Astro.props.data;
 ---
 
 <div class:list={["team-member-tile"]}>
-  <div class="image-wrapper">
+  <div class="image-wrapper" data-animation="fade-down">
     <Image
       src={urlForImage(image.source)
         .width(600)
@@ -20,8 +20,10 @@ const { image, name, bio } = Astro.props.data;
     />
   </div>
   <div class="text-wrapper">
-    <Heading as="h2" text={name} size="md" />
-    <p>{bio}</p>
+    <div data-animation="fade-down">
+      <Heading as="h2" text={name} size="md" />
+    </div>
+    <p data-animation="fade-down">{bio}</p>
   </div>
 </div>
 
@@ -32,7 +34,8 @@ const { image, name, bio } = Astro.props.data;
   }
 
   .image-wrapper {
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
     position: relative;
 
     &::after {
@@ -71,12 +74,12 @@ const { image, name, bio } = Astro.props.data;
       height: 100%;
       transform: translateX(-50%);
       background: linear-gradient(0deg, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.05) 100%);
-      
+      animation: inherit;
+      opacity: 0;
     }
 
     h2 {
       margin-bottom: 0.5em;
-      /* color: var(--weirdo-color-accent-2); */
     }
 
     p {

@@ -38,3 +38,12 @@ const { values, banners, about, activities, camps, events, team, metaData } =
 		{team && (<SectionTeam data={team} variant="slider" />)}
 	</main>
 </Layout>
+
+<script>
+  import { applyFadeDownAnimation, applySlideLeftAnimation } from '../utils/animations';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    applyFadeDownAnimation();
+    applySlideLeftAnimation();
+  });
+</script>

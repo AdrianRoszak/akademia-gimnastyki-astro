@@ -145,3 +145,7 @@
   }
 }
 
+.pseudo-visible::after {
+  opacity: 1;
+}
+

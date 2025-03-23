@@ -54,33 +54,33 @@ const items = Astro.props.items
 </style>
 
 <script type="module">
-  import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
+  import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
   
-    new Swiper('.tiles-swiper', {
-      autoplay: {
-        delay: 4000,
+  const swiper = new Swiper('.tiles-swiper', {
+    autoplay: {
+      delay: 4000,
+    },
+    slidesPerView: 1,
+    spaceBetween: 0,
+    breakpoints: {
+      500: {
+        slidesPerView: 2
       },
-      slidesPerView: 1,
-      spaceBetween: 0,
-      breakpoints: {
-        500: {
-          slidesPerView: 2
-        },
-        720: {
-          slidesPerView: 3,
-        },
-        920: {
-          slidesPerView: 4
-        },
-        1366: {
-          slidesPerView: 5
-        }
+      720: {
+        slidesPerView: 3,
       },
-      speed: 500,
-      loop: true,
-      navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-    })
-  </script>
+      920: {
+        slidesPerView: 4
+      },
+      1366: {
+        slidesPerView: 5
+      }
+    },
+    speed: 500,
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    }
+  });
+</script>

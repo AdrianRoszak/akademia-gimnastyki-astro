@@ -28,22 +28,20 @@ data.heading = highlightRandomWord(data.heading);
 <style>
   .wrapper {
     display: grid;
-    grid-template-columns: 40% 1fr;
-    gap: 15%;
+    
+    @media (min-width: 920px) {
+      grid-template-columns: 40% 1fr;
+      gap: 15%;
+    }
   }
 
   .lead-wrapper {
-    margin-top: 2rem;
+    margin-top: 1rem;
+    
+    @media (min-width: 920px) {
+      margin-top: 2rem;
+    }
   }
 
 </style>
-
-<script>
-  import { applyFadeDownAnimation, applySlideLeftAnimation } from '../../utils/animations';
-
-  document.addEventListener('DOMContentLoaded', () => {
-    applyFadeDownAnimation();
-    applySlideLeftAnimation();
-  });
-</script>
 
