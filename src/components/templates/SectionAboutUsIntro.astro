@@ -12,11 +12,11 @@ data.heading = highlightRandomWord(data.heading);
 
 <section>
   <Container>
-    <div data-animation="fade-down">
+    <div data-animation="slide-left">
       <Heading text={data.heading} as="h2" size="xl" />
     </div>      
     <div class="wrapper">
-        <p class="lead-wrapper" data-animation="fade-down">{data.lead}</p>
+      <p class:list={["lead-wrapper", "lead-color"]} data-animation="fade-down">{data.lead}</p>
       <div class="portable-text-wrapper" data-animation="fade-down">
         <PortableText value={data.body}/>
       </div>
@@ -34,16 +34,16 @@ data.heading = highlightRandomWord(data.heading);
 
   .lead-wrapper {
     margin-top: 2rem;
-    color: var(--weirdo-color-dark-grey)
   }
 
 </style>
 
 <script>
-  import { applyFadeDownAnimation } from '../../utils/animations';
+  import { applyFadeDownAnimation, applySlideLeftAnimation } from '../../utils/animations';
 
   document.addEventListener('DOMContentLoaded', () => {
     applyFadeDownAnimation();
+    applySlideLeftAnimation();
   });
 </script>
 

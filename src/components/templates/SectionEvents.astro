@@ -19,7 +19,7 @@ const { data } = Astro.props
   <Container>
     <div class="heading-wrapper">
       <Heading as="h1" size="xl" text={data.title} />
-      <p>{data.lead}</p>
+      <p class="lead-color">{data.lead}</p>
     </div>
     {!data.events || data.events.length === 0 ? (
       <p>Brak wydarzeń do wyświetlenia</p>

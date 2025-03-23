@@ -1,15 +1,16 @@
 ---
 import { PortableText } from 'astro-portabletext'
 import Container from '../../components/atoms/Container.astro'
-import CampTile from '../../components/molecules/CampTile.astro'
 import Heading from '../../components/molecules/Heading.astro'
 import CampsGrid from '../../components/organisms/CampsGrid.astro'
 import type { CampsData } from '../../data/digests/digest-camps-data'
 import { getCampsData } from '../../data/get-camps-data'
 import Layout from '../../layouts/Layout.astro'
+import { highlightRandomWord } from '../../utils'
 
 const { meta, intro, upcomingCamps, pastCamps, title } =
   (await getCampsData()) as CampsData
+
 ---
 
 <Layout title={meta.title} description={meta.description}>
@@ -17,7 +18,7 @@ const { meta, intro, upcomingCamps, pastCamps, title } =
     <section class="camps-section-intro">
       <Container>
         <div class="heading-wrapper">
-          <Heading as="h1" size='xl' text={title} />
+          <Heading as="h1" size='xl' text={highlightRandomWord(title)} />
           <div class="portable-text-wrapper">
             <PortableText value={intro}/>
           </div>

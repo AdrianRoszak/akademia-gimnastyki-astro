@@ -9,12 +9,11 @@ const { data } = Astro.props
   <Container>
       <ul class="tiles-wrapper">
         {data.values.map((value, index) => {
-              
               return (
               <li class="tile-wrapper">
                 <small>0{index+1}</small>
                 <Heading as="h2" size="md" text={value.title} />
-                <p>{value.description}</p>
+                <p class="lead-color">{value.description}</p>
               </li>
               )
             })}

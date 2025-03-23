@@ -1,13 +1,23 @@
 ---
 import type { HomePage } from '../../data/digests/digest-home-page-data'
+import { highlightRandomWord } from '../../utils'
 import Container from '../atoms/Container.astro'
 import DecoElement from '../atoms/DecoElement.astro'
 import Heading from '../molecules/Heading.astro'
 import TeamMemeberTile from '../molecules/TeamMemberTile.astro'
 
-//TODO: fix this
-//@ts-expect-error
-const { title, teamMembers } = Astro.props.data as HomePage['team']
+interface Props {
+  data: HomePage['team']
+}
+
+const { data } = Astro.props
+
+if(!data) {
+  throw new Error('No data provided for SectionTeam')
+}
+
+data.title = highlightRandomWord(data.title);
+
 ---
 
 <section class="section">
@@ -36,12 +46,12 @@ const { title, teamMembers } = Astro.props.data as HomePage['team']
   <Container>
     <div class="team-section-wrapper">
       <div>
-        <Heading as="h1" size="xl" text={title} />
+        <Heading as="h1" size="xl" text={data.title} />
       </div>
       <div class:list={["swiper", "tiles-swiper"]}>
         <div class="swiper-wrapper">
-          {teamMembers && (
-            teamMembers.map((item) => {
+          {data.teamMembers && (
+            data.teamMembers.map((item) => {
               return (
                 <div class="swiper-slide">
                   <TeamMemeberTile data={item} />
@@ -77,15 +87,11 @@ import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs
         slidesPerView: 4
       },
       1366: {
-        slidesPerView: 5
+        slidesPerView: 4
       }
     },
     speed: 500,
     loop: true,
-    // effect: 'fade',
-    // fadeEffect: {
-    //   crossFade: true
-    // },
     navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
@@ -116,7 +122,6 @@ import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs
 
   .swiper-button-next,
   .swiper-button-prev {
-    /* position: relative; */
     color: var(--weirdo-color-white);
     background-color: var(--weirdo-color-accent-1);
     border-radius: 50%;
@@ -138,15 +143,4 @@ import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs
       background-color: var(--weirdo-color-accent-1-80);
     }
   }
-
-  /* .swiper-button-next {
-    @media (max-width: 768px) {
-      background: var(--weirdo-color-white);
-      color: var(--weirdo-color-accent-1);
-
-      &:active, &:focus {
-        background: var(--weirdo-color-white);
-      }
-    }
-  } */
 </style>

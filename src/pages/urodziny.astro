@@ -10,7 +10,7 @@ import Banner from '../components/organisms/Banner.astro'
 import type { BirthdayData } from '../data/digests/digest-birthday-data'
 import { getBirthdayData } from '../data/get-birthday-data'
 import Layout from '../layouts/Layout.astro'
-import { urlForImage } from '../utils'
+import { highlightRandomWord, urlForImage } from '../utils'
 
 const { meta, banners, intro, priceSection, locationSection } =
   (await getBirthdayData()) as BirthdayData
@@ -30,7 +30,7 @@ const { meta, banners, intro, priceSection, locationSection } =
       <Container>
         {intro && (
           <div class:list={["intro-wrapper"]}>
-            <Heading as='h1' size='xl' text="Urodziny z Akademią Gimnastyki" />
+            <Heading as='h1' size='xl' text={highlightRandomWord("Urodziny z Akademią Gimnastyki")} />
             <div class:list={["portable-text-wrapper"]}>
               <PortableText value={intro} />
             </div>
@@ -77,7 +77,7 @@ const { meta, banners, intro, priceSection, locationSection } =
     <section class="location-section">
       <Container>
         <div class="heading-wrapper">
-          <Heading text={locationSection.heading} as='h1' size='xl' />
+          <Heading text={highlightRandomWord(locationSection.heading)} as='h1' size='xl' />
         </div>
         {locationSection.locations && (
         <div class="locations-grid">
@@ -211,13 +211,13 @@ const { meta, banners, intro, priceSection, locationSection } =
     &::before {
       background: var(--weirdo-color-accent-2);
       top: 0;
-      left: 0;
+      right: 100%;
     }
 
     &::after {
       background: var(--weirdo-color-accent-1);
       bottom: 0;
-      right: 0;
+      left: 100%;
     }
   }
 

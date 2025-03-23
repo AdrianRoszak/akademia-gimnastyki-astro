@@ -1,20 +1,27 @@
 ---
 import type { HomePage } from '../../data/digests/digest-home-page-data'
+import { highlightRandomWord } from '../../utils'
 import Container from '../atoms/Container.astro'
 import ArrowRight from '../atoms/icons/ArrowRight.astro'
 import Heading from '../molecules/Heading.astro'
 import CampsGrid from '../organisms/CampsGrid.astro'
 
-const { title, lead, camps } = Astro.props.data as HomePage['camps']
+const data = Astro.props.data as HomePage['camps']
+
+if (!data) {
+  throw new Error('No data provided for SectionCamps')
+}
+
+data.title = highlightRandomWord(data.title)
 ---
 
 <section class="section-camps">
   <Container>
     <div class="heading-wrapper">
-      <Heading as="h1" size="xl" text={title} />
-      <p>{lead}</p>
+      <Heading as="h1" size="xl" text={data.title} />
+      <p class="lead-color">{data.lead}</p>
     </div>
-    <CampsGrid data={camps} />
+    <CampsGrid data={data.camps} />
     <div class="button-wrapper">
       <a href="/obozy" class="weirdo-button--color-white">
         Zobacz wszystkie obozy
