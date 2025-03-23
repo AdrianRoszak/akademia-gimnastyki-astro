@@ -5,6 +5,10 @@ $black-h: 0;
 $black-s: 0%;
 $black-l: 1%;
 
+$dark-grey-h: 0;
+$dark-grey-s: 0%;
+$dark-grey-l: 65%;
+
 $grey-h: 0;
 $grey-s: 0%;
 $grey-l: 80%;
@@ -32,6 +36,7 @@ $accent-3-l: 56%;
 
 // default theme colors
 $brand-black: hsla($black-h, $black-s, $black-l, 1);
+$brand-dark-grey: hsla($dark-grey-h, $dark-grey-s, $dark-grey-l, 1);
 $brand-grey: hsla($grey-h, $grey-s, $grey-l, 1);
 $brand-light-grey: hsla($light-grey-h, $light-grey-s, $light-grey-l, 1);
 $brand-white: hsla($white-h, $white-s, $white-l, 1);
@@ -41,6 +46,7 @@ $accent-2: hsla($accent-2-h, $accent-2-s, $accent-2-l, 1);
 $accent-3: hsla($accent-3-h, $accent-3-s, $accent-3-l, 1);
 
 $color-black: $brand-black;
+$color-dark-grey: $brand-dark-grey;
 $color-grey: $brand-grey;
 $color-light-grey: $brand-light-grey;
 $color-white: $brand-white;
@@ -57,6 +63,7 @@ $color-accent-3-20: hsla($accent-3-h, $accent-3-s, $accent-3-l, 0.2);
 
 $colors: (
   "color-black": $color-black,
+  "color-dark-grey": $color-dark-grey,
   "color-grey": $color-grey,
   "color-light-grey": $color-light-grey,
   "color-white": $color-white,

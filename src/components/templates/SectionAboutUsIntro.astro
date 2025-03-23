@@ -1,0 +1,49 @@
+---
+import { PortableText } from "astro-portabletext";
+import { highlightRandomWord } from "../../utils";
+import Container from "../atoms/Container.astro";
+import Heading from "../molecules/Heading.astro";
+
+
+const { data } = Astro.props;
+
+data.heading = highlightRandomWord(data.heading);
+---
+
+<section>
+  <Container>
+    <div data-animation="fade-down">
+      <Heading text={data.heading} as="h2" size="xl" />
+    </div>      
+    <div class="wrapper">
+        <p class="lead-wrapper" data-animation="fade-down">{data.lead}</p>
+      <div class="portable-text-wrapper" data-animation="fade-down">
+        <PortableText value={data.body}/>
+      </div>
+    </div>
+  </Container>
+</section>
+
+
+<style>
+  .wrapper {
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    gap: 15%;
+  }
+
+  .lead-wrapper {
+    margin-top: 2rem;
+    color: var(--weirdo-color-dark-grey)
+  }
+
+</style>
+
+<script>
+  import { applyFadeDownAnimation } from '../../utils/animations';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    applyFadeDownAnimation();
+  });
+</script>
+

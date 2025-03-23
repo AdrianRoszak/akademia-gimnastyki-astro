@@ -13,7 +13,8 @@ export const queryAboutPage = `*[_type == 'about'] {
       location_address,
       location_image,
       location_map_link
-    },
+    }
+  },
   about_team_block {
     team_block_title,
     team_block_team_members {

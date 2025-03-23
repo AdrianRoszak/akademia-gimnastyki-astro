@@ -10,7 +10,11 @@ import {
 
 export interface AboutPage {
 	banners: BannerType[];
-	intro: TypedObject;
+	intro: {
+		heading: string;
+		lead: string;
+		body: TypedObject;
+	};
 	// values: {
 	// 	title: string;
 	// 	lead: string;
@@ -30,9 +34,15 @@ export interface AboutPage {
 export function digestAboutPageData(source): AboutPage | null {
 	if (!source) return null;
 
+	console.log(source[0]);
+
 	return {
 		banners: digestBanners(source[0].about_banner_selector),
-		intro: source[0].about_intro,
+		intro: {
+			heading: source[0].about_intro.about_us_block_heading,
+			lead: source[0].about_intro.about_us_block_lead,
+			body: source[0].about_intro.about_us_block_content,
+		},
 		// values: digestValues(source[0].about_values_block),
 		team: digestTeam(source[0].about_team_block),
 		//@ts-expect-error
