@@ -3,7 +3,6 @@ import { Image } from 'astro:assets'
 import type { HomePage } from '../../data/digests/digest-home-page-data'
 import { urlForImage } from '../../utils'
 import Container from '../atoms/Container.astro'
-import ArrowRight from '../atoms/icons/ArrowRight.astro'
 import BodyText from '../molecules/BodyText.astro'
 import Heading from '../molecules/Heading.astro'
 
@@ -23,24 +22,25 @@ const { data } = Astro.props
       {data.activities && data.activities.map((activity) => (
         <div class="activity-item" data-weirdo="activity-item">
             <div class="activity-text" data-weirdo="activity-text">
-              <div data-weirdo="activity-heading">
+              <div data-weirdo="activity-heading" data-animation="fade-down">
                 <Heading as="h2" size='lg' text={activity.name}/>
               </div>
-              <div class="portable-text-wrapper">
+              <div class="portable-text-wrapper" data-animation="fade-down">
                 <BodyText text={activity.description} />
               </div>
           </div>
           <div class="image-wrapper">
-            <div class="transparent-image-background" />
+            <div class="transparent-image-background"/>
             <Image
-            src={urlForImage(activity.image.source)
-            .width(1000)
-            .format("webp")
-            .quality(80)
-            .url()}
-              alt={activity.image.alt}
-              width={1000}
-              height={1000}
+              data-animation="fade"
+              src={urlForImage(activity.image.source)
+              .width(1000)
+              .format("webp")
+              .quality(80)
+              .url()}
+                alt={activity.image.alt}
+                width={1000}
+                height={1000}  
             />
           </div>
         </div>

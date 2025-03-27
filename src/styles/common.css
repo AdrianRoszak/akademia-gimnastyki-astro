@@ -92,7 +92,7 @@
 }
 
 .fade {
-  animation: fade 0.75s forwards;
+  animation: fade 0.75s 0.5s forwards;
 }
 
 [data-animation="fade"] {
