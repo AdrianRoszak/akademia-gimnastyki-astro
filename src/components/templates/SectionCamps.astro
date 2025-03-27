@@ -18,8 +18,10 @@ data.title = highlightRandomWord(data.title)
 <section class="section-camps">
   <Container>
     <div class="heading-wrapper">
-      <Heading as="h1" size="xl" text={data.title} />
-      <p class="lead-color">{data.lead}</p>
+      <div data-animation="fade-down">
+        <Heading as="h1" size="xl" text={data.title} />
+      </div>
+      <p class="lead-color" data-animation="fade-down">{data.lead}</p>
     </div>
     <CampsGrid data={data.camps} />
     <div class="button-wrapper">

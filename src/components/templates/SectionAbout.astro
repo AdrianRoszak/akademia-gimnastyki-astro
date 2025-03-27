@@ -20,9 +20,12 @@ data.title = highlightRandomWord(data.title)
         <Image src={DecoImage} alt="decoration image" width={600} height={800} class="deco-image" />
       </div>
       <div>
-        <Heading as="h1" size='xl' text={data.title} />
-        <!-- <Heading as="h2" size='xl' text={data.lead} /> -->
-        <div class="portable-text-wrapper">
+
+        <div data-animation="fade-down">
+          <Heading as="h1" size='xl' text={data.title} />
+
+        </div>
+        <div class="portable-text-wrapper" data-animation="fade-down">
           <PortableText value={data.body}/>
         </div>
       </div>
