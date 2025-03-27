@@ -7,6 +7,17 @@ export const queryAboutPage = `*[_type == 'about'] {
     }
   },
   about_intro,
+  about_values {
+    values_block_title,
+    values_block_lead,
+    values_block_values_selector {
+      value_selector_list[]-> {
+        value_item_description,
+        value_item_title,
+        value_item_icon
+      }
+    }
+  },
   about_locations {
     location_selector_list[]-> {
       location_name,

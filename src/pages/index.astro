@@ -40,10 +40,12 @@ const { values, banners, about, activities, camps, events, team, metaData } =
 </Layout>
 
 <script>
-  import { applyFadeDownAnimation, applySlideLeftAnimation } from '../utils/animations';
+  import { applyFadeAnimation, applyFadeDownAnimation, applySlideLeftAnimation, imageParallax } from '../utils';
 
   document.addEventListener('DOMContentLoaded', () => {
     applyFadeDownAnimation();
     applySlideLeftAnimation();
+		imageParallax();
+		applyFadeAnimation();
   });
 </script>

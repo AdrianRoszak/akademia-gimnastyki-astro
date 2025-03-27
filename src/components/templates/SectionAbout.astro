@@ -16,14 +16,12 @@ data.title = highlightRandomWord(data.title)
 <section id='about' data-weirdo-nav-target="about" class="section">
   <Container>
     <div class="wrapper">
-      <div class="deco-image-wrapper">
-        <Image src={DecoImage} alt="decoration image" width={600} height={800} class="deco-image" />
+      <div class="deco-image-wrapper" data-weirdo="images-move">
+        <Image src={DecoImage} alt="decoration image" width={600} height={800} class="deco-image"/>
       </div>
       <div>
-
         <div data-animation="fade-down">
           <Heading as="h1" size='xl' text={data.title} />
-
         </div>
         <div class="portable-text-wrapper" data-animation="fade-down">
           <PortableText value={data.body}/>
@@ -53,6 +51,7 @@ data.title = highlightRandomWord(data.title)
 
   .deco-image-wrapper {
     position: relative;
+    top: 30%;
 
     &::after {
       content: "";
@@ -66,7 +65,6 @@ data.title = highlightRandomWord(data.title)
         padding-top: 125%;
       }
     }
-
 
     .deco-image {
       position: absolute;
