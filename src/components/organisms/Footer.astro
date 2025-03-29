@@ -42,6 +42,9 @@ const { data } = Astro.props
               <AccountsBlock data={data} />
             )}
         </div>
+      </div>
+      <div class="credentials">
+        <p>Strona stworzona przez: <a href='https://valias.es' target="_blank" rel="noopener noreferrer">Valias</a></p>
       </div>  
   </Container>
 </footer>
@@ -49,7 +52,7 @@ const { data } = Astro.props
 <style>
   .footer {
     background-color: var(--weirdo-color-accent-3);
-    padding: 2rem 0;
+    padding: 2rem 0 1rem;
     
     @media(min-width: 768px) {
       margin-top: 8rem;
@@ -126,6 +129,20 @@ const { data } = Astro.props
     .link {
       @media(min-width: 768px) {
       font-size: calc(0.8 * var(--weirdo-text-md));
+      }
+    }
+  }
+
+  .credentials {
+    font-size: var(--weirdo-text-sm);
+    margin-top: 2rem;
+    text-align: right;
+
+    a {
+      text-decoration: underline;
+
+      &:hover {
+        color: var(--weirdo-color-white);
       }
     }
   }
