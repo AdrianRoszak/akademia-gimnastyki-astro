@@ -43,13 +43,16 @@ export type ActivityType = {
 	image: ImageType;
 };
 
+export type AboutUsSection = {
+	title: string;
+	lead: string;
+	body: TypedObject;
+	image: ImageType | null;
+};
+
 export interface HomePage {
 	banners: BannerType[];
-	about: {
-		title: string;
-		lead: string;
-		body: TypedObject;
-	};
+	about: AboutUsSection;
 	activities: {
 		title: string;
 		lead: string;
@@ -96,6 +99,7 @@ export function digestHomePageData(source): HomePage | null {
 			title: source[0].home_about_us_block.about_us_block_heading,
 			lead: source[0].home_about_us_block.about_us_block_lead,
 			body: source[0].home_about_us_block.about_us_block_content,
+			image: secureImage(source[0].home_about_us_block.about_us_deco_image),
 		},
 		camps: {
 			title: source[0].home_camp_block.camps_block_heading,

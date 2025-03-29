@@ -36,8 +36,6 @@ export interface AboutPage {
 export function digestAboutPageData(source): AboutPage | null {
 	if (!source) return null;
 
-	console.log(source[0]);
-
 	return {
 		banners: digestBanners(source[0].about_banner_selector),
 		intro: {

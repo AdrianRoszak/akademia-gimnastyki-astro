@@ -1,5 +1,5 @@
 import { getCurrentDate } from '..';
-import { bannerFragment } from './fragments';
+import { aboutUsFragment, bannerFragment } from './fragments';
 import { campsItemFragment } from './query-camps-page-data';
 
 export const queryHomePage = `*[_type == 'home'] {
@@ -9,9 +9,7 @@ export const queryHomePage = `*[_type == 'home'] {
     }
   },
   home_about_us_block {
-    about_us_block_heading,
-    about_us_block_lead,
-    about_us_block_content,
+    ${aboutUsFragment}
   },
   home_activities_block {
     activities_block_heading,

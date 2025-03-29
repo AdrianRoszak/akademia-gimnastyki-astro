@@ -1,8 +1,7 @@
 ---
 import { Image } from 'astro:assets'
 import { PortableText } from 'astro-portabletext'
-import DecoImage from '../../assets/ag_about_2.png'
-import { highlightRandomWord } from '../../utils'
+import { highlightRandomWord, urlForImage } from '../../utils'
 import Container from '../atoms/Container.astro'
 import Heading from '../molecules/Heading.astro'
 
@@ -16,9 +15,22 @@ data.title = highlightRandomWord(data.title)
 <section id='about' data-weirdo-nav-target="about" class="section">
   <Container>
     <div class="wrapper">
-      <div class="deco-image-wrapper" data-weirdo="images-move">
-        <Image src={DecoImage} alt="decoration image" width={600} height={800} class="deco-image"/>
+      {data.image && (
+        <div class="deco-image-wrapper" data-weirdo="images-move">
+        <Image
+          class="deco-image"
+            src={urlForImage(data.image.source)
+            .width(600)
+            .format("webp")
+            .quality(80)
+            .url()}
+              alt={data.image.alt}
+              width={600}
+              height={800}
+            />
       </div>
+      )}
+        <!-- <Image src={DecoImage} alt="decoration image" width={600} height={800} class="deco-image"/> -->
       <div>
         <div data-animation="fade-down">
           <Heading as="h1" size='xl' text={data.title} />
