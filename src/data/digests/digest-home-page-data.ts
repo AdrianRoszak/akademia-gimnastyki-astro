@@ -41,6 +41,7 @@ export type ActivityType = {
 	name: string;
 	description: string;
 	image: ImageType;
+	slug: string;
 };
 
 export type AboutUsSection = {
@@ -211,16 +212,20 @@ function digestActivities(source): HomePage['activities'] {
 	return {
 		title: source.activities_block_heading,
 		lead: source.activities_block_lead,
-		activities: source.activities_block_activities_selector.activity_selector_list.map(
-			//@ts-ignore
-			(activity) => {
-				return {
-					name: activity.activity_item_name,
-					description: activity.activity_item_description,
-					image: secureImage(activity.activity_item_image),
-				};
-			},
-		),
+		activities:
+			source.activities_block_activities_selector.activity_selector_list.map(digestActivityItem),
+	};
+}
+
+// @ts-ignore
+function digestActivityItem(source): ActivityType | null {
+	if (!source) return null;
+
+	return {
+		name: source.activity_item_name,
+		description: source.activity_item_description,
+		image: source.activity_item_image && secureImage(source.activity_item_image),
+		slug: source.activity_item_slug.current,
 	};
 }
 

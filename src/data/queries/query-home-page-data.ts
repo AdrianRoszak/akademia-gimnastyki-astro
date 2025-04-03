@@ -19,6 +19,7 @@ export const queryHomePage = `*[_type == 'home'] {
         activity_item_name,
         activity_item_description,
         activity_item_image,
+        activity_item_slug,
       }
     }
   },

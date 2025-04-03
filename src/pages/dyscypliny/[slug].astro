@@ -1,0 +1,44 @@
+---
+import type { CampItem } from '../../data/digests/digest-camps-data'
+import { getActivityPageData } from '../../data/get-activity-page-data'
+import { getActivitySlugs } from '../../data/get-activity-page-slugs'
+import Layout from '../../layouts/Layout.astro'
+
+export async function getStaticPaths() {
+  async function obtainActivitySlugs() {
+    const slugs = await getActivitySlugs()
+
+    type Slug = {
+      activity_item_slug: {
+        current: string
+      }
+    }
+
+    return slugs.map((slug: Slug) => {
+      return {
+        params: {
+          slug: slug.activity_item_slug.current,
+        },
+      }
+    })
+  }
+
+  const slugs = await obtainActivitySlugs()
+
+  return [...slugs]
+}
+
+const { slug } = Astro.params
+const data = (await getActivityPageData(slug)) as CampItem
+
+---
+
+<Layout title={data.name} description={''}>
+  <main>
+    <section>
+      <p>{data.name}</p>
+      <p>{data.description}</p>
+    </section>
+  </main>
+</Layout>
+
