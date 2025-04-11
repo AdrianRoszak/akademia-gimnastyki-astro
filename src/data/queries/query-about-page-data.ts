@@ -14,7 +14,7 @@ export const queryAboutPage = `*[_type == 'about'] {
       value_selector_list[]-> {
         value_item_description,
         value_item_title,
-        value_item_icon
+        value_item_add_description
       }
     }
   },

@@ -9,13 +9,17 @@ const { data } = Astro.props
   <Container>
       <ul class="tiles-wrapper">
         {data.values.map((value, index) => {
+          console.log(value)
               return (
               <li class="tile-wrapper" data-animation="fade">
                 <small data-animation="fade-down">0{index+1}</small>
                 <div data-animation="fade-down">
                 <Heading as="h2" size="md" text={value.title} />
                 </div>
-                <p class="lead-color" data-animation="fade-down">{value.description}</p>
+                <p class="lead-color" style='flex-grow: 1;' data-animation="fade-down">{value.description}</p>
+                {value.addDescription && (
+                  <p class="additional-description" style={'font-weight: 300;'} data-animation="fade-down"><strong>{value.addDescription}</strong></p>
+                )}
               </li>
               )
             })}

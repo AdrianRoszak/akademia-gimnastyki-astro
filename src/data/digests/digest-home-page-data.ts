@@ -270,6 +270,7 @@ export function digestValues(source) {
 			return {
 				title: value.value_item_title,
 				description: value.value_item_description,
+				addDescription: value.value_item_add_description && value.value_item_add_description,
 				icon: {
 					alt: value.value_item_title,
 					source: value.value_item_icon,
