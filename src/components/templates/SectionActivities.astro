@@ -3,7 +3,7 @@ import { Image } from 'astro:assets'
 import type { HomePage } from '../../data/digests/digest-home-page-data'
 import { urlForImage } from '../../utils'
 import Container from '../atoms/Container.astro'
-import ArrowRight from '../atoms/icons/ArrowRight.astro'
+// import ArrowRight from '../atoms/icons/ArrowRight.astro'
 import BodyText from '../molecules/BodyText.astro'
 import Heading from '../molecules/Heading.astro'
 
@@ -29,7 +29,7 @@ const { data } = Astro.props
               <div class="portable-text-wrapper" data-animation="fade-down">
                 <BodyText text={activity.description} />
               </div>
-              {activity.slug && (
+              {/* {activity.slug && (
                 <a 
                   href={`/dyscypliny/${activity.slug}`} 
                   class="weirdo-button--color-accent-3"
@@ -39,7 +39,7 @@ const { data } = Astro.props
                   Dowiedz się więcej
                   <ArrowRight width={24}/>
                 </a>
-              )}
+              )} */}
           </div>
           <div class="image-wrapper">
             <div class="transparent-image-background"/>
