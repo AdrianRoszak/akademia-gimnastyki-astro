@@ -44,7 +44,8 @@ const { data } = Astro.props
         </div>
       </div>
       <div class="credentials">
-        <p>Strona stworzona przez: <a href='https://valias.es' target="_blank" rel="noopener noreferrer">Valias</a></p>
+        <p>©2025 KS Akademia Gimnastyki. Wszelkie prawa zastrzeżone.</p>
+        <p>Stworzone z troską przez: <a href='https://valias.es' target="_blank" rel="noopener noreferrer">Valías</a></p>
       </div>  
   </Container>
 </footer>
@@ -136,7 +137,14 @@ const { data } = Astro.props
   .credentials {
     font-size: var(--weirdo-text-sm);
     margin-top: 2rem;
-    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
 
     a {
       text-decoration: underline;
