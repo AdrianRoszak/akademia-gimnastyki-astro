@@ -1,1 +1,1 @@
-export { secureImage } from './secure-image';
+export { secureImage, secureFile } from './secure-image';
