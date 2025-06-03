@@ -43,6 +43,7 @@ const { code, name } = (await getRegistrationPage(slug)) as RegistrationPage
     <Container>
       <div class="wrapper">
         <Heading as="h1" text={name} size='xl' />
+        <p class="lead">Odpowiedz tylko na te pytanie, które dotyczą wydarzenia, w którym bierzesz udział</p>
         <div set:html={code} />
     </Container>
   </section>
@@ -58,6 +59,12 @@ const { code, name } = (await getRegistrationPage(slug)) as RegistrationPage
     flex-direction: column;
     gap: 2rem;
   }
+
+  .lead {
+    color: var(--weirdo-color-accent-3);
+    margin-top: -1em;
+  }
+
 </style>
 
 <!-- <script>

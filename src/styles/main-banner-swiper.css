@@ -1,63 +1,62 @@
 .main-banner-swiper {
-  .swiper-wrapper {
-    transform: none !important;
-  }
+	.swiper-wrapper {
+		transform: none !important;
+	}
 
-  .swiper-slide {
-    transition: all 0.5s ease;
-    /* transform: none !important; */
+	.swiper-slide {
+		transition: all 0.5s ease;
+		/* transform: none !important; */
 
-    .heading-lead-wrapper {
-      opacity: 0;
-      transition: all 0.5s ease;
-      transform: translateY(-50px);
-    }
+		.heading-lead-wrapper {
+			opacity: 0;
+			transition: all 0.5s ease;
+			transform: translateY(-50px);
+		}
 
-    .slider-button {
-      opacity: 0;
-      transition: all 0.5s ease;
-      transform: translateX(-50px);
-    }
-  }
-  
+		.slider-button {
+			opacity: 0;
+			transition: all 0.5s ease;
+			transform: translateX(-50px);
+		}
+	}
 
-  .swiper-slide-active {
-    .heading-lead-wrapper {
-      opacity: 1;
-      transform: translateY(0);
-    }
+	.swiper-slide-active {
+		.heading-lead-wrapper {
+			opacity: 1;
+			transform: translateY(0);
+		}
 
-    .slider-button {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
+		.slider-button {
+			opacity: 1;
+			transform: translateX(0);
+		}
+	}
 
-  .swiper-slide-prev {
-    .heading-lead-wrapper {
-      opacity: 0;
-      transform: translateY(-50px);
-    }
+	.swiper-slide-prev {
+		.heading-lead-wrapper {
+			opacity: 0;
+			transform: translateY(-50px);
+		}
 
-    .slider-button {
-      opacity: 0;
-      transform: translateX(-50px);
-    }
-  }
+		.slider-button {
+			opacity: 0;
+			transform: translateX(-50px);
+		}
+	}
 
-  .swiper-slide-next {
-    .heading-lead-wrapper {
-      opacity: 0;
-      transform: translateY(50px);
-    }
+	.swiper-slide-next {
+		.heading-lead-wrapper {
+			opacity: 0;
+			transform: translateY(50px);
+		}
 
-    .slider-button {
-      opacity: 0;
-      transform: translateX(50px);
-    }
-  }
+		.slider-button {
+			opacity: 0;
+			transform: translateX(50px);
+		}
+	}
 }
 
 .swiper-pagination-bullet-active {
-  background: var(--weirdo-color-accent-2) !important;
+	background: var(--weirdo-color-accent-2) !important;
 }
