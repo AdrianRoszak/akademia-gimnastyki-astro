@@ -1,0 +1,51 @@
+---
+import { Image } from 'astro:assets';
+import Container from '../components/atoms/Container.astro';
+import { getInfoPageData } from '../data/get-info-page-data';
+import Layout from '../layouts/Layout.astro';
+import { urlForImage } from '../utils';
+
+const {image} = await getInfoPageData()
+
+---
+
+<Layout title="Informacje" description="Informacje o wydarzeniu">
+  <section>
+    <Container>
+      <div class="wrapper">
+        <h1>Informacje o wydarzeniu</h1>
+        <div class="info-image-wrapper">
+            <Image
+              src={urlForImage(image!.source)
+                .width(800)
+                .format("webp")
+                .quality(80)
+                .url()}
+              alt={image!.alt}
+              width={800}
+              height={800}
+            />
+          </div>
+        <!-- <a href={file} download>Download Plakat</a> -->
+      </div>
+    </Container>
+  </section>
+</Layout>
+
+<style>
+  .wrapper {
+    margin-top: 12rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+  }
+
+    .info-image-wrapper {
+      img {
+        object-fit: contain;
+        object-position: top center;
+    }
+  }
+</style>
