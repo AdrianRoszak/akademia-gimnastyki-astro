@@ -14,7 +14,6 @@ export function secureImage(image): ImageType | null {
 
 // @ts-ignore
 export function secureFile(file): string | null {
-	console.log('secureFile', file);
 	if (!file) return null;
 	return file.asset._ref;
 }

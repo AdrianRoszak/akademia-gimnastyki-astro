@@ -1,7 +1,5 @@
 import { fetchSanityData } from '.';
-import { digestAboutPageData } from './digests';
-import { secureFile, secureImage } from './digests/utils';
-import { queryAboutPage } from './queries';
+import { secureFile } from './digests/utils';
 
 const queryInfoPage = `
 *[_type == "poster"]{

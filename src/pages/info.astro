@@ -1,13 +1,13 @@
 ---
 import { Image } from 'astro:assets';
 import Container from '../components/atoms/Container.astro';
+import ArrowRight from '../components/atoms/icons/ArrowRight.astro';
 import { getInfoPageData } from '../data/get-info-page-data';
 import Layout from '../layouts/Layout.astro';
 import { urlForImage } from '../utils';
+import { urlForFile } from '../utils/url-for-image';
 
 const {image, file} = await getInfoPageData()
-
-console.log('Image data:', image);
 
 ---
 
@@ -30,7 +30,12 @@ console.log('Image data:', image);
               />
             </div>
         )}
-        <!-- <a href={file} download>Download Plakat</a> -->
+        {file && (
+          <a href={urlForFile(file).url} download class="weirdo-button--color-accent-3">
+            Pobierz plik z informacjami
+            <ArrowRight width={24} />
+          </a>
+        )}
       </div>
     </Container>
   </section>

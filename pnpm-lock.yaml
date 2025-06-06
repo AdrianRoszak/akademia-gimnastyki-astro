@@ -23,6 +23,9 @@ importers:
       '@astrojs/vercel':
         specifier: ^8.1.4
         version: 8.1.4(astro@5.8.1(@types/node@22.15.29)(jiti@2.4.2)(rollup@4.41.1)(sass@1.89.1)(typescript@5.8.3)(yaml@2.8.0))(react@19.1.0)(rollup@4.41.1)
+      '@sanity/asset-utils':
+        specifier: ^2.2.1
+        version: 2.2.1
       '@sanity/astro':
         specifier: ^3.2.6
         version: 3.2.6(@emotion/is-prop-valid@1.2.2)(@sanity/client@6.29.1)(@sanity/types@3.91.0(@types/react@19.1.6))(astro@5.8.1(@types/node@22.15.29)(jiti@2.4.2)(rollup@4.41.1)(sass@1.89.1)(typescript@5.8.3)(yaml@2.8.0))(react-dom@19.1.0(react@19.1.0))(react-is@18.3.1)(react@19.1.0)(sanity@3.91.0(@emotion/is-prop-valid@1.2.2)(@types/node@22.15.29)(@types/react@19.1.6)(immer@10.1.1)(jiti@2.4.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.89.1)(styled-components@6.1.12(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.8.3)(yaml@2.8.0))(styled-components@6.1.12(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.8.3)
