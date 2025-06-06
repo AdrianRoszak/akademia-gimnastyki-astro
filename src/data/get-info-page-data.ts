@@ -17,12 +17,13 @@ export async function getInfoPageData() {
 
 // @ts-ignore
 function digestInfoPageData(source) {
-	console.log('digestInfoPageData', source);
 	return {
 		file: secureFile(source[0]?.poster_file),
-		image: {
-			source: source[0]?.poster_image?.asset?._ref,
-			alt: 'plakat',
-		},
+		image: source[0].poster_image
+			? {
+					source: source[0]?.poster_image?.asset?._ref,
+					alt: 'plakat',
+				}
+			: null,
 	};
 }

@@ -5,7 +5,9 @@ import { getInfoPageData } from '../data/get-info-page-data';
 import Layout from '../layouts/Layout.astro';
 import { urlForImage } from '../utils';
 
-const {image} = await getInfoPageData()
+const {image, file} = await getInfoPageData()
+
+console.log('Image data:', image);
 
 ---
 
@@ -14,18 +16,20 @@ const {image} = await getInfoPageData()
     <Container>
       <div class="wrapper">
         <h1>Informacje o wydarzeniu</h1>
-        <div class="info-image-wrapper">
-            <Image
-              src={urlForImage(image!.source)
-                .width(800)
-                .format("webp")
-                .quality(80)
-                .url()}
-              alt={image!.alt}
-              width={800}
-              height={800}
-            />
-          </div>
+        {image && (
+          <div class="info-image-wrapper">
+              <Image
+                src={urlForImage(image!.source)
+                  .width(800)
+                  .format("webp")
+                  .quality(80)
+                  .url()}
+                alt={image!.alt}
+                width={800}
+                height={800}
+              />
+            </div>
+        )}
         <!-- <a href={file} download>Download Plakat</a> -->
       </div>
     </Container>

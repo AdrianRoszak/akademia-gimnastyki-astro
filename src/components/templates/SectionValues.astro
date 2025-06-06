@@ -9,7 +9,6 @@ const { data } = Astro.props
   <Container>
       <ul class="tiles-wrapper">
         {data.values.map((value, index) => {
-          console.log(value)
               return (
               <li class="tile-wrapper" data-animation="fade">
                 <small data-animation="fade-down">0{index+1}</small>
