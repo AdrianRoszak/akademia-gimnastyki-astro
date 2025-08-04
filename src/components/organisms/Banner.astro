@@ -22,7 +22,7 @@ const { data } = Astro.props
       <div class="flex-wrapper">
         <div class="heading-lead-wrapper">
           <Heading as="h2" size="2xl" text={data.title} />
-          <BodyText text={data.lead} />
+          {data.lead && <BodyText text={data.lead} />}
         </div>
         {data.button && (
         <div class="slider-button">

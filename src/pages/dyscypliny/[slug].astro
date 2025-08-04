@@ -1,8 +1,15 @@
 ---
+import { PortableText } from 'astro-portabletext'
+import Heading from '../../components/molecules/Heading.astro'
 import type { CampItem } from '../../data/digests/digest-camps-data'
 import { getActivityPageData } from '../../data/get-activity-page-data'
 import { getActivitySlugs } from '../../data/get-activity-page-slugs'
 import Layout from '../../layouts/Layout.astro'
+
+import { urlForImage } from '../../utils'
+
+import { Image } from 'astro:assets'
+
 
 export async function getStaticPaths() {
   async function obtainActivitySlugs() {
@@ -36,9 +43,35 @@ const data = (await getActivityPageData(slug)) as CampItem
 <Layout title={data.name} description={''}>
   <main>
     <section>
-      <p>{data.name}</p>
-      <p>{data.description}</p>
+      <div>
+        <Heading text={data.name} as="h1" size='xl' />
+        {data.image && (
+          <Image
+                src={urlForImage(data.image.source)
+                .width(900)
+                .format("webp")
+                .quality(80)
+                .url()}
+                  alt={data.image.alt}
+                  width={900}
+                  height={600}
+              />
+        )}
+      </div>
+      <div class="portable-text-wrapper" data-animation="fade-down">
+          <PortableText value={data.description} />
+              </div>
     </section>
   </main>
 </Layout>
 
+
+<script>
+  import { applyFadeAnimation, applyFadeDownAnimation, applySlideLeftAnimation } from '../../utils/animations';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    applyFadeDownAnimation();
+    applySlideLeftAnimation();
+		applyFadeAnimation();
+  });
+</script>

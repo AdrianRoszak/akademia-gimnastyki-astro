@@ -16,7 +16,7 @@ export type DateTimeType = {
 
 export type BannerType = {
 	title: string;
-	lead: string;
+	lead?: string;
 	images: ImagesType | null;
 	button?: {
 		text: string;
