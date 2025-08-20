@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets'
+import { getActivitiesNav } from '../../data/get-activities-nav'
 import type { GlobalData } from '../../data/types'
 import { urlForImage } from '../../utils'
 import Container from '../atoms/Container.astro'
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const { data } = Astro.props
+const activities = await getActivitiesNav()
 ---
 
 <header class="weirdo-header">
@@ -38,9 +40,17 @@ const { data } = Astro.props
         <a href='/o-nas'>
           O nas
         </a>
-        <a href='/' data-weirdo-nav="link" data-weirdo-nav-target-id="activities">
-          Dyscypliny
-        </a>
+        <div class="dropdown" data-dropdown="activities">
+          <button class="dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+            Dyscypliny
+            <span class="dropdown-arrow">▼</span>
+          </button>
+                        <div class="dropdown-menu">
+                {activities.map((activity) => (
+                  <a href={`/dyscypliny/${activity.slug}`}>{activity.name}</a>
+                ))}
+              </div>
+        </div>
         <a href="/obozy">
           Obozy
         </a>
@@ -78,9 +88,19 @@ const { data } = Astro.props
       <a href='/o-nas' >
         O nas
       </a>
-      <a href='/' data-weirdo-nav="link" data-weirdo-nav-target-id="activities">
-        Dyscypliny
-      </a>
+      <div class="mobile-dropdown" data-mobile-dropdown="activities">
+        <button class="mobile-dropdown-trigger" aria-expanded="false">
+          Dyscypliny
+          <span class="mobile-dropdown-arrow">▼</span>
+        </button>
+        <div class="mobile-dropdown-menu">
+          {activities.map(activity => (
+            <a href={`/dyscypliny/${activity.slug}`}>
+              {activity.name}
+            </a>
+          ))}
+        </div>
+      </div>
       <a href="/obozy">
           Obozy
         </a>
@@ -108,6 +128,60 @@ const { data } = Astro.props
     const burgerButton = document.querySelector('[data-weirdo-nav-burger]')
     const mobileNav = document.querySelector('[data-weirdo="mobile-nav"]')
     const isHomePage = window.location.pathname === '/'
+
+    // Desktop dropdown functionality
+    const desktopDropdowns = document.querySelectorAll('[data-dropdown]')
+    desktopDropdowns.forEach(dropdown => {
+      const trigger = dropdown.querySelector('.dropdown-trigger')
+      const menu = dropdown.querySelector('.dropdown-menu')
+      
+      if (trigger && menu) {
+        trigger.addEventListener('click', (e) => {
+          e.preventDefault()
+          const isOpen = trigger.getAttribute('aria-expanded') === 'true'
+          
+          // Close all other dropdowns
+          desktopDropdowns.forEach(otherDropdown => {
+            if (otherDropdown !== dropdown) {
+              const otherTrigger = otherDropdown.querySelector('.dropdown-trigger')
+              const otherMenu = otherDropdown.querySelector('.dropdown-menu')
+              if (otherTrigger && otherMenu) {
+                otherTrigger.setAttribute('aria-expanded', 'false')
+                otherMenu.classList.remove('open')
+              }
+            }
+          })
+          
+          // Toggle current dropdown
+          trigger.setAttribute('aria-expanded', !isOpen ? 'true' : 'false')
+          menu.classList.toggle('open', !isOpen)
+        })
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!dropdown.contains(e.target as Node)) {
+            trigger.setAttribute('aria-expanded', 'false')
+            menu.classList.remove('open')
+          }
+        })
+      }
+    })
+
+    // Mobile dropdown functionality
+    const mobileDropdowns = document.querySelectorAll('[data-mobile-dropdown]')
+    mobileDropdowns.forEach(dropdown => {
+      const trigger = dropdown.querySelector('.mobile-dropdown-trigger')
+      const menu = dropdown.querySelector('.mobile-dropdown-menu')
+      
+      if (trigger && menu) {
+        trigger.addEventListener('click', (e) => {
+          e.preventDefault()
+          const isOpen = trigger.getAttribute('aria-expanded') === 'true'
+          trigger.setAttribute('aria-expanded', !isOpen ? 'true' : 'false')
+          menu.classList.toggle('open', !isOpen)
+        })
+      }
+    })
 
     navLinks.forEach(link => {
       const targetId = link.getAttribute('data-weirdo-nav-target-id')
@@ -153,13 +227,10 @@ const { data } = Astro.props
           mobileNav.classList.remove('open')
           burgerButton.classList.remove('active')
         }, 400)
-        // mobileNav.classList.remove('open')
-        // burgerButton.classList.remove('active')
       })
     }
   })
-
-    </script>
+</script>
 
 <style>
   .wrapper {
@@ -206,6 +277,79 @@ const { data } = Astro.props
 
         &:hover {
           color: var(--weirdo-color-accent-2);
+        }
+      }
+    }
+
+    /* Desktop Dropdown Styles */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+
+      .dropdown-trigger {
+        background: none;
+        border: none;
+        font-family: inherit;
+        font-size: inherit;
+        color: inherit;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-wrap: nowrap;
+
+        &:hover {
+          color: var(--weirdo-color-accent-2);
+        }
+
+        .dropdown-arrow {
+          font-size: 0.8em;
+          transition: transform 0.2s ease;
+        }
+
+        &[aria-expanded="true"] .dropdown-arrow {
+          transform: rotate(180deg);
+        }
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: var(--weirdo-color-white);
+        box-shadow: var(--weirdo-shadow-default);
+        border-radius: 4px;
+        padding: 0.5rem 0;
+        min-width: 200px;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.2s ease;
+
+        &.open {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+
+        a {
+          display: block;
+          padding: 0.75rem 1rem;
+          color: var(--weirdo-color-text);
+          text-decoration: none;
+          transition: background-color 0.2s ease;
+
+          &:hover {
+            background-color: var(--weirdo-color-accent-2);
+            color: var(--weirdo-color-white);
+          }
+        }
+
+        .dropdown-divider {
+          height: 1px;
+          background: #e5e5e5;
+          margin: 0.5rem 0;
         }
       }
     }
@@ -328,6 +472,61 @@ const { data } = Astro.props
       color: var(--weirdo-color-white);
       font-size: var(--weirdo-text-3xl);
       margin: 0 1rem;
+    }
+
+    /* Mobile Dropdown Styles */
+    .mobile-dropdown {
+      .mobile-dropdown-trigger {
+        width: 100%;
+        background: none;
+        border: none;
+        font-family: inherit;
+        font-size: inherit;
+        color: inherit;
+        padding: 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .dropdown-arrow {
+          font-size: 0.8em;
+          transition: transform 0.2s ease;
+        }
+
+        &[aria-expanded="true"] .dropdown-arrow {
+          transform: rotate(180deg);
+        }
+      }
+
+      .mobile-dropdown-menu {
+        margin-top: 0.5rem;
+        padding-left: 1rem;
+        border-left: 2px solid var(--weirdo-color-accent-2);
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+
+        &.open {
+          max-height: 300px;
+          padding: 0.5rem 0 0.5rem 1rem;
+        }
+
+        a {
+          display: block;
+          padding: 0.5rem 0;
+          color: var(--weirdo-color-white);
+          text-decoration: none;
+          font-size: 0.9em;
+          transition: color 0.2s ease;
+
+          &:hover {
+            color: var(--weirdo-color-accent-2);
+          }
+        }
+      }
     }
   }
 </style>
