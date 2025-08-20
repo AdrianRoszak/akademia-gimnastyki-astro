@@ -8,7 +8,7 @@ import { getCampsData } from '../../data/get-camps-data'
 import Layout from '../../layouts/Layout.astro'
 import { highlightRandomWord } from '../../utils'
 
-const { meta, intro, upcomingCamps, pastCamps, title } =
+const { meta, intro, upcomingCamps, title } =
   (await getCampsData()) as CampsData
 
 ---
@@ -32,17 +32,6 @@ const { meta, intro, upcomingCamps, pastCamps, title } =
           <Heading as="h1" size='xl' text='Nadchodzące obozy' />
           <CampsGrid data={upcomingCamps} />
         </div>
-      </Container>
-    </section>
-       )}
-
-      {pastCamps && pastCamps.length > 0 && (
-      <section>
-      <Container>
-        <div class="camps-wrapper">
-        <Heading as="h1" size='xl' text='Poprzednie obozy' />
-        <CampsGrid data={pastCamps} />
-       </div>
       </Container>
     </section>
        )}

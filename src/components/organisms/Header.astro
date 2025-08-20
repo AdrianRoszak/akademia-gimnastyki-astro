@@ -176,6 +176,7 @@ const activities = await getActivitiesNav()
       if (trigger && menu) {
         trigger.addEventListener('click', (e) => {
           e.preventDefault()
+          e.stopPropagation() // Prevent event from bubbling up and closing mobile nav
           const isOpen = trigger.getAttribute('aria-expanded') === 'true'
           trigger.setAttribute('aria-expanded', !isOpen ? 'true' : 'false')
           menu.classList.toggle('open', !isOpen)
@@ -470,7 +471,7 @@ const activities = await getActivitiesNav()
 
     a {
       color: var(--weirdo-color-white);
-      font-size: var(--weirdo-text-3xl);
+      font-size: var(--weirdo-text-2xl);
       margin: 0 1rem;
     }
 
@@ -481,20 +482,25 @@ const activities = await getActivitiesNav()
         background: none;
         border: none;
         font-family: inherit;
-        font-size: inherit;
-        color: inherit;
+        font-size: var(--weirdo-text-2xl);
+        color: var(--weirdo-color-white);
         padding: 0;
+        margin: 0 1rem;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: space-between;
 
-        .dropdown-arrow {
+        @media (max-height: 700px) {
+          font-size: var(--weirdo-text-xl);
+        }
+
+        .mobile-dropdown-arrow {
           font-size: 0.8em;
           transition: transform 0.2s ease;
         }
 
-        &[aria-expanded="true"] .dropdown-arrow {
+        &[aria-expanded="true"] .mobile-dropdown-arrow {
           transform: rotate(180deg);
         }
       }
@@ -502,12 +508,15 @@ const activities = await getActivitiesNav()
       .mobile-dropdown-menu {
         margin-top: 0.5rem;
         padding-left: 1rem;
-        border-left: 2px solid var(--weirdo-color-accent-2);
         background: rgba(255, 255, 255, 0.05);
         border-radius: 4px;
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.3s ease, padding 0.3s ease;
+        
+        @media (min-width: 1024px) {
+          border-left: 2px solid var(--weirdo-color-accent-2);
+        }
 
         &.open {
           max-height: 300px;
