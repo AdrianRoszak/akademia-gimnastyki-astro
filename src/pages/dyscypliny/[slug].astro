@@ -1,15 +1,14 @@
 ---
+import { Image } from 'astro:assets'
 import { PortableText } from 'astro-portabletext'
+import Container from '../../components/atoms/Container.astro'
+import ArrowRight from '../../components/atoms/icons/ArrowRight.astro'
 import Heading from '../../components/molecules/Heading.astro'
-import type { CampItem } from '../../data/digests/digest-camps-data'
+import type { ActivityItem } from '../../data/digests/digest-activity-data'
 import { getActivityPageData } from '../../data/get-activity-page-data'
 import { getActivitySlugs } from '../../data/get-activity-page-slugs'
 import Layout from '../../layouts/Layout.astro'
-
-import { urlForImage } from '../../utils'
-
-import { Image } from 'astro:assets'
-
+import { highlightRandomWord, urlForImage } from '../../utils'
 
 export async function getStaticPaths() {
   async function obtainActivitySlugs() {
@@ -36,35 +35,107 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params
-const data = (await getActivityPageData(slug)) as CampItem
+const data = (await getActivityPageData(slug)) as ActivityItem
 
+// Apply random word highlighting to headings
+data.name = highlightRandomWord(data.name)
+const characteristicsTitle = highlightRandomWord('Cechy charakterystyczne')
+const galleryTitle = 'Galeria'
 ---
 
-<Layout title={data.name} description={''}>
+<Layout title={data.meta.title} description={data.meta.description}>
   <main>
-    <section>
-      <div>
-        <Heading text={data.name} as="h1" size='xl' />
-        {data.image && (
-          <Image
+    <article class="activity-slug-section">
+      <Container>
+        <header class="intro-wrapper">
+          <div class="intro-image-wrapper" data-animation="slide-left">
+            {data.image && (
+              <Image
                 src={urlForImage(data.image.source)
-                .width(900)
-                .format("webp")
-                .quality(80)
-                .url()}
-                  alt={data.image.alt}
-                  width={900}
-                  height={600}
+                  .width(800)
+                  .format("webp")
+                  .quality(80)
+                  .url()}
+                alt={data.image.alt}
+                width={800}
+                height={800}
               />
+            )}
+          </div>
+          <div class="intro-text-wrapper">
+            <div class="intro-heading-wrapper" data-animation="fade-down">
+              <Heading text={data.name} size="2xl" as="h1" />
+            </div>
+            <div class="portable-text-wrapper" data-animation="fade-down">
+              <PortableText value={data.description} />
+            </div>
+            {(data.button || data.internalLink) && (
+              <nav class="button-wrapper" data-animation="fade-down" aria-label="Akcje dla dyscypliny">
+                {data.button && (
+                  <a href={data.button.link} class="weirdo-button--color-accent-2" target="_blank" rel="noopener noreferrer">
+                    {data.button.text}
+                    <ArrowRight width={24} />
+                  </a>
+                )}
+                {data.internalLink && (
+                  <a href={`/zapisy/${data.internalLink.slug}`} class="weirdo-button--color-accent-3">
+                    {data.internalLink.name}
+                    <ArrowRight width={24} />
+                  </a>
+                )}
+              </nav>
+            )}
+          </div>
+        </header>
+
+        {data.characteristics && data.characteristics.length > 0 && (
+          <section class="characteristics-section" data-animation="fade-down" aria-labelledby="characteristics-heading">
+            <header class="section-heading-wrapper">
+              <Heading text={characteristicsTitle} size="xl" as="h2" id="characteristics-heading" />
+            </header>
+            <ul class="tiles-wrapper" role="list">
+              {data.characteristics.map((characteristic, index) => (
+                <li class="tile-wrapper" data-animation="fade">
+                  <span class="tile-number" data-animation="fade-down" aria-hidden="true">0{index + 1}</span>
+                  <div data-animation="fade-down">
+                    <Heading as="h3" size="lg" text={characteristic.name} />
+                  </div>
+                  <p class="lead-color" style="flex-grow: 1;" data-animation="fade-down">
+                    {characteristic.description}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </section>
         )}
-      </div>
-      <div class="portable-text-wrapper" data-animation="fade-down">
-          <PortableText value={data.description} />
-              </div>
-    </section>
+
+        {data.gallery && data.gallery.length > 0 && (
+          <section class="gallery-section" data-animation="fade-down" aria-labelledby="gallery-heading">
+            <header class="section-heading-wrapper">
+              <Heading text={galleryTitle} size="xl" as="h2" id="gallery-heading" />
+            </header>
+            <div class="gallery-grid" role="img" aria-labelledby="gallery-heading">
+              {data.gallery.map((image) => (
+                <figure class="gallery-item">
+                  <Image
+                    src={urlForImage(image.source)
+                      .width(600)
+                      .format("webp")
+                      .quality(80)
+                      .url()}
+                    alt={image.alt}
+                    width={600}
+                    height={400}
+                  />
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
+      </Container>
+    </article>
   </main>
 </Layout>
-
 
 <script>
   import { applyFadeAnimation, applyFadeDownAnimation, applySlideLeftAnimation } from '../../utils/animations';
@@ -75,3 +146,272 @@ const data = (await getActivityPageData(slug)) as CampItem
 		applyFadeAnimation();
   });
 </script>
+
+<style>
+  .activity-slug-section {
+    padding-top: 8rem;
+    padding-bottom: 4rem;
+
+    @media(min-width: 768px) {
+      padding-top: 11rem;
+      padding-bottom: 4rem;
+    }
+
+    @media(min-width: 1024px) {
+      padding-top: 14rem;
+    }
+  }
+
+  .intro-wrapper {
+    margin-bottom: 6rem;
+    
+    @media(min-width: 768px) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4rem;
+      align-items: center;
+      margin-bottom: 8rem;
+    }
+
+    @media(min-width: 1200px) {
+      grid-template-columns: 1fr 1.2fr;
+      gap: 6rem;
+    }
+  }
+
+  .intro-text-wrapper {
+    order: 2;
+    
+    @media(min-width: 768px) {
+      order: 1;
+    }
+  }
+
+  .intro-heading-wrapper {
+    margin-bottom: 2rem;
+  }
+
+  /* Enhanced heading styles */
+  .intro-heading-wrapper .weirdo-heading {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--weirdo-color-text);
+    line-height: 1.1;
+    text-wrap: balance;
+
+    @media(min-width: 768px) {
+      line-height: 1.05;
+    }
+  }
+
+  .section-heading-wrapper .weirdo-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--weirdo-color-text);
+    line-height: 1.2;
+    text-wrap: balance;
+    position: relative;
+
+    @media(min-width: 768px) {
+      line-height: 1.15;
+    }
+  }
+
+  .section-heading-wrapper .weirdo-heading::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--weirdo-color-accent-2);
+    margin: 1rem auto 0;
+
+    @media(min-width: 768px) {
+      width: 80px;
+      height: 4px;
+      margin: 1.5rem auto 0;
+    }
+  }
+
+  .tile-wrapper .weirdo-heading {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--weirdo-color-accent-2);
+    line-height: 1.2;
+    text-wrap: balance;
+    margin-bottom: 0.5rem;
+
+    @media(min-width: 768px) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .button-wrapper {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @media(min-width: 640px) {
+      flex-direction: row;
+      gap: 2rem;
+    }
+  }
+
+  .intro-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    margin-bottom: 2rem;
+    order: 1;
+    
+    &::after, &::before {
+      content: '';
+      display: block;      
+      width: 100%;
+      z-index: 1;
+    }
+
+    &::after {
+      padding-top: 100%;
+    }
+
+    &::before {
+      height: 100%;
+      background: var(--weirdo-color-accent-3);
+      position: absolute;
+      top: 1%;
+      left: 1%;
+      z-index: -1;
+    }
+
+    @media(min-width: 768px) {
+      margin-bottom: 0;
+      order: 2;
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 2;
+    }
+  }
+
+  .characteristics-section {
+    margin-bottom: 6rem;
+
+    @media(min-width: 768px) {
+      margin-bottom: 8rem;
+    }
+  }
+
+  .section-heading-wrapper {
+    text-align: center;
+    margin-bottom: 4rem;
+
+    @media(min-width: 768px) {
+      margin-bottom: 5rem;
+    }
+  }
+
+  .tiles-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 4rem;
+
+    @media(min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media(min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .tile-wrapper {
+    font-size: var(--weirdo-text-md);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background: #fafafa;
+    padding: 8%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+    @media(min-width: 768px) {
+      padding: 15%;
+    }
+
+    h2, h3, h4, h5 {
+      height: calc(2em * 1.1);
+      overflow: hidden;
+    }
+
+    small {
+      font-size: var(--weirdo-text-lg);
+      color: var(--weirdo-color-accent-3);
+    }
+  }
+
+  .tile-number {
+    font-size: var(--weirdo-text-lg);
+    color: var(--weirdo-color-accent-3);
+  }
+
+  .gallery-section {
+    margin-bottom: 6rem;
+
+    @media(min-width: 768px) {
+      margin-bottom: 8rem;
+    }
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+
+    @media(min-width: 640px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media(min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: var(--weirdo-shadow-default);
+
+    &::after {
+      content: '';
+      display: block;
+      padding-top: 66.67%; /* 3:2 aspect ratio */
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.05);
+    }
+  }
+
+  .portable-text-wrapper {
+    margin: 0;
+  }
+</style>

@@ -1,4 +1,5 @@
 export { digestAboutPageData } from './digest-about-page-data';
+export { digestActivityItem } from './digest-activity-data';
 export { digestBirthdayData } from './digest-birthday-data';
 export { digestCampsData } from './digest-camps-data';
 export { digestFaqData } from './digest-faq-data';
