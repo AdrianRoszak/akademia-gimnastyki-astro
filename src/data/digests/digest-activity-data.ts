@@ -48,8 +48,8 @@ export function digestActivityItem(source): ActivityItem | null {
 				}))
 			: null,
 		gallery: source.activity_item_gallery
-			? // @ts-expect-error
-				source.activity_item_gallery
+			? source.activity_item_gallery
+					// @ts-expect-error
 					.map((img) => secureImage(img))
 					.filter(Boolean)
 			: null,
