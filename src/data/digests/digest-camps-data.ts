@@ -14,6 +14,7 @@ export type CampItem = {
 	location: string;
 	price: string;
 	slug: string;
+	gallery?: ImageType[] | null;
 	meta: {
 		title: string;
 		description: string;
@@ -63,6 +64,7 @@ export function digestCampItem(source): CampItem | null {
 		longDescription: source.camp_item_long_description,
 		program: source.camp_item_program,
 		priceDetails: source.camp_item_price_details,
+		gallery: source.camp_item_gallery ? source.camp_item_gallery.map(secureImage) : null,
 		meta: {
 			title: source.camp_item_meta_data_block.meta_data_site_title,
 			description: source.camp_item_meta_data_block.meta_data_site_description,
