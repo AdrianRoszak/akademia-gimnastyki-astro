@@ -10,7 +10,7 @@ export async function getSummerCamps(): Promise<SummerCamps | null> {
 
 export const querySummerCampsData = `*[_type == 'summer_camps'] {
   summer_camps_intro,
-  summer_camps_name,
+	summer_camps_title,
   summer_camps_image,
   summer_camps_sessions,
   summer_camps_start_date,
@@ -40,7 +40,7 @@ export function digestSummerCamps(source): SummerCamps | null {
 	if (!source) return null;
 
 	return {
-		name: source.summer_camps_name,
+		name: source.summer_camps_title,
 		image: secureImage(source.summer_camps_image),
 		// @ts-ignore
 		sessions: source.summer_camps_sessions.map((session) => {
