@@ -39,7 +39,8 @@ const data = (await getActivityPageData(slug)) as ActivityItem
 
 // Apply random word highlighting to headings
 data.name = highlightRandomWord(data.name)
-const characteristicsTitle = highlightRandomWord('Cechy charakterystyczne')
+const characteristicsTitle = highlightRandomWord('Cechy naszych treningów')
+const characteristicsLead = 'Spełniamy wymogi bezpieczeństwa i jakości, ale od naszych treningów możesz oczekiwać znacznie więcej. Sprawdź, co wyróżnia treningi z Akademią Gimnastyki!'
 const galleryTitle = 'Galeria'
 ---
 
@@ -93,6 +94,7 @@ const galleryTitle = 'Galeria'
             <header class="section-heading-wrapper">
               <Heading text={characteristicsTitle} size="xl" as="h2" id="characteristics-heading" />
             </header>
+            <p data-animation="fade-down" class="lead">{characteristicsLead}</p>
             <ul class="tiles-wrapper" role="list">
               {data.characteristics.map((characteristic, index) => (
                 <li class="tile-wrapper" data-animation="fade">
@@ -189,6 +191,15 @@ const galleryTitle = 'Galeria'
 
   .intro-heading-wrapper {
     margin-bottom: 2rem;
+  }
+
+  .lead {
+    margin: 0 auto 5rem;
+    color: var(--weirdo-color-dark-grey);
+    line-height: 1.6;
+    text-align: center;
+    text-wrap: balance;
+    width: clamp(360px, 80ch, 100%);
   }
 
   /* Enhanced heading styles */
@@ -310,10 +321,9 @@ const galleryTitle = 'Galeria'
 
   .section-heading-wrapper {
     text-align: center;
-    margin-bottom: 4rem;
 
     @media(min-width: 768px) {
-      margin-bottom: 5rem;
+      margin-bottom: 1rem;
     }
   }
 
