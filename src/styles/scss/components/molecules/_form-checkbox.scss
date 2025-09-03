@@ -1,0 +1,280 @@
+@use '../../utils/' as utils;
+
+// Styles for external form fields (ActiveNow or similar services)
+.activenow-form-field {
+  display: flex !important;
+  gap: 8px;
+  align-items: flex-start;
+  margin-top: 4px !important;
+
+  .activenow-error {
+    flex-shrink: 0;
+    width: 16px !important;
+
+    &.soft-d-none {
+      visibility: hidden;
+    }
+  }
+
+  // Checkbox input styling (targets the actual external classes)
+  input[type="checkbox"] {
+    position: relative !important;
+    display: block;
+    flex-shrink: 0;
+    width: 20px !important;
+    height: 20px !important;
+    padding-left: 0px !important; 
+    margin-top: 2px !important;
+    margin-right: 12px;
+    background-color: utils.getVar('color-white') !important;
+    border: 2px solid utils.getVar('color-grey') !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    appearance: none !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    // Hover state
+    &:hover {
+      border-color: utils.getVar('color-accent-2') !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+      transform: translateY(-1px);
+    }
+
+    // Focus state
+    &:focus {
+      border-color: utils.getVar('color-accent-2') !important;
+      outline: none !important;
+      box-shadow: 0 0 0 3px utils.getVar('color-accent-2-20') !important;
+    }
+
+    // Creating the checkmark with pseudo-elements
+    &::before {
+      position: absolute !important;
+      content: '' !important;
+      top: 50% !important;
+      left: 50% !important;
+      width: 12px !important;
+      height: 12px !important;
+      border-radius: 2px !important;
+      background-color: utils.getVar('color-accent-2') !important;
+      transform: translate(-50%, -50%) scale(0) !important;
+      transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+    }
+
+    &::after {
+      content: '' !important;
+      position: absolute !important;
+      top: 3px !important;
+      left: 6px !important;
+      width: 5px !important;
+      height: 9px !important;
+      border: 2px solid utils.getVar('color-white') !important;
+      border-width: 0 2px 2px 0 !important;
+      opacity: 0 !important;
+      transform: rotate(45deg) scale(0) !important;
+      transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+    }
+
+    // Checked state
+    &:checked {
+      border-color: utils.getVar('color-accent-2') !important;
+      background-color: utils.getVar('color-accent-2') !important;
+      box-shadow: 0 2px 8px utils.getVar('color-accent-2-20') !important;
+
+      &::before {
+        transform: translate(-50%, -50%) scale(1) !important;
+      }
+
+      &::after {
+        opacity: 1 !important;
+        transform: rotate(45deg) scale(1) !important;
+      }
+    }
+
+    // Active state (when clicking)
+    &:active {
+      transform: scale(0.95);
+      
+      &:checked {
+        &::before {
+          transform: translate(-50%, -50%) scale(0.9) !important;
+        }
+      }
+    }
+
+    // Disabled state
+    &:disabled {
+      border-color: utils.getVar('color-grey') !important;
+      background-color: utils.getVar('color-light-grey') !important;
+      box-shadow: none !important;
+      cursor: not-allowed !important;
+      opacity: 0.6 !important;
+
+      &:hover {
+        box-shadow: none !important;
+        transform: none;
+      }
+
+      &:checked {
+        border-color: utils.getVar('color-grey') !important;
+        background-color: utils.getVar('color-grey') !important;
+
+        &::before {
+          background-color: utils.getVar('color-dark-grey') !important;
+        }
+
+        &::after {
+          border-color: utils.getVar('color-white') !important;
+        }
+      }
+    }
+
+    // Specific external classes
+    &.activenow-required-checkbox {
+      border-color: utils.getVar('color-accent-1') !important;
+
+      &:invalid {
+        border-color: utils.getVar('color-accent-1') !important;
+        box-shadow: 0 0 0 3px hsla(332, 100%, 60%, 0.2) !important;
+      }
+
+      &:checked {
+        border-color: utils.getVar('color-accent-2') !important;
+        background-color: utils.getVar('color-accent-2') !important;
+      }
+    }
+
+    &.activenow-enabled-checkbox {
+      pointer-events: auto !important;
+      opacity: 1 !important;
+    }
+
+    // Alternative checkmark style (you can switch between styles)
+    &.style-alternative {
+      &::after {
+        top: 2px !important;
+        left: 3px !important;
+        width: 11px !important;
+        height: 6px !important;
+        border: 2px solid utils.getVar('color-white') !important;
+        border-width: 0 0 2px 2px !important;
+        transform: rotate(-45deg) scale(0) !important;
+      }
+
+      &:checked::after {
+        transform: rotate(-45deg) scale(1) !important;
+      }
+    }
+  }
+
+  // Label styling (comes after checkbox in DOM)
+  label {
+    flex: 1;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    color: utils.getVar('color-dark-grey') !important;
+    text-indent: 0% !important;
+    background-color: transparent !important;
+    cursor: pointer !important;
+    user-select: none;
+
+    @media (min-width: 768px) {
+      font-size: 16px !important;
+    }
+
+    &::after {
+      display: none !important;
+    }
+
+    // When entire label content is a link
+    a {
+      display: inline;
+      font-size: inherit !important;
+      line-height: inherit !important;
+      text-decoration: underline !important;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: utils.getVar('color-accent-2-80') !important;
+        text-decoration: none !important;
+      }
+
+      &:focus {
+        border-radius: 2px !important;
+        outline: 2px solid utils.getVar('color-accent-2-80') !important;
+        outline-offset: 2px !important;
+      }
+    }
+  }
+}
+
+// Additional fallback for any other external form services
+.external-form-field,
+.form-field-external {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-top: 4px;
+
+  input[type="checkbox"] {
+    position: relative !important;
+    flex-shrink: 0;
+    width: 18px !important;
+    height: 18px !important;
+    margin-top: 2px;
+    margin-right: 8px;
+    border: 2px solid utils.getVar('color-grey') !important;
+    border-radius: 3px !important;
+    background-color: utils.getVar('color-white') !important;
+    cursor: pointer !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    transition: all 0.2s ease;
+
+    &:checked {
+      border-color: utils.getVar('color-accent-2') !important;
+      background-color: utils.getVar('color-accent-2') !important;
+
+      &::after {
+        content: '' !important;
+        position: absolute !important;
+        top: 2px !important;
+        left: 5px !important;
+        width: 6px !important;
+        height: 10px !important;
+        border: solid utils.getVar('color-white') !important;
+        border-width: 0 2px 2px 0 !important;
+        transform: rotate(45deg) !important;
+      }
+    }
+  }
+
+  label {
+    flex: 1;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    color: utils.getVar('color-dark-grey') !important;
+    cursor: pointer !important;
+
+    @media (min-width: 768px) {
+      font-size: 16px !important;
+    }
+
+    a {
+      color: utils.getVar('color-accent-2') !important;
+      text-decoration: underline !important;
+
+      &:hover {
+        color: utils.getVar('color-accent-2-80') !important;
+        text-decoration: none !important;
+      }
+    }
+  }
+}
