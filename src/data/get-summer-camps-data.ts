@@ -60,5 +60,8 @@ export function digestSummerCamps(source): SummerCamps | null {
 			title: source.summer_camps_meta_data_block.meta_data_site_title,
 			description: source.summer_camps_meta_data_block.meta_data_site_description,
 		},
+		registrationSlug: source.summer_camps_registration
+			? source.summer_camps_registration.registration_item_slug.current
+			: '',
 	};
 }
