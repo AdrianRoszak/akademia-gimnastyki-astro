@@ -18,6 +18,6 @@ export async function getActivitiesNav(): Promise<ActivityNavItem[]> {
 	// @ts-ignore
 	return data.map((item) => ({
 		name: item.activity_item_name,
-		slug: item.activity_item_slug.current,
+		slug: item.activity_item_slug ? item.activity_item_slug.current : '',
 	}));
 }

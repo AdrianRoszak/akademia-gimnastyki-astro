@@ -49,6 +49,7 @@ const {
   program,
   priceDetails,
   gallery,
+  registrationSlug,
 } = (await getSingleCampData(slug)) as CampItem
 ---
 
@@ -84,7 +85,7 @@ const {
                 endDate={endDate} 
               />
             </div>
-                <a href='https://wypoczynekdzieci.pl/rejestracja-uczestnikow/' class="weirdo-button--color-accent-2" target="_blank">
+                <a href={`/zapisy/${registrationSlug}`} class="weirdo-button--color-accent-2" target="_blank">
                   Zapisy na obóz
                   <ArrowRight width={24} />
                 </a>

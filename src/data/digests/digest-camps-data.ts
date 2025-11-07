@@ -19,6 +19,7 @@ export type CampItem = {
 		title: string;
 		description: string;
 	};
+	registrationSlug: string;
 };
 
 export type CampsData = {
@@ -69,5 +70,8 @@ export function digestCampItem(source): CampItem | null {
 			title: source.camp_item_meta_data_block.meta_data_site_title,
 			description: source.camp_item_meta_data_block.meta_data_site_description,
 		},
+		registrationSlug: source.camp_item_registration
+			? source.camp_item_registration.registration_item_slug.current
+			: '',
 	};
 }
