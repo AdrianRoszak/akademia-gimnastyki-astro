@@ -2,7 +2,7 @@ export function imageParallax() {
 	// Function that moves images parallax up or down when user scrolls
 	// it should be applied only on screens larger than 1180px
 	const images = document.querySelectorAll('[data-weirdo="images-move"]');
-	const windowWidth = window.innerWidth;
+	// const windowWidth = window.innerWidth;
 
 	window.addEventListener('load', () => {
 		if (window.innerWidth >= 1180) {

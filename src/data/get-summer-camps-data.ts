@@ -1,5 +1,5 @@
 import { fetchSanityData } from '.';
-import { type CampItem, digestCampItem } from './digests/digest-camps-data';
+import type { CampItem } from './digests/digest-camps-data';
 import { secureImage } from './digests/utils';
 
 export async function getSummerCamps(): Promise<SummerCamps | null> {
