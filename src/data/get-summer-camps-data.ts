@@ -56,6 +56,7 @@ export function digestSummerCamps(source): SummerCamps | null {
 		longDescription: source.summer_camps_long_description,
 		program: source.summer_camps_program,
 		priceDetails: source.summer_camps_price_details,
+		registrationSlug: '',
 		meta: {
 			title: source.summer_camps_meta_data_block.meta_data_site_title,
 			description: source.summer_camps_meta_data_block.meta_data_site_description,
