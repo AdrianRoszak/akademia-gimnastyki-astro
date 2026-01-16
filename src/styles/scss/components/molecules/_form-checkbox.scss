@@ -45,8 +45,8 @@
 
     // Focus state
     &:focus {
-      border-color: utils.getVar('color-accent-2') !important;
       outline: none !important;
+      border-color: utils.getVar('color-accent-2') !important;
       box-shadow: 0 0 0 3px utils.getVar('color-accent-2-20') !important;
     }
 
@@ -60,8 +60,8 @@
       content: '' !important;
       background-color: utils.getVar('color-accent-2') !important;
       border-radius: 2px !important;
-      transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
       transform: translate(-50%, -50%) scale(0) !important;
+      transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
     }
 
     &::after {
@@ -74,8 +74,8 @@
       border: 2px solid utils.getVar('color-white') !important;
       border-width: 0 2px 2px 0 !important;
       opacity: 0 !important;
-      transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
       transform: rotate(45deg) scale(0) !important;
+      transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
     }
 
     // Checked state
@@ -206,9 +206,9 @@
       }
 
       &:focus {
-        border-radius: 2px !important;
         outline: 2px solid utils.getVar('color-accent-2-80') !important;
         outline-offset: 2px !important;
+        border-radius: 2px !important;
       }
     }
   }

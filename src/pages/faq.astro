@@ -1,13 +1,13 @@
 ---
-import { PortableText } from 'astro-portabletext'
-import Container from '../components/atoms/Container.astro'
-import Heading from '../components/molecules/Heading.astro'
-import type { FaqData } from '../data/digests/digest-faq-data'
-import { getFaqData } from '../data/get-faq-data'
-import Layout from '../layouts/Layout.astro'
-import { highlightRandomWord } from '../utils'
+import { PortableText } from 'astro-portabletext';
+import Container from '../components/atoms/Container.astro';
+import Heading from '../components/molecules/Heading.astro';
+import type { FaqData } from '../data/digests/digest-faq-data';
+import { getFaqData } from '../data/get-faq-data';
+import Layout from '../layouts/Layout.astro';
+import { highlightRandomWord } from '../utils';
 
-const { title, lead, questions, meta } = (await getFaqData()) as FaqData
+const { title, lead, questions, meta } = (await getFaqData()) as FaqData;
 ---
 
 <Layout title={meta.title} description={meta.description}>

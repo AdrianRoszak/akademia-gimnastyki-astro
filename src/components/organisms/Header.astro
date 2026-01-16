@@ -1,18 +1,18 @@
 ---
-import { Image } from 'astro:assets'
-import { getActivitiesNav } from '../../data/get-activities-nav'
-import type { GlobalData } from '../../data/types'
-import { urlForImage } from '../../utils'
-import Container from '../atoms/Container.astro'
-import MailIcon from '../atoms/icons/MailIcon.astro'
-import Phone from '../atoms/icons/Phone.astro'
+import { Image } from 'astro:assets';
+import { getActivitiesNav } from '../../data/get-activities-nav';
+import type { GlobalData } from '../../data/types';
+import { urlForImage } from '../../utils';
+import Container from '../atoms/Container.astro';
+import MailIcon from '../atoms/icons/MailIcon.astro';
+import Phone from '../atoms/icons/Phone.astro';
 
 interface Props {
-  data: GlobalData
+	data: GlobalData;
 }
 
-const { data } = Astro.props
-const activities = await getActivitiesNav()
+const { data } = Astro.props;
+const activities = await getActivitiesNav();
 ---
 
 <header class="weirdo-header">

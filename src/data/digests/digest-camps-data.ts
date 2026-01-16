@@ -33,7 +33,7 @@ export type CampsData = {
 	pastCamps: CampItem[] | null;
 };
 
-//@ts-ignore
+//@ts-expect-error
 export function digestCampsData(source): CampsData | null {
 	if (!source) return null;
 
@@ -49,7 +49,7 @@ export function digestCampsData(source): CampsData | null {
 	};
 }
 
-//@ts-ignore
+//@ts-expect-error
 export function digestCampItem(source): CampItem | null {
 	if (!source) return null;
 

@@ -1,56 +1,56 @@
 ---
-import { Image } from 'astro:assets'
-import { PortableText } from 'astro-portabletext'
-import Container from '../../components/atoms/Container.astro'
-import ArrowRight from '../../components/atoms/icons/ArrowRight.astro'
-import EventTileDetails from '../../components/molecules/EventTileDetails.astro'
-import Heading from '../../components/molecules/Heading.astro'
-import type { CampItem } from '../../data/digests/digest-camps-data'
-import { getCampPageSlugs } from '../../data/get-camp-page-slugs'
-import { getSingleCampData } from '../../data/get-camps-data'
-import Layout from '../../layouts/Layout.astro'
-import { urlForImage } from '../../utils'
+import { Image } from 'astro:assets';
+import { PortableText } from 'astro-portabletext';
+import Container from '../../components/atoms/Container.astro';
+import ArrowRight from '../../components/atoms/icons/ArrowRight.astro';
+import EventTileDetails from '../../components/molecules/EventTileDetails.astro';
+import Heading from '../../components/molecules/Heading.astro';
+import type { CampItem } from '../../data/digests/digest-camps-data';
+import { getCampPageSlugs } from '../../data/get-camp-page-slugs';
+import { getSingleCampData } from '../../data/get-camps-data';
+import Layout from '../../layouts/Layout.astro';
+import { urlForImage } from '../../utils';
 
 export async function getStaticPaths() {
-  async function obtainSingleCampSlugs() {
-    const slugs = await getCampPageSlugs()
+	async function obtainSingleCampSlugs() {
+		const slugs = await getCampPageSlugs();
 
-    type Slug = {
-      camp_item_slug: {
-        current: string
-      }
-    }
+		type Slug = {
+			camp_item_slug: {
+				current: string;
+			};
+		};
 
-    return slugs.map((slug: Slug) => {
-      return {
-        params: {
-          slug: slug.camp_item_slug.current,
-        },
-      }
-    })
-  }
+		return slugs.map((slug: Slug) => {
+			return {
+				params: {
+					slug: slug.camp_item_slug.current,
+				},
+			};
+		});
+	}
 
-  const slugs = await obtainSingleCampSlugs()
+	const slugs = await obtainSingleCampSlugs();
 
-  return [...slugs]
+	return [...slugs];
 }
 
-const { slug } = Astro.params
+const { slug } = Astro.params;
 const {
-  meta,
-  name,
-  description,
-  image,
-  longDescription,
-  price,
-  endDate,
-  startDate,
-  location,
-  program,
-  priceDetails,
-  gallery,
-  registrationSlug,
-} = (await getSingleCampData(slug)) as CampItem
+	meta,
+	name,
+	description,
+	image,
+	longDescription,
+	price,
+	endDate,
+	startDate,
+	location,
+	program,
+	priceDetails,
+	gallery,
+	registrationSlug,
+} = (await getSingleCampData(slug)) as CampItem;
 ---
 
 <Layout title={meta.title} description={meta.description}>

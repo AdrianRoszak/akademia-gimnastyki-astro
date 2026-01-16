@@ -1,18 +1,17 @@
 ---
-import { Image } from 'astro:assets'
-import { PortableText } from 'astro-portabletext'
-import type { CampItem } from '../../data/digests/digest-camps-data'
-import { urlForImage } from '../../utils'
-import ArrowRight from '../atoms/icons/ArrowRight.astro'
-import EventTileDetails from './EventTileDetails.astro'
-import Heading from './Heading.astro'
+import { Image } from 'astro:assets';
+import { PortableText } from 'astro-portabletext';
+import type { CampItem } from '../../data/digests/digest-camps-data';
+import { urlForImage } from '../../utils';
+import ArrowRight from '../atoms/icons/ArrowRight.astro';
+import EventTileDetails from './EventTileDetails.astro';
+import Heading from './Heading.astro';
 
 interface Props {
-  data: CampItem
+	data: CampItem;
 }
 
-const { name, startDate, endDate, location, price, description, image, slug } =
-  Astro.props.data
+const { name, startDate, endDate, location, price, description, image, slug } = Astro.props.data;
 ---
 
 <div class="camp-tile">

@@ -1,18 +1,18 @@
 ---
-import { PortableText } from 'astro-portabletext'
-import type { TypedObject } from 'astro-portabletext/types'
-import type { HTMLTag, Polymorphic } from 'astro/types'
+import { PortableText } from 'astro-portabletext';
+import type { TypedObject } from 'astro-portabletext/types';
+import type { HTMLTag, Polymorphic } from 'astro/types';
 
-export type TextVariant = 'p' | 'span'
+export type TextVariant = 'p' | 'span';
 
 type DecorativeTextProps<Tag extends HTMLTag> = Polymorphic<{
-  as: Tag
-  text: TypedObject | string
-}>
+	as: Tag;
+	text: TypedObject | string;
+}>;
 
-type Props = DecorativeTextProps<TextVariant>
+type Props = DecorativeTextProps<TextVariant>;
 
-const { as: Tag = 'p', text } = Astro.props
+const { as: Tag = 'p', text } = Astro.props;
 ---
 
 <Tag>

@@ -1,25 +1,24 @@
 ---
-import type { HomePage } from '../../data/digests/digest-home-page-data'
-import { highlightRandomWord } from '../../utils'
-import Container from '../atoms/Container.astro'
-import DecoElement from '../atoms/DecoElement.astro'
-import Heading from '../molecules/Heading.astro'
-import TeamMemeberTile from '../molecules/TeamMemberTile.astro'
-import TeamSlider from '../organisms/TeamSlider.astro'
+import type { HomePage } from '../../data/digests/digest-home-page-data';
+import { highlightRandomWord } from '../../utils';
+import Container from '../atoms/Container.astro';
+import DecoElement from '../atoms/DecoElement.astro';
+import Heading from '../molecules/Heading.astro';
+import TeamMemeberTile from '../molecules/TeamMemberTile.astro';
+import TeamSlider from '../organisms/TeamSlider.astro';
 
 interface Props {
-  data: HomePage['team']
-  variant?: 'default' | 'slider'
+	data: HomePage['team'];
+	variant?: 'default' | 'slider';
 }
 
-const { data, variant = 'default' } = Astro.props
+const { data, variant = 'default' } = Astro.props;
 
-if(!data) {
-  throw new Error('No data provided for SectionTeam')
+if (!data) {
+	throw new Error('No data provided for SectionTeam');
 }
 
 data.title = highlightRandomWord(data.title);
-
 ---
 
 <section class="section">

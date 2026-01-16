@@ -2,23 +2,23 @@
 type CSSValue = `${number}${'px' | 'rem' | 'em' | '%'}`;
 
 type Props = {
-  position: {
-    top?: CSSValue;
-    bottom?: CSSValue
-    left?: CSSValue;
-    right?: CSSValue
-  }
-  size: {
-    width: CSSValue;
-    height: CSSValue
-  }
-  color: 'accent-1' | "accent-2" | "accent-3"
-}
+	position: {
+		top?: CSSValue;
+		bottom?: CSSValue;
+		left?: CSSValue;
+		right?: CSSValue;
+	};
+	size: {
+		width: CSSValue;
+		height: CSSValue;
+	};
+	color: 'accent-1' | 'accent-2' | 'accent-3';
+};
 
 const { position, size, color } = Astro.props;
 
 const { width, height } = size;
-const { top = 'unset', bottom = 'unset', left = 'unset', right= 'unset' } = position;
+const { top = 'unset', bottom = 'unset', left = 'unset', right = 'unset' } = position;
 ---
 
 <div 

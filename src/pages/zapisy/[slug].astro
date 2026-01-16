@@ -1,40 +1,37 @@
 ---
-import Container from '../../components/atoms/Container.astro'
-import Layout from '../../layouts/Layout.astro'
+import Container from '../../components/atoms/Container.astro';
+import Layout from '../../layouts/Layout.astro';
 
-import Heading from '../../components/molecules/Heading.astro'
-import {
-  type RegistrationPage,
-  getRegistrationPage,
-} from '../../data/get-registration-page'
-import { getRegistrationSlugs } from '../../data/get-registration-slugs'
+import Heading from '../../components/molecules/Heading.astro';
+import { type RegistrationPage, getRegistrationPage } from '../../data/get-registration-page';
+import { getRegistrationSlugs } from '../../data/get-registration-slugs';
 
 export async function getStaticPaths() {
-  async function obtainRegistrationSlugs() {
-    const slugs = await getRegistrationSlugs()
+	async function obtainRegistrationSlugs() {
+		const slugs = await getRegistrationSlugs();
 
-    type Slug = {
-      registration_item_slug: {
-        current: string
-      }
-    }
+		type Slug = {
+			registration_item_slug: {
+				current: string;
+			};
+		};
 
-    return slugs.map((slug: Slug) => {
-      return {
-        params: {
-          slug: slug.registration_item_slug.current,
-        },
-      }
-    })
-  }
+		return slugs.map((slug: Slug) => {
+			return {
+				params: {
+					slug: slug.registration_item_slug.current,
+				},
+			};
+		});
+	}
 
-  const slugs = await obtainRegistrationSlugs()
+	const slugs = await obtainRegistrationSlugs();
 
-  return [...slugs]
+	return [...slugs];
 }
 
-const { slug } = Astro.params
-const { code, name } = (await getRegistrationPage(slug)) as RegistrationPage
+const { slug } = Astro.params;
+const { code, name } = (await getRegistrationPage(slug)) as RegistrationPage;
 ---
 
 <Layout title="zapisy" description='Zapisy'>

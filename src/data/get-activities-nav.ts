@@ -15,7 +15,7 @@ export async function getActivitiesNav(): Promise<ActivityNavItem[]> {
 
 	const data = await sanityClient.fetch(query);
 
-	// @ts-ignore
+	// @ts-expect-error
 	return data.map((item) => ({
 		name: item.activity_item_name,
 		slug: item.activity_item_slug ? item.activity_item_slug.current : '',

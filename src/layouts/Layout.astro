@@ -1,27 +1,26 @@
 ---
-import { AstroFont } from 'astro-font'
-import { SEO } from 'astro-seo'
+import { AstroFont } from 'astro-font';
+import { SEO } from 'astro-seo';
 
-import '../styles/index.css'
-import '../styles/scss/styles.scss'
-import ScrollToTop from '../components/atoms/ScrollToTop.astro'
-import Footer from '../components/organisms/Footer.astro'
-import Header from '../components/organisms/Header.astro'
-import { getGlobalData } from '../data/get-global-data'
+import '../styles/index.css';
+import '../styles/scss/styles.scss';
+import ScrollToTop from '../components/atoms/ScrollToTop.astro';
+import Footer from '../components/organisms/Footer.astro';
+import Header from '../components/organisms/Header.astro';
+import { getGlobalData } from '../data/get-global-data';
 
-import CookieBanner from '../components/molecules/react-components/cookie-banner.jsx'
+import CookieBanner from '../components/molecules/react-components/cookie-banner.jsx';
 
 interface Props {
-  title: string
-  description: string
+	title: string;
+	description: string;
 }
 
-const globalData = await getGlobalData()
+const globalData = await getGlobalData();
 
-const { title, description } = Astro.props
-const pathname = Astro.url.pathname.replace(/^\/+/, '')
-const siteUrl = `${Astro.site}${pathname}`
-
+const { title, description } = Astro.props;
+const pathname = Astro.url.pathname.replace(/^\/+/, '');
+const siteUrl = `${Astro.site}${pathname}`;
 ---
 
 <!doctype html>

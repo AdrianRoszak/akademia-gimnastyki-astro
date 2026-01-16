@@ -1,19 +1,19 @@
 ---
-import CalendarIcon from '../atoms/icons/CalendarIcon.astro'
-import ClockIcon from '../atoms/icons/ClockIcon.astro'
-import PinIcon from '../atoms/icons/PinIcon.astro'
-import PriceIcon from '../atoms/icons/PriceIcon.astro'
+import CalendarIcon from '../atoms/icons/CalendarIcon.astro';
+import ClockIcon from '../atoms/icons/ClockIcon.astro';
+import PinIcon from '../atoms/icons/PinIcon.astro';
+import PriceIcon from '../atoms/icons/PriceIcon.astro';
 
 interface Props {
-  price: string
-  location: string
-  startDate?: string
-  startTime?: string
-  endDate?: string
-  endTime?: string
+	price: string;
+	location: string;
+	startDate?: string;
+	startTime?: string;
+	endDate?: string;
+	endTime?: string;
 }
 
-const { price, location, startDate, startTime, endDate, endTime } = Astro.props
+const { price, location, startDate, startTime, endDate, endTime } = Astro.props;
 ---
 
 <div class="event-tile-details">

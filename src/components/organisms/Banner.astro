@@ -1,19 +1,19 @@
 ---
-import { urlForImage } from '../../utils'
+import { urlForImage } from '../../utils';
 
-import { Image } from 'astro:assets'
+import { Image } from 'astro:assets';
 
-import type { BannerType } from '../../data/digests/digest-home-page-data'
-import Container from '../atoms/Container.astro'
-import ArrowRight from '../atoms/icons/ArrowRight.astro'
-import BodyText from '../molecules/BodyText.astro'
-import Heading from '../molecules/Heading.astro'
+import type { BannerType } from '../../data/digests/digest-home-page-data';
+import Container from '../atoms/Container.astro';
+import ArrowRight from '../atoms/icons/ArrowRight.astro';
+import BodyText from '../molecules/BodyText.astro';
+import Heading from '../molecules/Heading.astro';
 
 interface Props {
-  data: BannerType
+	data: BannerType;
 }
 
-const { data } = Astro.props
+const { data } = Astro.props;
 ---
 
 <div class="weirdo-banner">

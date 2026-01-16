@@ -1,19 +1,19 @@
 ---
-import { Image } from 'astro:assets'
-import { PortableText } from 'astro-portabletext'
-import birthdayBackground from '../assets/ag-birthday-confetti.png'
-import birthdayPlaceholder from '../assets/birthday-placeholder.jpg'
-import Container from '../components/atoms/Container.astro'
-import ArrowRight from '../components/atoms/icons/ArrowRight.astro'
-import Heading from '../components/molecules/Heading.astro'
-import Banner from '../components/organisms/Banner.astro'
-import type { BirthdayData } from '../data/digests/digest-birthday-data'
-import { getBirthdayData } from '../data/get-birthday-data'
-import Layout from '../layouts/Layout.astro'
-import { highlightRandomWord, urlForImage } from '../utils'
+import { Image } from 'astro:assets';
+import { PortableText } from 'astro-portabletext';
+import birthdayBackground from '../assets/ag-birthday-confetti.png';
+import birthdayPlaceholder from '../assets/birthday-placeholder.jpg';
+import Container from '../components/atoms/Container.astro';
+import ArrowRight from '../components/atoms/icons/ArrowRight.astro';
+import Heading from '../components/molecules/Heading.astro';
+import Banner from '../components/organisms/Banner.astro';
+import type { BirthdayData } from '../data/digests/digest-birthday-data';
+import { getBirthdayData } from '../data/get-birthday-data';
+import Layout from '../layouts/Layout.astro';
+import { highlightRandomWord, urlForImage } from '../utils';
 
 const { meta, banners, intro, priceSection, locationSection } =
-  (await getBirthdayData()) as BirthdayData
+	(await getBirthdayData()) as BirthdayData;
 ---
 
 <Layout title={meta.title} description={meta.description}>

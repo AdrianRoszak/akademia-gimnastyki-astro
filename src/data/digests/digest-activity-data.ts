@@ -32,7 +32,7 @@ export type ActivityItem = {
 	};
 };
 
-//@ts-ignore
+//@ts-expect-error
 export function digestActivityItem(source): ActivityItem | null {
 	if (!source) return null;
 

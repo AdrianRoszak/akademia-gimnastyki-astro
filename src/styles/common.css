@@ -135,7 +135,7 @@
 }
 
 .slide-left {
-	animation: slideLeft .75s forwards;
+	animation: slideLeft 0.75s forwards;
 }
 
 [data-animation="slide-left"] {

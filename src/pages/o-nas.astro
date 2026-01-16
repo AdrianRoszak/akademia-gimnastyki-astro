@@ -1,17 +1,15 @@
 ---
-import Banner from '../components/organisms/Banner.astro'
-import BannerSlider from '../components/organisms/BannerSlider.astro'
-import SectionAboutUsIntro from '../components/templates/SectionAboutUsIntro.astro'
-import SectionTeam from '../components/templates/SectionTeam.astro'
-import SectionValues from '../components/templates/SectionValues.astro'
+import Banner from '../components/organisms/Banner.astro';
+import BannerSlider from '../components/organisms/BannerSlider.astro';
+import SectionAboutUsIntro from '../components/templates/SectionAboutUsIntro.astro';
+import SectionTeam from '../components/templates/SectionTeam.astro';
+import SectionValues from '../components/templates/SectionValues.astro';
 // import SectionValues from '../components/templates/SectionValues.astro'
-import type { AboutPage } from '../data/digests/digest-about-page-data'
-import { getAboutPageData } from '../data/get-about-page-data'
-import Layout from '../layouts/Layout.astro'
+import type { AboutPage } from '../data/digests/digest-about-page-data';
+import { getAboutPageData } from '../data/get-about-page-data';
+import Layout from '../layouts/Layout.astro';
 
-const { banners, intro, team, metaData, values } =
-  (await getAboutPageData()) as AboutPage
-
+const { banners, intro, team, metaData, values } = (await getAboutPageData()) as AboutPage;
 ---
 
 
