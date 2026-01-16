@@ -13,7 +13,7 @@ export async function getInfoPageData() {
 	return digestedData;
 }
 
-// @ts-ignore
+// @ts-expect-error
 function digestInfoPageData(source) {
 	return {
 		file: secureFile(source[0]?.poster_file),

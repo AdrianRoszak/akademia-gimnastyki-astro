@@ -5,7 +5,7 @@ export type RegulationData = {
 	body: TypedObject;
 };
 
-//@ts-ignore
+//@ts-expect-error
 export function digestRegulationData(source): RegulationData | null {
 	if (!source) {
 		return null;

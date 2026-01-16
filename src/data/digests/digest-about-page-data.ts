@@ -32,7 +32,7 @@ export interface AboutPage {
 	metaData: MetaDataType;
 }
 
-//@ts-ignore
+//@ts-expect-error
 export function digestAboutPageData(source): AboutPage | null {
 	if (!source) return null;
 

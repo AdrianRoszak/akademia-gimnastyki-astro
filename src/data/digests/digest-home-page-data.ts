@@ -90,7 +90,7 @@ export interface HomePage {
 	metaData: MetaDataType;
 }
 
-//@ts-ignore
+//@ts-expect-error
 export function digestHomePageData(source): HomePage | null {
 	if (!source) return null;
 
@@ -133,7 +133,7 @@ export type Team = {
 	teamMembers: TeamMember[] | null;
 };
 
-//@ts-ignore
+//@ts-expect-error
 export function digestTeamMember(source): TeamMember | null {
 	if (!source) return null;
 
@@ -144,7 +144,7 @@ export function digestTeamMember(source): TeamMember | null {
 	};
 }
 
-//@ts-ignore
+//@ts-expect-error
 export function digestTeam(source): Team | null {
 	if (!source) return null;
 	return {
@@ -176,14 +176,14 @@ export function digestDate(source: string): DateTimeType {
 	};
 }
 
-//@ts-ignore
+//@ts-expect-error
 export function digestEvents(source): HomePage['events'] {
 	return {
 		title: source.events_block_heading,
 		lead: source.events_block_lead,
 		events: source.events_block_events_selector
 			? source.events_block_events_selector.event_selector_list.map(
-					//@ts-ignore
+					//@ts-expect-error
 					(event) => {
 						return {
 							name: event.event_item_name,
@@ -207,7 +207,7 @@ export function digestEvents(source): HomePage['events'] {
 	};
 }
 
-//@ts-ignore
+//@ts-expect-error
 function digestActivities(source): HomePage['activities'] {
 	return {
 		title: source.activities_block_heading,
@@ -217,7 +217,7 @@ function digestActivities(source): HomePage['activities'] {
 	};
 }
 
-// @ts-ignore
+// @ts-expect-error
 function digestActivityItem(source): ActivityType | null {
 	if (!source) return null;
 
@@ -236,9 +236,9 @@ export function processButtonLink(link: string): string {
 	return link;
 }
 
-//@ts-ignore
+//@ts-expect-error
 export function digestBanners(source): BannerType[] {
-	//@ts-ignore
+	//@ts-expect-error
 	return source.banner_selector_list.map((banner) => {
 		return {
 			title: banner.banner_item_heading,
@@ -260,12 +260,12 @@ export function digestBanners(source): BannerType[] {
 	});
 }
 
-//@ts-ignore
+//@ts-expect-error
 export function digestValues(source) {
 	return {
 		title: source.values_block_title,
 		lead: source.values_block_lead,
-		//@ts-ignore
+		//@ts-expect-error
 		values: source.values_block_values_selector.value_selector_list.map((value) => {
 			return {
 				title: value.value_item_title,
@@ -286,7 +286,7 @@ type ImagesType = {
 	mobileImage: ImageType | false;
 };
 
-//@ts-ignore
+//@ts-expect-error
 export function digestImages(images): ImagesType | null {
 	if (!images) return null;
 

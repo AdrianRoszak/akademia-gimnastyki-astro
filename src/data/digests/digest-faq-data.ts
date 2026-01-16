@@ -15,14 +15,14 @@ export type FaqData = {
 	};
 };
 
-//@ts-ignore
+//@ts-expect-error
 export function digestFaqData(source): FaqData | null {
 	if (!source) return null;
 
 	return {
 		title: source[0].faq_page_title,
 		lead: source[0].faq_page_description,
-		//@ts-ignore
+		//@ts-expect-error
 		questions: source[0].faq_page_selector.faq_selector_list.map((item): Faq => {
 			return {
 				question: item.faq_item_question,

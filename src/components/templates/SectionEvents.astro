@@ -1,18 +1,18 @@
 ---
-import { Image } from 'astro:assets'
-import { PortableText } from 'astro-portabletext'
-import type { HomePage } from '../../data/digests/digest-home-page-data'
-import { urlForImage } from '../../utils'
-import Container from '../atoms/Container.astro'
-import ArrowRight from '../atoms/icons/ArrowRight.astro'
-import EventTileDetails from '../molecules/EventTileDetails.astro'
-import Heading from '../molecules/Heading.astro'
+import { Image } from 'astro:assets';
+import { PortableText } from 'astro-portabletext';
+import type { HomePage } from '../../data/digests/digest-home-page-data';
+import { urlForImage } from '../../utils';
+import Container from '../atoms/Container.astro';
+import ArrowRight from '../atoms/icons/ArrowRight.astro';
+import EventTileDetails from '../molecules/EventTileDetails.astro';
+import Heading from '../molecules/Heading.astro';
 
 interface Props {
-  data: HomePage['events']
+	data: HomePage['events'];
 }
 
-const { data } = Astro.props
+const { data } = Astro.props;
 ---
 
 <section id="events" data-weirdo-nav-target="events" class="section">

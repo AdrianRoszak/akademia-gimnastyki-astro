@@ -1,5 +1,6 @@
 @use "sass:math";
 @use "sass:map";
+@use "sass:list";
 
 @use "../../utils/" as utils;
 @use "../../defaults/" as defaults;
@@ -34,14 +35,14 @@ $container-padding-y: 0;
 
 @mixin generate-container-max-widths {
   $breakpoints: defaults.$breakpoints;
-  $keys: map-keys($breakpoints);
-  $breakpoints-count: length($keys);
+  $keys: map.keys($breakpoints);
+  $breakpoints-count: list.length($keys);
 
-  $xl-index: index($keys, xl);
+  $xl-index: list.index($keys, xl);
 
   @for $i from 2 through $breakpoints-count {
-    $breakpoint-key: nth($keys, $i);
-    $previous-breakpoint-key: nth($keys, $i - 1);
+    $breakpoint-key: list.nth($keys, $i);
+    $previous-breakpoint-key: list.nth($keys, $i - 1);
 
     $breakpoint-value: map.get($breakpoints, $breakpoint-key);
     $previous-breakpoint-value: map.get($breakpoints, $previous-breakpoint-key);

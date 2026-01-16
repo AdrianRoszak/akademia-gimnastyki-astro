@@ -1,17 +1,17 @@
 ---
-import { Image } from 'astro:assets'
-import type { HomePage } from '../../data/digests/digest-home-page-data'
-import { urlForImage } from '../../utils'
-import Container from '../atoms/Container.astro'
-import ArrowRight from '../atoms/icons/ArrowRight.astro'
-import BodyText from '../molecules/BodyText.astro'
-import Heading from '../molecules/Heading.astro'
+import { Image } from 'astro:assets';
+import type { HomePage } from '../../data/digests/digest-home-page-data';
+import { urlForImage } from '../../utils';
+import Container from '../atoms/Container.astro';
+import ArrowRight from '../atoms/icons/ArrowRight.astro';
+import BodyText from '../molecules/BodyText.astro';
+import Heading from '../molecules/Heading.astro';
 
 interface Props {
-  data: HomePage['activities']
+	data: HomePage['activities'];
 }
 
-const { data } = Astro.props
+const { data } = Astro.props;
 ---
 
 <section id="activities" data-weirdo-nav-target="activities" class="section">

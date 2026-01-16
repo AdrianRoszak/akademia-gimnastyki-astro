@@ -1,28 +1,27 @@
 ---
-import { Image } from 'astro:assets'
-import { PortableText } from 'astro-portabletext'
-import Container from '../components/atoms/Container.astro'
-import ArrowRight from '../components/atoms/icons/ArrowRight.astro'
-import ClockIcon from '../components/atoms/icons/ClockIcon.astro'
-import EventTileDetails from '../components/molecules/EventTileDetails.astro'
-import Heading from '../components/molecules/Heading.astro'
-import { type SummerCamps, getSummerCamps } from '../data/get-summer-camps-data'
-import Layout from '../layouts/Layout.astro'
-import { urlForImage } from '../utils'
+import { Image } from 'astro:assets';
+import { PortableText } from 'astro-portabletext';
+import Container from '../components/atoms/Container.astro';
+import ArrowRight from '../components/atoms/icons/ArrowRight.astro';
+import ClockIcon from '../components/atoms/icons/ClockIcon.astro';
+import EventTileDetails from '../components/molecules/EventTileDetails.astro';
+import Heading from '../components/molecules/Heading.astro';
+import { type SummerCamps, getSummerCamps } from '../data/get-summer-camps-data';
+import Layout from '../layouts/Layout.astro';
+import { urlForImage } from '../utils';
 
 const {
-  meta,
-  name,
-  description,
-  sessions,
-  image,
-  longDescription,
-  price,
-  location,
-  program,
-  priceDetails,
-} = (await getSummerCamps()) as SummerCamps
-
+	meta,
+	name,
+	description,
+	sessions,
+	image,
+	longDescription,
+	price,
+	location,
+	program,
+	priceDetails,
+} = (await getSummerCamps()) as SummerCamps;
 ---
 
 <Layout title={meta.title} description={meta.description}>

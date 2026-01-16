@@ -1,47 +1,48 @@
 ---
-import { Image } from 'astro:assets'
-import { PortableText } from 'astro-portabletext'
-import Container from '../../components/atoms/Container.astro'
-import ArrowRight from '../../components/atoms/icons/ArrowRight.astro'
-import Heading from '../../components/molecules/Heading.astro'
-import type { ActivityItem } from '../../data/digests/digest-activity-data'
-import { getActivityPageData } from '../../data/get-activity-page-data'
-import { getActivitySlugs } from '../../data/get-activity-page-slugs'
-import Layout from '../../layouts/Layout.astro'
-import { highlightRandomWord, urlForImage } from '../../utils'
+import { Image } from 'astro:assets';
+import { PortableText } from 'astro-portabletext';
+import Container from '../../components/atoms/Container.astro';
+import ArrowRight from '../../components/atoms/icons/ArrowRight.astro';
+import Heading from '../../components/molecules/Heading.astro';
+import type { ActivityItem } from '../../data/digests/digest-activity-data';
+import { getActivityPageData } from '../../data/get-activity-page-data';
+import { getActivitySlugs } from '../../data/get-activity-page-slugs';
+import Layout from '../../layouts/Layout.astro';
+import { highlightRandomWord, urlForImage } from '../../utils';
 
 export async function getStaticPaths() {
-  async function obtainActivitySlugs() {
-    const slugs = await getActivitySlugs()
+	async function obtainActivitySlugs() {
+		const slugs = await getActivitySlugs();
 
-    type Slug = {
-      activity_item_slug: {
-        current: string
-      }
-    }
+		type Slug = {
+			activity_item_slug: {
+				current: string;
+			};
+		};
 
-    return slugs.map((slug: Slug) => {
-      return {
-        params: {
-          slug: slug.activity_item_slug.current,
-        },
-      }
-    })
-  }
+		return slugs.map((slug: Slug) => {
+			return {
+				params: {
+					slug: slug.activity_item_slug.current,
+				},
+			};
+		});
+	}
 
-  const slugs = await obtainActivitySlugs()
+	const slugs = await obtainActivitySlugs();
 
-  return [...slugs]
+	return [...slugs];
 }
 
-const { slug } = Astro.params
-const data = (await getActivityPageData(slug)) as ActivityItem
+const { slug } = Astro.params;
+const data = (await getActivityPageData(slug)) as ActivityItem;
 
 // Apply random word highlighting to headings
-data.name = highlightRandomWord(data.name)
-const characteristicsTitle = highlightRandomWord('Cechy naszych treningów')
-const characteristicsLead = 'Spełniamy wymogi bezpieczeństwa i jakości, ale od naszych treningów możesz oczekiwać znacznie więcej. Sprawdź, co wyróżnia treningi z Akademią Gimnastyki!'
-const galleryTitle = 'Galeria'
+data.name = highlightRandomWord(data.name);
+const characteristicsTitle = highlightRandomWord('Cechy naszych treningów');
+const characteristicsLead =
+	'Spełniamy wymogi bezpieczeństwa i jakości, ale od naszych treningów możesz oczekiwać znacznie więcej. Sprawdź, co wyróżnia treningi z Akademią Gimnastyki!';
+const galleryTitle = 'Galeria';
 ---
 
 <Layout title={data.meta.title} description={data.meta.description}>

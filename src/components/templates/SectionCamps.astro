@@ -1,18 +1,18 @@
 ---
-import type { HomePage } from '../../data/digests/digest-home-page-data'
-import { highlightRandomWord } from '../../utils'
-import Container from '../atoms/Container.astro'
-import ArrowRight from '../atoms/icons/ArrowRight.astro'
-import Heading from '../molecules/Heading.astro'
-import CampsGrid from '../organisms/CampsGrid.astro'
+import type { HomePage } from '../../data/digests/digest-home-page-data';
+import { highlightRandomWord } from '../../utils';
+import Container from '../atoms/Container.astro';
+import ArrowRight from '../atoms/icons/ArrowRight.astro';
+import Heading from '../molecules/Heading.astro';
+import CampsGrid from '../organisms/CampsGrid.astro';
 
-const data = Astro.props.data as HomePage['camps']
+const data = Astro.props.data as HomePage['camps'];
 
 if (!data) {
-  throw new Error('No data provided for SectionCamps')
+	throw new Error('No data provided for SectionCamps');
 }
 
-data.title = highlightRandomWord(data.title)
+data.title = highlightRandomWord(data.title);
 ---
 
 <section class="section-camps">

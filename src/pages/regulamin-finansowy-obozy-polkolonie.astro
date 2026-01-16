@@ -1,11 +1,11 @@
 ---
-import { getRegulationData } from '../data/get-regulation-data'
+import { getRegulationData } from '../data/get-regulation-data';
 
-import Container from '../components/atoms/Container.astro'
-import BodyText from '../components/molecules/BodyText.astro'
-import Heading from '../components/molecules/Heading.astro'
-import type { RegulationData } from '../data/digests/digest-regulation-data'
-import Layout from '../layouts/Layout.astro'
+import Container from '../components/atoms/Container.astro';
+import BodyText from '../components/molecules/BodyText.astro';
+import Heading from '../components/molecules/Heading.astro';
+import type { RegulationData } from '../data/digests/digest-regulation-data';
+import Layout from '../layouts/Layout.astro';
 
 // TODO: implement getStaticPaths
 // export async function getStaticPaths() {
@@ -32,9 +32,9 @@ import Layout from '../layouts/Layout.astro'
 //   return [...slugs]
 // }
 
-const CURRENT_SLUG = 'regulamin-finansowy-obozy-polkolonie'
+const CURRENT_SLUG = 'regulamin-finansowy-obozy-polkolonie';
 
-const { title, body } = (await getRegulationData(CURRENT_SLUG)) as RegulationData
+const { title, body } = (await getRegulationData(CURRENT_SLUG)) as RegulationData;
 ---
 
 <Layout title={title} description="Regulamin finansowy obozów i półkolonii">

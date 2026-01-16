@@ -118,8 +118,8 @@ a {
         height: 2.5em;
         content: "";
         background-color: $color;
-        transition: all #{utils.getVar("animation-duration")} ease-in-out;
         transform: translateY(-50%);
+        transition: all #{utils.getVar("animation-duration")} ease-in-out;
       }
 
       svg {

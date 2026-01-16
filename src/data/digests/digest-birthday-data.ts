@@ -37,7 +37,7 @@ export type BirthdayData = {
 	};
 };
 
-//@ts-ignore
+//@ts-expect-error
 export function digestBirthdayData(source): BirthdayData | null {
 	if (!source) return null;
 

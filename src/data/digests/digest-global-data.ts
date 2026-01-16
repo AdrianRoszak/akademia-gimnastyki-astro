@@ -1,7 +1,7 @@
 import type { GlobalData } from '../types';
 import { secureImage } from './utils';
 
-//@ts-ignore
+//@ts-expect-error
 export function digestGlobalData(source): GlobalData {
 	return {
 		companyName: source[0].company_data_name,
@@ -12,7 +12,7 @@ export function digestGlobalData(source): GlobalData {
 	};
 }
 
-//@ts-ignore
+//@ts-expect-error
 function digestAccount(source): GlobalData['companyAccountDetails'] | null {
 	if (!source) return null;
 

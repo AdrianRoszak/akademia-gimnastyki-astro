@@ -1,15 +1,15 @@
 ---
-import { Image } from 'astro:assets'
-import { PortableText } from 'astro-portabletext'
-import { highlightRandomWord, urlForImage } from '../../utils'
-import Container from '../atoms/Container.astro'
-import Heading from '../molecules/Heading.astro'
+import { Image } from 'astro:assets';
+import { PortableText } from 'astro-portabletext';
+import { highlightRandomWord, urlForImage } from '../../utils';
+import Container from '../atoms/Container.astro';
+import Heading from '../molecules/Heading.astro';
 
-const { data } = Astro.props
-if(!data) {
-  throw new Error('No data provided for SectionAbout')
+const { data } = Astro.props;
+if (!data) {
+	throw new Error('No data provided for SectionAbout');
 }
-data.title = highlightRandomWord(data.title)
+data.title = highlightRandomWord(data.title);
 ---
 
 <section id='about' data-weirdo-nav-target="about" class="section">

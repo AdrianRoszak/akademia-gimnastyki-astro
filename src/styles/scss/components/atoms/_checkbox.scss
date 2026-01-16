@@ -7,12 +7,12 @@ $checkbox-label-spacing: calc($checkbox-height * 0.05);
 
 .#{utils.buildClassName("checkbox")} {
   display: none;
+  visibility: hidden;
   width: 0;
   height: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  visibility: hidden;
 
   &:checked + label {
     background-color: utils.getVar("color-secondary");

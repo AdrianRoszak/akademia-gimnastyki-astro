@@ -35,14 +35,14 @@ export type SummerCamps = Omit<CampItem, 'slug' | 'startDate' | 'endDate'> & {
 	}[];
 };
 
-//@ts-ignore
+//@ts-expect-error
 export function digestSummerCamps(source): SummerCamps | null {
 	if (!source) return null;
 
 	return {
 		name: source.summer_camps_title,
 		image: secureImage(source.summer_camps_image),
-		// @ts-ignore
+		// @ts-expect-error
 		sessions: source.summer_camps_sessions.map((session) => {
 			return {
 				startTime: session.summer_camps_start_date,
