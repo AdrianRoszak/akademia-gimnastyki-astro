@@ -1,9 +1,9 @@
 import { sanityClient } from 'sanity:client';
 import { getFileAsset } from '@sanity/asset-utils';
-import imageUrlBuilder from '@sanity/image-url';
+import { createImageUrlBuilder } from '@sanity/image-url';
 
 export function urlForImage(source: string) {
-	const builder = imageUrlBuilder(sanityClient);
+	const builder = createImageUrlBuilder(sanityClient);
 	return builder.image(source);
 }
 
