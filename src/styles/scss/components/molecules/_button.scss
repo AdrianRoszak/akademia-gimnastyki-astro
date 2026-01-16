@@ -1,32 +1,36 @@
 @use "sass:math";
+@use "sass:color";
+@use "sass:map";
 
 @use "../../defaults" as defaults;
 @use "../../theme" as theme;
 @use "../../utils" as utils;
 
 $button-colors: theme.$colors;
-$button-color-default: map-get($button-colors, "color-light-grey");
+$button-color-default: map.get($button-colors, "color-light-grey");
 
 @function luminance($color) {
-  $red: math.div(red($color), 255);
-  $green: math.div(green($color), 255);
-  $blue: math.div(blue($color), 255);
+  $red: math.div(color.channel($color, "red", $space: rgb), 255);
+  $green: math.div(color.channel($color, "green", $space: rgb), 255);
+  $blue: math.div(color.channel($color, "blue", $space: rgb), 255);
 
-  $red: if(
-    $red < 0.03928,
-    math.div($red, 12.92),
-    pow((math.div(($red + 0.055), 1.055)), 2.4)
-  );
-  $green: if(
-    $green < 0.03928,
-    math.div($green, 12.92),
-    pow((math.div(($green + 0.055), 1.055)), 2.4)
-  );
-  $blue: if(
-    $blue < 0.03928,
-    math.div($blue, 12.92),
-    pow((math.div(($blue + 0.055), 1.055)), 2.4)
-  );
+  @if $red < 0.03928 {
+    $red: math.div($red, 12.92);
+  } @else {
+    $red: pow((math.div(($red + 0.055), 1.055)), 2.4);
+  }
+  
+  @if $green < 0.03928 {
+    $green: math.div($green, 12.92);
+  } @else {
+    $green: pow((math.div(($green + 0.055), 1.055)), 2.4);
+  }
+  
+  @if $blue < 0.03928 {
+    $blue: math.div($blue, 12.92);
+  } @else {
+    $blue: pow((math.div(($blue + 0.055), 1.055)), 2.4);
+  }
 
   @return 0.2126 * $red + 0.7152 * $green + 0.0722 * $blue;
 }
@@ -42,20 +46,20 @@ $button-color-default: map-get($button-colors, "color-light-grey");
 }
 
 @function lightness($color) {
-  $red: red($color);
-  $green: green($color);
-  $blue: blue($color);
+  $red: color.channel($color, "red", $space: rgb);
+  $green: color.channel($color, "green", $space: rgb);
+  $blue: color.channel($color, "blue", $space: rgb);
 
-  @return (max($red, $green, $blue) + min($red, $green, $blue)) / 2;
+  @return (math.max($red, $green, $blue) + math.min($red, $green, $blue)) / 2;
 }
 
 @function lighten-or-darken($color) {
   $lightness: lightness($color);
 
   @if ($lightness > 128) {
-    @return darken($color, 10%);
+    @return color.adjust($color, $lightness: -10%);
   } @else {
-    @return lighten($color, 20%);
+    @return color.adjust($color, $lightness: 20%);
   }
 }
 
@@ -90,10 +94,10 @@ a {
   transition: all #{utils.getVar("animation-duration")} ease-in-out;
 
   &:hover {
-    background-color: darken($button-color-default, 10%);
+    background-color: color.adjust($button-color-default, $lightness: -10%);
   }
 
-  @media (min-width: map-get(defaults.$breakpoints, "lg")) {
+  @media (min-width: map.get(defaults.$breakpoints, "lg")) {
     justify-content: flex-start;
     max-width: fit-content;
   }
@@ -131,11 +135,11 @@ a {
 
         &::after {
           width: 100%;
-          background-color: lighten($color, 10%);
+          background-color: color.adjust($color, $lightness: 10%);
         }
       }
 
-      @media (min-width: map-get(defaults.$breakpoints, "lg")) {
+      @media (min-width: map.get(defaults.$breakpoints, "lg")) {
         &:after {
           width: 2.5em;
         }

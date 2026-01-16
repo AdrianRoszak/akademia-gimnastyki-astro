@@ -80,7 +80,7 @@ $type-scales: (
 @mixin apply-font-sizes($base-size, $breakpoints, $scales) {
   @each $breakpoint, $value in breakpoints.$breakpoints {
     @media (min-width: $value) {
-      $chosen-scale: map-get($scales, $breakpoint);
+      $chosen-scale: map.get($scales, $breakpoint);
       @include generate-font-sizes($base-size, $chosen-scale);
     }
   }
@@ -89,15 +89,15 @@ $type-scales: (
 // Map of type scales to use for each breakpoint
 // TODO: this should be corelated with the breakpoints defined in defaults
 $type-scales-by-breakpoint: (
-  "default": map-get($type-scales, minor-third),
-  "xs": map-get($type-scales, major-third),
-  "sm": map-get($type-scales, major-third),
-  "md": map-get($type-scales, perfect-fourth),
-  "lg": map-get($type-scales, perfect-fourth),
-  "xl": map-get($type-scales, perfect-fourth),
-  "2xl": map-get($type-scales, golden-ratio),
-  "3xl": map-get($type-scales, golden-ratio),
-  "4xl": map-get($type-scales, golden-ratio),
+  "default": map.get($type-scales, minor-third),
+  "xs": map.get($type-scales, major-third),
+  "sm": map.get($type-scales, major-third),
+  "md": map.get($type-scales, perfect-fourth),
+  "lg": map.get($type-scales, perfect-fourth),
+  "xl": map.get($type-scales, perfect-fourth),
+  "2xl": map.get($type-scales, golden-ratio),
+  "3xl": map.get($type-scales, golden-ratio),
+  "4xl": map.get($type-scales, golden-ratio),
 );
 
 // Apply font sizes based on the breakpoints and type scales

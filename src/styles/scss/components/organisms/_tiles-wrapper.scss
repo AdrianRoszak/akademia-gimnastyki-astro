@@ -1,3 +1,5 @@
+@use "sass:map";
+
 @use "../../utils/" as utils;
 @use "../../defaults/" as defaults;
 
@@ -8,11 +10,11 @@
   margin: 2rem 0;
   border-radius: 0.5rem;
   
-  @media (min-width: map-get(defaults.$breakpoints, "sm")) {
+  @media (min-width: map.get(defaults.$breakpoints, "sm")) {
     grid-template-columns: repeat(2, 1fr);
   }
   
-  @media (min-width: map-get(defaults.$breakpoints, "xl")) {
+  @media (min-width: map.get(defaults.$breakpoints, "xl")) {
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
