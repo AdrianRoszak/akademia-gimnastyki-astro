@@ -32,19 +32,19 @@ $type-scales: (
 // Mixin to generate font sizes
 @mixin generate-font-sizes($base-size, $scale) {
   $size-md: $base-size;
-  $size-sm: round($size-md / $scale);
-  $size-xs: round($size-sm / $scale);
-  $size-2xs: round($size-xs / $scale);
-  $size-lg: round($size-md * $scale);
-  $size-xl: round($size-lg * $scale);
-  $size-2xl: round($size-xl * $scale);
-  $size-3xl: round($size-2xl * $scale);
-  $size-4xl: round($size-3xl * $scale);
-  $size-5xl: round($size-4xl * $scale);
-  $size-6xl: round($size-5xl * $scale);
-  $size-7xl: round($size-6xl * $scale);
-  $size-8xl: round($size-7xl * $scale);
-  $size-9xl: round($size-8xl * $scale);
+  $size-sm: math.div($size-md, $scale);
+  $size-xs: math.div($size-sm, $scale);
+  $size-2xs: math.div($size-xs, $scale);
+  $size-lg: $size-md * $scale;
+  $size-xl: $size-lg * $scale;
+  $size-2xl: $size-xl * $scale;
+  $size-3xl: $size-2xl * $scale;
+  $size-4xl: $size-3xl * $scale;
+  $size-5xl: $size-4xl * $scale;
+  $size-6xl: $size-5xl * $scale;
+  $size-7xl: $size-6xl * $scale;
+  $size-8xl: $size-7xl * $scale;
+  $size-9xl: $size-8xl * $scale;
 
   $text-sizes: (
     "text-2xs": $size-2xs,

@@ -35,4 +35,10 @@ export default defineConfig({
 		sitemap(),
 		react(),
 	],
+	vite: {
+		optimizeDeps: {
+			// Exclude these transitive dependencies from Sanity that cause warnings
+			exclude: ['react-compiler-runtime', 'react-is', 'styled-components', 'lodash/startCase.js'],
+		},
+	},
 });
