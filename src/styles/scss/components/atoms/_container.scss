@@ -1,4 +1,5 @@
 @use "sass:math";
+@use "sass:map";
 
 @use "../../utils/" as utils;
 @use "../../defaults/" as defaults;
@@ -42,8 +43,8 @@ $container-padding-y: 0;
     $breakpoint-key: nth($keys, $i);
     $previous-breakpoint-key: nth($keys, $i - 1);
 
-    $breakpoint-value: map-get($breakpoints, $breakpoint-key);
-    $previous-breakpoint-value: map-get($breakpoints, $previous-breakpoint-key);
+    $breakpoint-value: map.get($breakpoints, $breakpoint-key);
+    $previous-breakpoint-value: map.get($breakpoints, $previous-breakpoint-key);
 
     $value-to-use: $breakpoint-value; // Default for smaller than xl
     @if $i >= $xl-index {

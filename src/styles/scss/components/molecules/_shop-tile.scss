@@ -1,3 +1,5 @@
+@use "sass:map";
+
 @use "../../utils" as utils;
 @use "../../defaults" as defaults;
 
@@ -38,15 +40,15 @@
       margin-top: $shop-tile-address-spacing;
       border-top: $shop-tile-address-border;
 
-      @media (min-width: map-get(defaults.$breakpoints, "sm")) {
+      @media (min-width: map.get(defaults.$breakpoints, "sm")) {
         grid-template-columns: repeat(3, 1fr);
       }
 
-      @media (min-width: map-get(defaults.$breakpoints, "lg")) {
+      @media (min-width: map.get(defaults.$breakpoints, "lg")) {
         grid-template-columns: repeat(5, 1fr);
       }
 
-      @media (min-width: map-get(defaults.$breakpoints, "xl")) {
+      @media (min-width: map.get(defaults.$breakpoints, "xl")) {
         grid-template-columns: repeat(7, 1fr);
       }
     }

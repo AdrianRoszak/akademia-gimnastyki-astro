@@ -1,5 +1,6 @@
 @use "sass:meta";
 @use "sass:string";
+@use "sass:color";
 
 @forward "defaults";
 @forward "theme";
@@ -40,7 +41,7 @@
     transform: scale(1.1);
 
     &:after {
-      background: lighten($background, 10%);
+      background: color.adjust($background, $lightness: 10%);
     }
   }
 }

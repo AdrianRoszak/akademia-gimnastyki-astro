@@ -9,7 +9,7 @@ pre-commit:
       stage_fixed: true
     check:
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,astro}"
-      run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
+      run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {files}
       stage_fixed: true
     # stylelint:
     #   glob: "*.{css,scss,sass,less}"

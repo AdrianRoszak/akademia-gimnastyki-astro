@@ -1,9 +1,9 @@
-import { defineQuery } from 'groq';
+import groq from 'groq';
 
-export const queryGlobalData = defineQuery(`*[_type == 'company_data'] {
+export const queryGlobalData = groq`*[_type == 'company_data'] {
   company_data_name,
   company_data_logo,
   company_data_phone,
   company_data_email,
   company_data_accounts
-}`);
+}`;
